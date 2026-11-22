@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth"><head><script data-bard-client-injected="true">(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6IjExNjRiNzdiNDMzZDdhMDAyMWI4NjE4YjhjYTU3ZTMyZGI5MWUxMTMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIxNjE5ODIwMTk0NzI5OTAxMTM5NSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjX2FjMWFhODI0NWFkNjQ4MGJfaW5kZXguaHRtbC0zNzkifSwiZXhwIjoxNzk1MzEwODU1LCJpYXQiOjE3OTUzMDcyNTUsImFsZyI6IlJTMjU2In0.Xmg3G4snYpQ6ocrc98ph6n7fj3VpHxt7U_sxivkI1CXokf193ChUGBnpud_dEeVYjmEgXzi_DcA3XU22e4X-LES8nUBJfhC2p9aL5HSpRvJZeWgNNnMrDZb-soodyNYHt1QGakSVzfpKby3xahR2Az_mTkeCCinS8fcievsY1pyx4oof15dFYgANnQM4re_kMYlvpA9564hfOQMvD-WsmHIa-01v20zwN4BEl7Nr4N52RBueoEFL7O_LriRF5Lrf6ALxs7vxNKjKZpiEgDTvdCTaOTCRJ-7zSVKQYg-9JYJ25OV307yu7_0oY1mBf9ew4YYgbk_L6PL8BplpOLT_pw","c_ac1aa8245ad6480b_index.html-379")</script><script data-bard-client-injected="true">
+  document.addEventListener('input', (event) => {
+    if (event.target && (event.target.isContentEditable || event.target.hasAttribute('contenteditable'))) {
+      const clonedDoc = document.cloneNode(true);
+      const injectedScripts = clonedDoc.querySelectorAll('[data-bard-client-injected="true"]');
+      injectedScripts.forEach(el => el.remove());
+      window.parent.postMessage({
+        type: 'inlineEdit',
+        html: '<!DOCTYPE html>\n' + clonedDoc.documentElement.outerHTML
+      }, '*');
+    }
+  });
+</script><script data-bard-client-injected="true">(function(){'use strict';window.addEventListener("message",a=>{a.data&&a.data.type==="SUPPLEMENTAL_DATA_UPDATE"&&window.dispatchEvent(new CustomEvent("supplementaldataupdate",{detail:a.data.data}))});}).call(this);
+</script><script data-bard-client-injected="true">(function(){'use strict';var k=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,d){if(a==Array.prototype||a==Object.prototype)return a;a[b]=d.value;return a};function m(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var d=a[b];if(d&&d.Math==Math)return d}throw Error("Cannot find global object");}var q=m(this);
+function r(a,b){if(b)a:{var d=q;a=a.split(".");for(var c=0;c<a.length-1;c++){var e=a[c];if(!(e in d))break a;d=d[e]}a=a[a.length-1];c=d[a];b=b(c);b!=c&&b!=null&&k(d,a,{configurable:!0,writable:!0,value:b})}}function t(a){function b(c){return a.next(c)}function d(c){return a.throw(c)}return new Promise(function(c,e){function f(g){g.done?c(g.value):Promise.resolve(g.value).then(b,d).then(f,e)}f(a.next())})}function u(a){return t(a())}
+r("Object.values",function(a){return a?a:function(b){var d=[],c;for(c in b)Object.prototype.hasOwnProperty.call(b,c)&&d.push(b[c]);return d}});r("Array.prototype.includes",function(a){return a?a:function(b,d){var c=this;c instanceof String&&(c=String(c));var e=c.length;d=d||0;for(d<0&&(d=Math.max(d+e,0));d<e;d++){var f=c[d];if(f===b||Object.is(f,b))return!0}return!1}});/*
+
+ MIT License
+
+ Copyright (c) 2017-2023 W.Y.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
+*/
+function v(a,b){var d=a.style;b.backgroundColor&&(d.backgroundColor=b.backgroundColor);b.width&&(d.width=`${b.width}px`);b.height&&(d.height=`${b.height}px`);var c=b.style;c!=null&&Object.keys(c).forEach(e=>{d[e]=c[e]})};var aa=(()=>{var a=0;return()=>{a+=1;return`u${`0000${(Math.random()*1679616<<0).toString(36)}`.slice(-4)}${a}`}})();function w(a){var b=[];for(let d=0,c=a.length;d<c;d++)b.push(a[d]);return b}let y=null;function z(a={}){return y?y:a.u?y=a.u:y=w(window.getComputedStyle(document.documentElement))}function A(a,b){return(a=(a.ownerDocument.defaultView||window).getComputedStyle(a).getPropertyValue(b))?parseFloat(a.replace("px","")):0}
+function B(a,b={}){var d;if(!(d=b.width)){d=A(a,"border-left-width");var c=A(a,"border-right-width");d=a.clientWidth+d+c}(b=b.height)||(b=A(a,"border-top-width"),c=A(a,"border-bottom-width"),b=a.clientHeight+b+c);return{width:d,height:b}}function C(a){return new Promise((b,d)=>{var c=new Image;c.onload=()=>{c.decode().then(()=>{requestAnimationFrame(()=>b(c))})};c.onerror=d;c.crossOrigin="anonymous";c.decoding="async";c.src=a})}
+function ba(a){return u(function*(){return Promise.resolve().then(()=>(new XMLSerializer).serializeToString(a)).then(encodeURIComponent).then(b=>`data:image/svg+xml;charset=utf-8,${b}`)})}
+function ca(a,b,d){return u(function*(){var c=document.createElementNS("http://www.w3.org/2000/svg","svg"),e=document.createElementNS("http://www.w3.org/2000/svg","foreignObject");c.setAttribute("width",`${b}`);c.setAttribute("height",`${d}`);c.setAttribute("viewBox",`0 0 ${b} ${d}`);e.setAttribute("width","100%");e.setAttribute("height","100%");e.setAttribute("x","0");e.setAttribute("y","0");e.setAttribute("externalResourcesRequired","true");c.appendChild(e);e.appendChild(a);return ba(c)})}
+var D=(a,b)=>{if(a instanceof b)return!0;a=Object.getPrototypeOf(a);return a===null?!1:a.constructor.name===b.name||D(a,b)};function da(a,b){return z(b).map(d=>{var c=a.getPropertyValue(d),e=a.getPropertyPriority(d);return`${d}: ${c}${e?" !important":""};`}).join(" ")}
+function E(a,b,d,c){a=window.getComputedStyle(a,d);var e=a.getPropertyValue("content");if(e!==""&&e!=="none"){var f=aa();try{b.className=`${b.className} ${f}`}catch(h){return}e=document.createElement("style");var g=e.appendChild;d=`.${f}:${d}`;a.cssText?(c=a.getPropertyValue("content"),c=`${a.cssText} content: '${c.replace(/'|"/g,"")}';`):c=da(a,c);g.call(e,document.createTextNode(`${d}{${c}}`));b.appendChild(e)}};function F(a){return a.search(/^(data:)/)!==-1}function G(a,b,d){return u(function*(){var c=yield fetch(a,b);if(c.status===404)throw Error(`Resource "${c.url}" not found`);var e=yield c.blob();return new Promise((f,g)=>{var h=new FileReader;h.onerror=g;h.onloadend=()=>{try{f(d({v:c,result:h.result}))}catch(l){g(l)}};h.readAsDataURL(e)})})}const H={};function ea(a,b,d){var c=a.replace(/\?.*/,"");d&&(c=a);/ttf|otf|eot|woff2?/i.test(c)&&(c=c.replace(/.*\//,""));return b?`[${b}]${c}`:c}
+function I(a,b,d){return u(function*(){var c=ea(a,b,d.F);if(H[c]!=null)return H[c];d.B&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime());try{let f=yield G(a,d.l,({v:g,result:h})=>{b||(b=g.headers.get("Content-Type")||"");return h.split(/,/)[1]});var e=`data:${b};base64,${f}`}catch(f){e=d.o||""}return H[c]=e})};const J={R:"application/font-woff",S:"application/font-woff",O:"application/font-truetype",C:"application/vnd.ms-fontobject",J:"image/png",H:"image/jpeg",G:"image/jpeg",D:"image/gif",N:"image/tiff",M:"image/svg+xml",P:"image/webp"};function K(a){return(a=/\.([^./]*?)$/g.exec(a))?a[1]:""};function fa(a){return u(function*(){var b=a.toDataURL();return b==="data:,"?a.cloneNode(!1):C(b)})}function ha(a,b){return u(function*(){if(a.currentSrc){var d=document.createElement("canvas");let c=d.getContext("2d");d.width=a.clientWidth;d.height=a.clientHeight;c==null||c.drawImage(a,0,0,d.width,d.height);d=d.toDataURL();return C(d)}d=a.poster;d=yield I(d,J[K(d).toLowerCase()]||"",b);return C(d)})}
+function ia(a,b){return u(function*(){try{let d;if(a==null?0:(d=a.contentDocument)==null?0:d.body)return yield L(a.contentDocument.body,b,!0)}catch(d){}return a.cloneNode(!1)})}function ja(a,b){return u(function*(){return D(a,HTMLCanvasElement)?fa(a):D(a,HTMLVideoElement)?ha(a,b):D(a,HTMLIFrameElement)?ia(a,b):a.cloneNode(a.tagName!=null&&a.tagName.toUpperCase()==="SVG")})}
+function ka(a,b,d){return u(function*(){if(b.tagName!=null&&b.tagName.toUpperCase()==="SVG")return b;var c=[];if(a.tagName!=null&&a.tagName.toUpperCase()==="SLOT"&&a.assignedNodes)c=w(a.assignedNodes());else{let e;if(D(a,HTMLIFrameElement)&&((e=a.contentDocument)==null?0:e.body))c=w(a.contentDocument.body.childNodes);else{let f;c=w(((f=a.shadowRoot)!=null?f:a).childNodes)}}if(c.length===0||D(a,HTMLVideoElement))return b;yield c.reduce((e,f)=>e.then(()=>L(f,d)).then(g=>{g&&b.appendChild(g)}),Promise.resolve());
+return b})}function la(a,b,d){var c=b.style;if(c){var e=window.getComputedStyle(a);e.cssText?(c.cssText=e.cssText,c.transformOrigin=e.transformOrigin):z(d).forEach(f=>{var g=e.getPropertyValue(f);f==="font-size"&&g.endsWith("px")&&(g=`${Math.floor(parseFloat(g.substring(0,g.length-2)))-.1}px`);D(a,HTMLIFrameElement)&&f==="display"&&g==="inline"&&(g="block");f==="d"&&b.getAttribute("d")&&(g=`path(${b.getAttribute("d")})`);c.setProperty(f,g,e.getPropertyPriority(f))})}}
+function ma(a,b){D(a,HTMLSelectElement)&&(b=Array.from(b.children).find(d=>a.value===d.getAttribute("value")))&&b.setAttribute("selected","")}
+function na(a,b){return u(function*(){var d=a.querySelectorAll?a.querySelectorAll("use"):[];if(d.length===0)return a;var c={};for(var e=0;e<d.length;e++){var f=d[e].getAttribute("xlink:href");if(f){let g=document.querySelector(f);a.querySelector(f)||!g||c[f]||(c[f]=yield L(g,b,!0))}}d=Object.values(c);if(d.length){c=document.createElementNS("http://www.w3.org/1999/xhtml","svg");c.setAttribute("xmlns","http://www.w3.org/1999/xhtml");c.style.position="absolute";c.style.width="0";c.style.height="0";
+c.style.overflow="hidden";c.style.display="none";e=document.createElementNS("http://www.w3.org/1999/xhtml","defs");c.appendChild(e);for(f=0;f<d.length;f++)e.appendChild(d[f]);a.appendChild(c)}return a})}
+function L(a,b,d){return u(function*(){return d||!b.filter||b.filter(a)?Promise.resolve(a).then(c=>ja(c,b)).then(c=>ka(a,c,b)).then(c=>{D(c,Element)&&(la(a,c,b),E(a,c,":before",b),E(a,c,":after",b),D(a,HTMLTextAreaElement)&&(c.textContent=a.value),D(a,HTMLInputElement)&&c.setAttribute("value",a.value),ma(a,c));return c}).then(c=>na(c,b)):null})};const M=/url\((['"]?)([^'"]+?)\1\)/g,oa=/url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g,pa=/src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;function qa(a){var b=[];a.replace(M,(d,c,e)=>{b.push(e);return d});return b.filter(d=>!F(d))}
+function ra(a,b,d,c){return u(function*(){try{let e=d?(new URL(b,d||void 0)).toString():b,f;f=yield I(e,J[K(b).toLowerCase()]||"",c);return a.replace(new RegExp(`(url\\(['"]?)(${b.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")})(['"]?\\))`,"g"),`$1${f}$3`)}catch(e){}return a})}function sa(a,{K:b}){return b?a.replace(pa,d=>{for(;;){let [c,,e]=oa.exec(d)||[];if(!e)return"";if(e===b)return`src: ${c};`}}):a}
+function N(a,b,d){return u(function*(){if(a.search(M)===-1)return a;var c=sa(a,d);return qa(c).reduce((e,f)=>e.then(g=>ra(g,f,b,d)),Promise.resolve(c))})};function O(a,b,d){return u(function*(){var c,e=(c=b.style)==null?void 0:c.getPropertyValue(a);return e?(c=yield N(e,null,d),b.style.setProperty(a,c,b.style.getPropertyPriority(a)),!0):!1})}function ta(a,b){return u(function*(){(yield O("background",a,b))||(yield O("background-image",a,b));(yield O("mask",a,b))||(yield O("-webkit-mask",a,b))||(yield O("mask-image",a,b))||(yield O("-webkit-mask-image",a,b))})}
+function ua(a,b){return u(function*(){var d=D(a,HTMLImageElement);if(d&&!F(a.src)||D(a,SVGImageElement)&&!F(a.href.baseVal)){var c=d?a.src:a.href.baseVal,e=yield I(c,J[K(c).toLowerCase()]||"",b);yield new Promise((f,g)=>{a.onload=f;a.onerror=b.h?(...h)=>{try{f(b.h(...h))}catch(l){g(l)}}:g;a.decode&&(a.decode=f);a.loading==="lazy"&&(a.loading="eager");d?(a.srcset="",a.src=e):a.href.baseVal=e})}})}
+function va(a,b){return u(function*(){var d=w(a.childNodes).map(c=>P(c,b));yield Promise.all(d).then(()=>a)})}function P(a,b){return u(function*(){D(a,Element)&&(yield ta(a,b),yield ua(a,b),yield va(a,b))})};const Q={};function R(a){return u(function*(){var b=Q[a];if(b!=null)return b;b=yield(yield fetch(a)).text();b={url:a,cssText:b};return Q[a]=b})}function S(a,b){return u(function*(){var d=a.cssText,c=/url\(["']?([^"')]+)["']?\)/g,e=(d.match(/url\([^)]+\)/g)||[]).map(f=>u(function*(){var g=f.replace(c,"$1");g.startsWith("https://")||(g=(new URL(g,a.url)).href);return G(g,b.l,({result:h})=>{d=d.replace(f,`url(${h})`);return[f,h]})}));return Promise.all(e).then(()=>d)})}
+function T(a){if(a==null)return[];var b=[];a=a.replace(/(\/\*[\s\S]*?\*\/)/gi,"");for(var d=RegExp("((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})","gi");;){var c=d.exec(a);if(c===null)break;b.push(c[0])}a=a.replace(d,"");d=/@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;for(c=RegExp("((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})","gi");;){let e=d.exec(a);if(e===null)if(e=c.exec(a),e===null)break;else d.lastIndex=c.lastIndex;else c.lastIndex=
+d.lastIndex;b.push(e[0])}return b}
+function wa(a,b){return u(function*(){var d=[],c=[];a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach((f,g)=>{if(f.type===CSSRule.IMPORT_RULE){let h=g+1;f=R(f.href).then(l=>S(l,b)).then(l=>T(l).forEach(p=>{try{e.insertRule(p,p.startsWith("@import")?h+=1:e.cssRules.length)}catch(x){}})).catch(()=>{});c.push(f)}})}catch(f){let g=a.find(h=>h.href==null)||document.styleSheets[0];e.href!=null&&c.push(R(e.href).then(h=>S(h,b)).then(h=>T(h).forEach(l=>{g.insertRule(l,g.cssRules.length)})).catch(()=>
+{}))}});return Promise.all(c).then(()=>{a.forEach(e=>{if("cssRules"in e)try{w(e.cssRules||[]).forEach(f=>{d.push(f)})}catch(f){}});return d})})}function xa(a){return a.filter(b=>b.type===CSSRule.FONT_FACE_RULE).filter(b=>b.style.getPropertyValue("src").search(M)!==-1)}function ya(a,b){return u(function*(){if(a.ownerDocument==null)throw Error("Provided element is not within a Document");var d=yield wa(w(a.ownerDocument.styleSheets),b);return xa(d)})}
+function za(a){function b(c){(c.style.fontFamily||getComputedStyle(c).fontFamily).split(",").forEach(e=>{d.add(e.trim().replace(/["']/g,""))});Array.from(c.children).forEach(e=>{e instanceof HTMLElement&&b(e)})}var d=new Set;b(a);return d}function Aa(a,b){return u(function*(){var d=yield ya(a,b),c=za(a);return(yield Promise.all(d.filter(e=>c.has(e.style.fontFamily.trim().replace(/["']/g,""))).map(e=>N(e.cssText,e.parentStyleSheet?e.parentStyleSheet.href:null,b)))).join("\n")})}
+function Ba(a,b){return u(function*(){var d=b.m!=null?b.m:b.A?null:yield Aa(a,b);if(d){let c=document.createElement("style");c.appendChild(document.createTextNode(d));a.firstChild?a.insertBefore(c,a.firstChild):a.appendChild(c)}})};function Ca(a,b={}){return u(function*(){var {width:d,height:c}=B(a,b),e=yield L(a,b,!0);yield Ba(e,b);yield P(e,b);v(e,b);return yield ca(e,d,c)})}
+function Da(a,b={}){return u(function*(){var {width:d,height:c}=B(a,b),e=yield Ca(a,b);e=yield C(e);var f=document.createElement("canvas"),g=f.getContext("2d"),h=b.I||window.devicePixelRatio||1,l=b.j||d,p=b.i||c;f.width=l*h;f.height=p*h;!b.L&&(f.width>16384||f.height>16384)&&(f.width>16384&&f.height>16384?f.width>f.height?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384):f.width>16384?(f.height*=16384/f.width,f.width=16384):(f.width*=16384/f.height,f.height=16384));
+f.style.width=`${l}`;f.style.height=`${p}`;b.backgroundColor&&(g.fillStyle=b.backgroundColor,g.fillRect(0,0,f.width,f.height));g.drawImage(e,0,0,f.width,f.height);return f})}function Ea(a,b={}){return u(function*(){return(yield Da(a,b)).toDataURL()})};const Fa=["gemini.google.com","corp.google.com","proxy.googlers.com"];function V(a){a=Number(a.replace(/px$/,""));return Number.isFinite(a)?a:0}function W(){return document.body.querySelectorAll('[class*="animate"]').length>0}function X(a,b){var d=document.createElement("canvas");d.width=a;d.height=b;return d.toDataURL("image/png")}const Y=X(1,1);
+function Z(a,b){return u(function*(){var d=Math.max(b?b.width:a.offsetWidth,1),c=Math.max(b?b.height:a.offsetHeight,1),e=HTMLCanvasElement.prototype.toDataURL;b&&(HTMLCanvasElement.prototype.toDataURL=function(f,g){var h;if(h=this.isConnected&&a.contains(this)){{let n=this.getBoundingClientRect();if(n.width===0||n.height===0)h=!1;else if(window.getComputedStyle(this).position==="fixed")h=n.bottom>0&&n.top<b.height&&n.right>0&&n.left<b.width;else{h=a.getBoundingClientRect();var l=n.top-h.top,p=n.left-
+h.left,x=n.right-h.left;h=n.bottom-h.top>b.scrollTop&&l<b.scrollTop+b.height&&x>b.scrollLeft&&p<b.scrollLeft+b.width}}h=!h}return h?"data:,":e.call(this,f,g)});try{let f=window.getComputedStyle(a),g=b?`${V(f.marginTop)-b.scrollTop}px`:void 0,h=b?`${V(f.marginLeft)-b.scrollLeft}px`:void 0,l=`${Math.max(a.offsetWidth,d)}px`,p,x=`${Math.max(a.offsetHeight,c+((p=b==null?void 0:b.scrollTop)!=null?p:0))}px`;return yield Ea(a,Object.assign({},{width:d,height:c,j:d,i:c},b?{style:{width:l,height:x,marginTop:g,
+marginLeft:h,marginBlockStart:g,marginInlineStart:h}}:{},{A:!0,filter:n=>{if(n.tagName==="IMG"){let U=n.getAttribute("src");if(!U||U.trim()===""||n.style.display==="none")return!1}return!0},o:Y,h:()=>Y}))}catch(f){return X(d,c)}finally{HTMLCanvasElement.prototype.toDataURL=e}})}
+function Ga(){return u(function*(){var a=document.body.offsetWidth,b=document.body.offsetHeight,d=document.body.cloneNode(!0);d.querySelectorAll('[class*="animate"]').forEach(c=>{c.classList.remove(...Array.from(c.classList).filter(e=>e.startsWith("animate")))});d.style.width=`${a}px`;d.style.height=`${b}px`;return d})}
+function Ha(a){return u(function*(){var b={width:window.innerWidth||document.documentElement.clientWidth||document.body.offsetWidth,height:window.innerHeight||document.documentElement.clientHeight||document.body.offsetHeight,scrollTop:window.scrollY||document.documentElement.scrollTop||document.body.scrollTop||0,scrollLeft:window.scrollX||document.documentElement.scrollLeft||document.body.scrollLeft||0},d=document.body;if(W()){let c=yield Ga();d=c;document.body.appendChild(c)}b=yield Z(d,b);W()&&
+document.body.removeChild(d);window.parent.postMessage({type:"SEND_SCREENSHOT",image:b,topOffset:0},a.origin)})}function Ia(a){return u(function*(){var b={type:"SEND_SCREENSHOT_FOR_DATA_VISUALIZATION",image:yield Z(document.body),topOffset:0};window.parent.postMessage(b,a.origin)})}window.addEventListener("message",a=>u(function*(){if(Fa.some(d=>a.origin.includes(d))){var b=a.data;b&&(b.type==="MAKE_SCREENSHOT"&&(yield Ha(a)),b.type==="MAKE_SCREENSHOT_FOR_DATA_VISUALIZATION"&&(yield Ia(a)))}}));
+})();</script><script data-bard-client-injected="true">(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script data-bard-client-injected="true">
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script ws-interception-config="{&quot;parentOrigin&quot;:&quot;https://gemini.google.com&quot;,&quot;proxiedDomains&quot;:[]}" data-bard-client-injected="true">(function(){'use strict';var u=typeof Object.defineProperties=="function"?Object.defineProperty:function(b,d,e){if(b==Array.prototype||b==Object.prototype)return b;b[d]=e.value;return b};function v(b){b=["object"==typeof globalThis&&globalThis,b,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var d=0;d<b.length;++d){var e=b[d];if(e&&e.Math==Math)return e}throw Error("Cannot find global object");}var w=v(this);
+function y(b,d){if(d)a:{var e=w;b=b.split(".");for(var h=0;h<b.length-1;h++){var k=b[h];if(!(k in e))break a;e=e[k]}b=b[b.length-1];h=e[b];d=d(h);d!=h&&d!=null&&u(e,b,{configurable:!0,writable:!0,value:d})}}function z(b){function d(h){return b.next(h)}function e(h){return b.throw(h)}return new Promise(function(h,k){function m(n){n.done?h(n.value):Promise.resolve(n.value).then(d,e).then(m,k)}m(b.next())})}y("globalThis",function(b){return b||w});/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function A(b,d){function e(){}e.prototype=d.prototype;b.i=d.prototype;b.prototype=new e;b.prototype.constructor=b;b.h=function(h,k,m){for(var n=Array(arguments.length-2),p=2;p<arguments.length;p++)n[p-2]=arguments[p];return d.prototype[k].apply(h,n)}};function B(b,d,e="*"){function h(a){if(typeof a==="string")return F.encode(a).buffer;if(a instanceof ArrayBuffer)return a.slice(0);if(ArrayBuffer.isView(a))return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);throw Error("Invalid data type");}function k(a){a=h(a);var f={type:"send",data:new Uint8Array(a)},g;(g=r)==null||g.postMessage(f,[a])}function m(){if(!r)throw Error("Data port not captured yet.");r.onmessage=a=>{if(a.data.type==="message"){a=new MessageEvent("message",{data:G.decode(a.data.data)});
+let f;(f=c.onmessage)==null||f.call(c,a);c.dispatchEvent(a)}}}function n(){if(!t)throw Error("Control port not captured yet.");t.onmessage=a=>{switch(a.data.type){case "open":l=1;var f=new Event("open"),g;(g=c.onopen)==null||g.call(c,f);c.dispatchEvent(f);q.forEach(H=>{k(H)});q=[];break;case "close":g=a.data;l=3;g=new CloseEvent("close",{code:g.code,reason:g.reason,wasClean:g.wasClean});(f=c.onclose)==null||f.call(c,g);c.dispatchEvent(g);break;case "error":l=3;f=new Event("error");let x;(x=c.onerror)==
+null||x.call(c,f);c.dispatchEvent(f)}}}function p(a){return z(function*(){var f=new MessageChannel;t=f.port1;var g=new MessageChannel;r=g.port1;n();m();window.parent.postMessage({type:"websocket_open",portOrdering:["control","data"],url:b,protocols:a||[],connectionId:I},e,[f.port2,g.port2])}())}var c=Reflect.construct(EventTarget,[],new.target);c.CONNECTING=0;c.OPEN=1;c.CLOSING=2;c.CLOSED=3;c.url=b;c.binaryType="arraybuffer";c.protocol="";c.extensions="";var l=0,t=null,r=null,q=[],F=new TextEncoder,
+G=new TextDecoder;c.onopen=null;c.onmessage=null;c.onclose=null;c.onerror=null;Object.defineProperty(c,"readyState",{get:()=>l,enumerable:!0,configurable:!0});Object.defineProperty(c,"bufferedAmount",{get:()=>{var a=0;q.forEach(f=>{a+=typeof f==="string"?f.length:f.byteLength});return a},enumerable:!0,configurable:!0});var I=function(){var a;return((a=globalThis.crypto)==null?0:a.randomUUID)?globalThis.crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,f=>{var g=Math.random()*
+16|0;return(f==="x"?g:g&3|8).toString(16)})}();c.send=a=>{if(l===1)a instanceof Blob?a.arrayBuffer().then(f=>{k(f)}):k(a);else if(l===0)if(typeof a==="string")q.push(a);else if(a instanceof ArrayBuffer||ArrayBuffer.isView(a))q.push(h(a));else throw Error("Sending Blob is not supported before the connection is open.");else console.debug("WebSocket send called in CLOSING or CLOSED state; ignored.")};c.close=(a=1E3,f="")=>{if(l!==2&&l!==3){l=2;a={type:"close",code:a,reason:f,wasClean:a===1E3};var g;
+(g=t)==null||g.postMessage(a)}};Promise.resolve().then(()=>p(d));return c}A(B,EventTarget);var C=document.currentScript,D=C==null?void 0:C.getAttribute("ws-interception-config");if(!D)throw Error("WebSocket Interceptor: Missing ws-interception-config attribute in the script tag.");var E=JSON.parse(D);if(!E.parentOrigin||typeof E.parentOrigin!=="string")throw Error("WebSocket Interceptor: Invalid parentOrigin in ws-interception-config");
+(function(b){var d=Object.getOwnPropertyDescriptor(window,"WebSocket");if(!d||d.writable||d.configurable)d=Object.assign(function(e,h){try{let k=(new URL(e)).hostname;if(b.proxiedDomains.some(m=>k===m||k.endsWith(`.${m}`)))return new B(e,h,b.parentOrigin)}catch(k){throw window.parent.postMessage({type:"websocket_blocked",url:e,reason:"blocked_invalid_url"},b.parentOrigin),new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");}window.parent.postMessage({type:"websocket_blocked",
+url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");},{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}),Object.defineProperty(window,"WebSocket",{value:d,writable:!1,configurable:!1})})({proxiedDomains:E.proxiedDomains||[],parentOrigin:E.parentOrigin});}).call(this);
+</script><script data-bard-client-injected="true">((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedGenerateImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedImageTransformModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-3.1-flash-image","imageTransformModelName":"gemini-3-pro-image","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"],"deprecatedGenerateImageModelNames":["gemini-2.5-flash-image-preview","gemini-2.5-flash-image","gemini-3.1-flash-image-preview"],"deprecatedImageTransformModelNames":["gemini-3-pro-image-preview-11-2025"]})</script><script data-bard-client-injected="true">(function() {
+  const OVERLAY_SELECTOR =
+    'dialog[open], [role="dialog"], [role="alertdialog"], [role="menu"], [role="listbox"], [role="combobox"]';
+
+  function isVisibleOverlay(element) {
+    if (element.closest('[hidden], [aria-hidden="true"], [inert]')) {
+      return false;
+    }
+    if (window.getComputedStyle(element).visibility === 'hidden') {
+      return false;
+    }
+    for (let cur = element; cur; cur = cur.parentElement) {
+      if (window.getComputedStyle(cur).display === 'none') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function hasOpenOverlay() {
+    const candidates = document.querySelectorAll(OVERLAY_SELECTOR);
+    for (let i = 0; i < candidates.length; i++) {
+      if (isVisibleOverlay(candidates[i])) {
+        return true;
+      }
+    }
+    try {
+      if (document.querySelector('[popover]:popover-open')) {
+        return true;
+      }
+    } catch (e) {
+      // Ignore engines that do not support :popover-open.
+    }
+    return false;
+  }
+
+  function isNonEmptySearchInput(target) {
+    return (
+      Boolean(target) &&
+      target.tagName === 'INPUT' &&
+      typeof target.type === 'string' &&
+      target.type.toLowerCase() === 'search' &&
+      typeof target.value === 'string' &&
+      target.value.length > 0
+    );
+  }
+
+  function shouldIgnoreEscape(event) {
+    return (
+      event.key !== 'Escape' ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.isComposing ||
+      event.repeat ||
+      event.keyCode === 229 ||
+      isNonEmptySearchInput(event.target)
+    );
+  }
+
+  let shouldIgnoreCaptureState = false;
+
+  window.addEventListener(
+    'keydown',
+    function(event) {
+      if (event.key === 'Escape') {
+        shouldIgnoreCaptureState =
+          hasOpenOverlay() || isNonEmptySearchInput(event.target);
+      }
+    },
+    {capture: true},
+  );
+
+  window.addEventListener('keydown', function(event) {
+    if (
+      shouldIgnoreEscape(event) ||
+      event.defaultPrevented ||
+      shouldIgnoreCaptureState
+    ) {
+      return;
+    }
+    const wasBlockedOnCapture = shouldIgnoreCaptureState;
+    queueMicrotask(function() {
+      if (event.defaultPrevented || wasBlockedOnCapture) {
+        return;
+      }
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({'type': 'escapeKey'}, '*');
+      }
+    });
+  });
+})();</script><script data-bard-client-injected="true">(function() {
+  function normalizeSlug(str) {
+    try {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^p{L}p{N}s_-]/gu, '')
+        .replace(/s+/g, '-');
+    } catch (e) {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9s_-]/g, '')
+        .replace(/s+/g, '-');
+    }
+  }
+
+  function findTargetElement(hash) {
+    if (!hash || hash === '#') {
+      return null;
+    }
+    const rawId = hash.startsWith('#') ? hash.slice(1) : hash;
+    let decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (e) {
+      // Ignore URI malformed errors.
+    }
+
+    // 1. Direct ID match (raw and decoded).
+    let target = document.getElementById(rawId) || document.getElementById(decodedId);
+    if (target) {
+      return target;
+    }
+
+    // 2. Name attribute match (<a name="...">).
+    try {
+      if (typeof CSS !== 'undefined' && CSS.escape) {
+        target =
+          document.querySelector('[name="' + CSS.escape(rawId) + '"]') ||
+          document.querySelector('[name="' + CSS.escape(decodedId) + '"]');
+      } else {
+        const namedElements = document.getElementsByName(rawId);
+        if (namedElements && namedElements.length > 0) {
+          return namedElements[0];
+        }
+      }
+    } catch (e) {
+      // Ignore querySelector syntax errors.
+    }
+    if (target) {
+      return target;
+    }
+
+    // 3. Match heading text by slug (for Markdown TOCs where headings lack explicit IDs).
+    const targetSlug = normalizeSlug(decodedId);
+    if (targetSlug) {
+      for (const heading of document.querySelectorAll('h1, h2, h3, h4, h5, h6')) {
+        if (normalizeSlug(heading.textContent || '') === targetSlug) {
+          return heading;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  document.addEventListener('click', function(event) {
+    const target = event.target;
+    const anchor = target && typeof target.closest === 'function' ? target.closest('a') : null;
+    if (!anchor) {
+      return;
+    }
+
+    const href = anchor.getAttribute('href');
+    if (
+      !href ||
+      href.trim().toLowerCase().startsWith('javascript:') ||
+      anchor.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    // Check if the link is an in-page hash / anchor link.
+    if (href.startsWith('#')) {
+      event.preventDefault();
+      const targetElement = findTargetElement(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+      return;
+    }
+
+    // Check if the URL has the same origin/pathname but with a hash.
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      if (
+        url.hash &&
+        url.origin === window.location.origin &&
+        url.pathname === window.location.pathname
+      ) {
+        event.preventDefault();
+        const targetElement = findTargetElement(url.hash);
+        if (targetElement) {
+          targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+        return;
+      }
+    } catch (e) {
+      // Fall through if URL parsing fails.
+    }
+
+    // For all external or full navigation links, prevent iframe-level navigation
+    // (which breaks in AGSA WebView or sandboxed iframes) and ensure they open
+    // safely in a new tab/window.
+    if (anchor.target !== '_blank') {
+      event.preventDefault();
+      window.open(anchor.href, '_blank', 'noopener,noreferrer');
+    }
+  }, {capture: true});
+})();</script><script data-bard-client-injected="true">(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script data-bard-client-injected="true">(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nuestra Boda — Yermi &amp; Génesis</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Tipografías editoriales románticas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=Montserrat:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+
+  <!-- Font Awesome para iconos finos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: "#FAF8F5",
+            pearl: "#F2EDE4",
+            champagne: "#E6DEC8",
+            gold: "#B89B72",
+            goldDark: "#8F744E",
+            sage: "#6B705C",
+            olive: "#3A3D32",
+            charcoal: "#262626",
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', '"Playfair Display"', "serif"],
+            display: ['"Playfair Display"', "serif"],
+            sans: ['"Montserrat"', "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Estilos personalizados estilo editorial Chungdoi */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: #faf8f5;
+      color: #262626;
+      font-family: "Montserrat", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Altura dinámica segura en navegadores móviles (Safari/Chrome) */
+    .min-h-screen-safe {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    /* Textura sutil de papel algodón */
+    .paper-texture {
+      background-color: #faf8f5;
+      background-image:
+        radial-gradient(rgba(184, 155, 114, 0.14) 1px, transparent 0),
+        radial-gradient(rgba(107, 112, 92, 0.08) 1px, transparent 0);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    /* Sello de lacre dorado envejecido en relieve */
+    .wax-seal {
+      background: radial-gradient(circle at 32% 30%, #d8be94 0%, #b89b72 52%, #7e6440 100%);
+      box-shadow:
+        0 12px 28px rgba(126, 100, 64, 0.42),
+        inset 0 2px 5px rgba(255, 250, 240, 0.6),
+        inset 0 -4px 8px rgba(68, 52, 30, 0.65);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+    }
+    .wax-seal:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 16px 34px rgba(126, 100, 64, 0.55),
+        inset 0 2px 6px rgba(255, 250, 240, 0.75);
+    }
+
+    /* Cortina / Sobre editorial de bienvenida */
+    #envelope-overlay {
+      transition: opacity 0.95s ease, transform 1.1s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.95s;
+    }
+    #envelope-overlay.opened {
+      opacity: 0;
+      transform: translateY(-4%) scale(1.03);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-flap-top {
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: top center;
+    }
+    #envelope-overlay.opening .envelope-flap-top {
+      transform: rotateX(180deg);
+    }
+
+    /* Aparición suave al hacer scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.85s ease-out, transform 0.85s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .animate-pulse-soft {
+      animation: pulseSoft 2.8s infinite ease-in-out;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Montserrat", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.inset-3{inset:0.75rem}.inset-5{inset:1.25rem}.bottom-0{bottom:0px}.left-0{left:0px}.left-1\/2{left:50%}.left-3{left:0.75rem}.right-2\.5{right:0.625rem}.right-3{right:0.75rem}.right-5{right:1.25rem}.top-0{top:0px}.top-16{top:4rem}.top-2\.5{top:0.625rem}.top-3{top:0.75rem}.top-5{top:1.25rem}.z-0{z-index:0}.z-10{z-index:10}.z-20{z-index:20}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.col-span-1{grid-column:span 1 / span 1}.col-span-2{grid-column:span 2 / span 2}.row-span-1{grid-row:span 1 / span 1}.row-span-2{grid-row:span 2 / span 2}.mx-auto{margin-left:auto;margin-right:auto}.my-auto{margin-top:auto;margin-bottom:auto}.mb-1{margin-bottom:0.25rem}.mb-1\.5{margin-bottom:0.375rem}.mb-10{margin-bottom:2.5rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mb-7{margin-bottom:1.75rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-20{height:5rem}.h-24{height:6rem}.h-9{height:2.25rem}.h-\[56px\]{height:56px}.h-full{height:100%}.h-px{height:1px}.max-h-\[100dvh\]{max-height:100dvh}.max-h-\[380px\]{max-height:380px}.max-h-\[88vh\]{max-height:88vh}.min-h-\[36px\]{min-height:36px}.min-h-\[40px\]{min-height:40px}.min-h-\[42px\]{min-height:42px}.min-h-\[44px\]{min-height:44px}.min-h-\[46px\]{min-height:46px}.min-h-\[48px\]{min-height:48px}.min-h-\[50px\]{min-height:50px}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[56px\]{width:56px}.w-\[90vw\]{width:90vw}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-6xl{max-width:72rem}.max-w-full{max-width:100%}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-4{--tw-translate-y:-1rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}.cursor-default{cursor:default}.cursor-pointer{cursor:pointer}.touch-manipulation{touch-action:manipulation}.select-none{-webkit-user-select:none;user-select:none}.resize-none{resize:none}.auto-rows-\[165px\]{grid-auto-rows:165px}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-10{gap:2.5rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-8{gap:2rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.overflow-x-hidden{overflow-x:hidden}.scroll-smooth{scroll-behavior:smooth}.break-words{overflow-wrap:break-word}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-0{border-width:0px}.border-2{border-width:2px}.border-y{border-top-width:1px;border-bottom-width:1px}.border-b{border-bottom-width:1px}.border-l{border-left-width:1px}.border-t{border-top-width:1px}.border-\[\#e6d2b5\]\/70{border-color:rgb(230 210 181 / 0.7)}.border-gold{--tw-border-opacity:1;border-color:rgb(184 155 114 / var(--tw-border-opacity, 1))}.border-gold\/20{border-color:rgb(184 155 114 / 0.2)}.border-gold\/25{border-color:rgb(184 155 114 / 0.25)}.border-gold\/30{border-color:rgb(184 155 114 / 0.3)}.border-gold\/35{border-color:rgb(184 155 114 / 0.35)}.border-gold\/40{border-color:rgb(184 155 114 / 0.4)}.border-gold\/45{border-color:rgb(184 155 114 / 0.45)}.border-gold\/50{border-color:rgb(184 155 114 / 0.5)}.border-gold\/65{border-color:rgb(184 155 114 / 0.65)}.border-gold\/70{border-color:rgb(184 155 114 / 0.7)}.border-red-300{--tw-border-opacity:1;border-color:rgb(252 165 165 / var(--tw-border-opacity, 1))}.bg-\[\#262626\]{--tw-bg-opacity:1;background-color:rgb(38 38 38 / var(--tw-bg-opacity, 1))}.bg-\[\#3A3D32\]{--tw-bg-opacity:1;background-color:rgb(58 61 50 / var(--tw-bg-opacity, 1))}.bg-\[\#6B705C\]{--tw-bg-opacity:1;background-color:rgb(107 112 92 / var(--tw-bg-opacity, 1))}.bg-\[\#8C6D62\]{--tw-bg-opacity:1;background-color:rgb(140 109 98 / var(--tw-bg-opacity, 1))}.bg-\[\#B89B72\]{--tw-bg-opacity:1;background-color:rgb(184 155 114 / var(--tw-bg-opacity, 1))}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/85{background-color:rgb(0 0 0 / 0.85)}.bg-cream{--tw-bg-opacity:1;background-color:rgb(250 248 245 / var(--tw-bg-opacity, 1))}.bg-cream\/90{background-color:rgb(250 248 245 / 0.9)}.bg-cream\/95{background-color:rgb(250 248 245 / 0.95)}.bg-gold{--tw-bg-opacity:1;background-color:rgb(184 155 114 / var(--tw-bg-opacity, 1))}.bg-goldDark{--tw-bg-opacity:1;background-color:rgb(143 116 78 / var(--tw-bg-opacity, 1))}.bg-olive{--tw-bg-opacity:1;background-color:rgb(58 61 50 / var(--tw-bg-opacity, 1))}.bg-olive\/15{background-color:rgb(58 61 50 / 0.15)}.bg-pearl{--tw-bg-opacity:1;background-color:rgb(242 237 228 / var(--tw-bg-opacity, 1))}.bg-pearl\/40{background-color:rgb(242 237 228 / 0.4)}.bg-pearl\/70{background-color:rgb(242 237 228 / 0.7)}.bg-pearl\/85{background-color:rgb(242 237 228 / 0.85)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/15{background-color:rgb(255 255 255 / 0.15)}.bg-white\/80{background-color:rgb(255 255 255 / 0.8)}.bg-white\/85{background-color:rgb(255 255 255 / 0.85)}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.from-cream\/35{--tw-gradient-from:rgb(250 248 245 / 0.35) var(--tw-gradient-from-position);--tw-gradient-to:rgb(250 248 245 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-cream\/45{--tw-gradient-to:rgb(250 248 245 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(250 248 245 / 0.45) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-cream{--tw-gradient-to:#FAF8F5 var(--tw-gradient-to-position)}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.object-center{object-position:center}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-1{padding-bottom:0.25rem}.pb-14{padding-bottom:3.5rem}.pb-3{padding-bottom:0.75rem}.pr-1{padding-right:0.25rem}.pt-1{padding-top:0.25rem}.pt-24{padding-top:6rem}.pt-6{padding-top:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.font-serif{font-family:"Cormorant Garamond", "Playfair Display", serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[8px\]{font-size:8px}.text-\[9px\]{font-size:9px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-\[0\.15em\]{letter-spacing:0.15em}.tracking-\[0\.18em\]{letter-spacing:0.18em}.tracking-\[0\.22em\]{letter-spacing:0.22em}.tracking-\[0\.25em\]{letter-spacing:0.25em}.tracking-\[0\.26em\]{letter-spacing:0.26em}.tracking-\[0\.2em\]{letter-spacing:0.2em}.tracking-\[0\.32em\]{letter-spacing:0.32em}.tracking-\[0\.34em\]{letter-spacing:0.34em}.tracking-\[0\.35em\]{letter-spacing:0.35em}.tracking-\[0\.3em\]{letter-spacing:0.3em}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-\[\#6be899\]{--tw-text-opacity:1;color:rgb(107 232 153 / var(--tw-text-opacity, 1))}.text-charcoal{--tw-text-opacity:1;color:rgb(38 38 38 / var(--tw-text-opacity, 1))}.text-charcoal\/70{color:rgb(38 38 38 / 0.7)}.text-charcoal\/75{color:rgb(38 38 38 / 0.75)}.text-charcoal\/80{color:rgb(38 38 38 / 0.8)}.text-cream{--tw-text-opacity:1;color:rgb(250 248 245 / var(--tw-text-opacity, 1))}.text-gold{--tw-text-opacity:1;color:rgb(184 155 114 / var(--tw-text-opacity, 1))}.text-goldDark{--tw-text-opacity:1;color:rgb(143 116 78 / var(--tw-text-opacity, 1))}.text-olive{--tw-text-opacity:1;color:rgb(58 61 50 / var(--tw-text-opacity, 1))}.text-olive\/70{color:rgb(58 61 50 / 0.7)}.text-olive\/90{color:rgb(58 61 50 / 0.9)}.text-pearl{--tw-text-opacity:1;color:rgb(242 237 228 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-sage{--tw-text-opacity:1;color:rgb(107 112 92 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-0{opacity:0}.opacity-95{opacity:0.95}.opacity-100{opacity:1}.shadow{--tw-shadow:0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.duration-700{transition-duration:700ms}.selection\:bg-gold\/20 *::selection{background-color:rgb(184 155 114 / 0.2)}.selection\:text-olive *::selection{--tw-text-opacity:1;color:rgb(58 61 50 / var(--tw-text-opacity, 1))}.selection\:bg-gold\/20::selection{background-color:rgb(184 155 114 / 0.2)}.selection\:text-olive::selection{--tw-text-opacity:1;color:rgb(58 61 50 / var(--tw-text-opacity, 1))}.hover\:bg-cream:hover{--tw-bg-opacity:1;background-color:rgb(250 248 245 / var(--tw-bg-opacity, 1))}.hover\:bg-gold:hover{--tw-bg-opacity:1;background-color:rgb(184 155 114 / var(--tw-bg-opacity, 1))}.hover\:bg-olive:hover{--tw-bg-opacity:1;background-color:rgb(58 61 50 / var(--tw-bg-opacity, 1))}.hover\:bg-pearl:hover{--tw-bg-opacity:1;background-color:rgb(242 237 228 / var(--tw-bg-opacity, 1))}.hover\:bg-red-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:bg-sage:hover{--tw-bg-opacity:1;background-color:rgb(107 112 92 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/30:hover{background-color:rgb(255 255 255 / 0.3)}.hover\:text-cream:hover{--tw-text-opacity:1;color:rgb(250 248 245 / var(--tw-text-opacity, 1))}.hover\:text-olive:hover{--tw-text-opacity:1;color:rgb(58 61 50 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:brightness-95:hover{--tw-brightness:brightness(.95);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.focus\:border-olive:focus{--tw-border-opacity:1;border-color:rgb(58 61 50 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:inset-6{inset:1.5rem}.sm\:inset-8{inset:2rem}.sm\:left-4{left:1rem}.sm\:right-4{right:1rem}.sm\:top-20{top:5rem}.sm\:top-4{top:1rem}.sm\:top-5{top:1.25rem}.sm\:mb-14{margin-bottom:3.5rem}.sm\:mb-5{margin-bottom:1.25rem}.sm\:mb-6{margin-bottom:1.5rem}.sm\:mb-7{margin-bottom:1.75rem}.sm\:mb-8{margin-bottom:2rem}.sm\:mt-10{margin-top:2.5rem}.sm\:mt-6{margin-top:1.5rem}.sm\:h-16{height:4rem}.sm\:h-20{height:5rem}.sm\:h-32{height:8rem}.sm\:h-\[70px\]{height:70px}.sm\:w-16{width:4rem}.sm\:w-20{width:5rem}.sm\:w-\[70px\]{width:70px}.sm\:w-auto{width:auto}.sm\:auto-rows-\[260px\]{grid-auto-rows:260px}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:gap-10{gap:2.5rem}.sm\:gap-16{gap:4rem}.sm\:gap-4{gap:1rem}.sm\:gap-5{gap:1.25rem}.sm\:rounded-full{border-radius:9999px}.sm\:p-10{padding:2.5rem}.sm\:p-11{padding:2.75rem}.sm\:p-6{padding:1.5rem}.sm\:p-8{padding:2rem}.sm\:px-2{padding-left:0.5rem;padding-right:0.5rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:px-7{padding-left:1.75rem;padding-right:1.75rem}.sm\:py-16{padding-top:4rem;padding-bottom:4rem}.sm\:py-20{padding-top:5rem;padding-bottom:5rem}.sm\:py-5{padding-top:1.25rem;padding-bottom:1.25rem}.sm\:pb-16{padding-bottom:4rem}.sm\:pt-8{padding-top:2rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-5xl{font-size:3rem;line-height:1}.sm\:text-7xl{font-size:4.5rem;line-height:1}.sm\:text-\[11px\]{font-size:11px}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-xs{font-size:0.75rem;line-height:1rem}.sm\:leading-none{line-height:1}.sm\:tracking-\[0\.22em\]{letter-spacing:0.22em}.sm\:tracking-\[0\.28em\]{letter-spacing:0.28em}.sm\:tracking-\[0\.35em\]{letter-spacing:0.35em}.sm\:tracking-\[0\.38em\]{letter-spacing:0.38em}.sm\:tracking-\[0\.3em\]{letter-spacing:0.3em}.sm\:tracking-\[0\.42em\]{letter-spacing:0.42em}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:text-8xl{font-size:6rem;line-height:1}}@media (min-width: 1024px){.lg\:col-span-6{grid-column:span 6 / span 6}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}}</style></head>
+<body class="paper-texture antialiased selection:bg-gold/20 selection:text-olive">
+
+  <!-- Lienzo de destellos dorados sutiles -->
+  <canvas id="petals-canvas" class="fixed inset-0 pointer-events-none z-30" width="1484" height="635"></canvas>
+
+  <!-- ===================================================================== -->
+  <!-- 1. PANTALLA DE APERTURA (SOBRE EDITORIAL / CORTINA DE BIENVENIDA)     -->
+  <!-- ===================================================================== -->
+  <div id="envelope-overlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center paper-texture px-4 py-6 overflow-y-auto">
+    <!-- Marcos finos dorados envejecidos -->
+    <div class="absolute inset-3 sm:inset-6 border border-gold/45 rounded-2xl pointer-events-none"></div>
+    <div class="absolute inset-5 sm:inset-8 border border-gold/25 rounded-xl pointer-events-none"></div>
+
+    <!-- Tarjeta editorial central -->
+    <div class="relative w-full max-w-md bg-cream/95 rounded-2xl shadow-2xl border border-gold/40 p-6 sm:p-11 text-center overflow-hidden my-auto">
+      <!-- Solapa superior -->
+      <svg class="envelope-flap-top absolute top-0 left-0 w-full h-24 sm:h-32 text-pearl drop-shadow-xs pointer-events-none" viewBox="0 0 400 130" preserveAspectRatio="none">
+        <polygon points="0,0 400,0 200,120" fill="currentColor"></polygon>
+        <polyline points="0,0 200,120 400,0" fill="none" stroke="#B89B72" stroke-opacity="0.45" stroke-width="1.2"></polyline>
+      </svg>
+
+      <div class="relative z-10 pt-6 sm:pt-8">
+        <!-- Monograma central en marco fino dorado -->
+        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-5 rounded-full border border-gold/70 flex items-center justify-center bg-cream shadow-xs">
+          <div class="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] rounded-full border border-gold/35 flex items-center justify-center">
+            <span id="env-monogram" class="font-serif text-lg sm:text-xl tracking-[0.18em] text-goldDark font-semibold">Y &amp; G</span>
+          </div>
+        </div>
+
+        <p class="uppercase tracking-[0.32em] sm:tracking-[0.38em] text-[10px] sm:text-[11px] text-sage font-semibold mb-2">
+          Nuestra Boda
+        </p>
+
+        <h1 id="env-names" class="font-serif text-3xl sm:text-5xl text-olive font-normal tracking-wide mb-2">Yermi &amp; Génesis</h1>
+
+        <p id="env-date-dots" class="font-serif text-base sm:text-lg tracking-[0.26em] sm:tracking-[0.3em] text-goldDark mb-6 sm:mb-7">13 . 02 . 2027</p>
+
+        <!-- Sello de lacre interactivo en relieve -->
+        <div class="flex flex-col items-center justify-center">
+          <button id="open-envelope-btn" type="button" aria-label="Abrir Invitación" class="wax-seal animate-pulse-soft w-24 h-24 rounded-full flex flex-col items-center justify-center text-cream cursor-pointer border-2 border-[#e6d2b5]/70 focus:outline-none touch-manipulation">
+            <span id="seal-initials" class="font-serif text-2xl font-semibold tracking-widest">Y&amp;G</span>
+            <span class="text-[8px] uppercase tracking-[0.22em] mt-0.5 opacity-95">
+              Abrir
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CONTROLES FLOTANTES (MÚSICA ARRIBA DERECHA + EDICIÓN ABAJO IZQUIERDA) -->
+  <!-- ===================================================================== -->
+  <!-- Reproductor HTML5 oculto para canción cargada por el usuario -->
+  <audio id="custom-audio-player" loop="" playsinline="" webkit-playsinline="" preload="auto"></audio>
+  <input id="quick-music-file-input" type="file" accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg" class="hidden" onchange="handleAudioUpload(event)">
+
+  <!-- Botones discretos de música arriba a la derecha (sin música por defecto) -->
+  <div class="fixed top-3 right-3 sm:top-4 sm:right-4 z-40 flex items-center gap-2">
+    <button id="change-music-btn" type="button" onclick="document.getElementById('quick-music-file-input').click()" title="Subir o cambiar tu canción de fondo" class="min-h-[44px] px-3.5 py-2.5 rounded-full bg-cream/95 hover:bg-pearl text-olive shadow-md border border-gold/45 text-[11px] font-medium items-center gap-1.5 backdrop-blur-sm transition cursor-pointer touch-manipulation hidden">
+      <i class="fa-solid fa-music text-xs text-goldDark"></i>
+      <span id="music-btn-label">Agregar música</span>
+    </button>
+    <button id="music-toggle-btn" type="button" title="Pausar o reanudar música" class="hidden w-11 h-11 rounded-full bg-cream/95 text-olive shadow-md border border-gold/45 items-center justify-center backdrop-blur-sm hover:bg-pearl transition cursor-pointer touch-manipulation">
+      <i id="music-icon" class="fa-solid fa-volume-high text-xs text-goldDark"></i>
+    </button>
+  </div>
+
+  <!-- Botón fantasma invisible en la esquina inferior izquierda (3 toques rápidos para abrir edición) -->
+  <button id="ghost-editor-trigger" type="button" aria-label="Acceso privado" class="fixed bottom-0 left-0 z-40 w-16 h-16 opacity-0 bg-transparent border-0 cursor-default focus:outline-none touch-manipulation"></button>
+
+  <!-- Input oculto para cambiar fotos directamente desde la portada o galería -->
+  <input id="direct-photo-input" type="file" accept="image/*" class="hidden" onchange="handleDirectPhotoInput(event)">
+
+  <!-- Notificación Toast -->
+  <div id="toast-notification" class="fixed top-16 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-sm bg-olive text-cream px-4 py-3 rounded-2xl sm:rounded-full shadow-xl border border-gold/40 text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 text-center transition-all duration-300 opacity-100 translate-y-0">
+    <i class="fa-solid fa-circle-check text-gold shrink-0"></i>
+    <span id="toast-message">Cambios aplicados en la invitación</span>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CONTENIDO PRINCIPAL EDITORIAL                                         -->
+  <!-- ===================================================================== -->
+  <main class="relative z-10 w-full overflow-x-hidden">
+
+    <!-- 2. HERO SECTION EDITORIAL (PORTADA) -->
+    <section class="relative min-h-screen-safe flex flex-col items-center justify-end pb-14 sm:pb-16 pt-24 px-4 text-center overflow-hidden">
+      <!-- Fotografía principal a pantalla completa con degradado suave inferior -->
+      <div class="absolute inset-0 z-0">
+        <img id="hero-bg-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&amp;fit=crop&amp;w=1600&amp;q=85" onerror="this.src='https://placehold.co/1600x1000/F2EDE4/6B705C?text=Yermi+%26+Genesis'" alt="Yermi &amp; Génesis" class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-gradient-to-b from-cream/35 via-cream/45 to-cream"></div>
+        <button type="button" data-quick-photo-btn="hero-bg-img" onclick="triggerDirectPhotoChange(event, 'hero-bg-img')" title="Cambiar foto de portada" class="absolute top-16 sm:top-20 left-3 sm:left-4 z-20 min-h-[40px] px-3.5 py-2 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1.5 cursor-pointer touch-manipulation hidden">
+          <i class="fa-solid fa-image text-goldDark"></i>
+          <span>Cambiar portada</span>
+        </button>
+      </div>
+
+      <div class="relative z-10 w-full max-w-3xl mx-auto">
+        <p class="uppercase tracking-[0.34em] sm:tracking-[0.42em] text-xs sm:text-sm text-olive font-semibold mb-3">
+          ¡Nos Casamos!
+        </p>
+
+        <h1 id="hero-names" class="font-serif text-4xl sm:text-7xl md:text-8xl text-olive font-normal tracking-tight leading-tight sm:leading-none mb-4 sm:mb-5 break-words">Yermi &amp; Génesis</h1>
+
+        <div class="flex items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-7">
+          <span class="h-px w-8 sm:w-20 bg-gold"></span>
+          <p id="hero-date-text" class="font-serif italic text-xl sm:text-3xl text-goldDark">13 de Febrero, 2027</p>
+          <span class="h-px w-8 sm:w-20 bg-gold"></span>
+        </div>
+
+        <!-- Botón Agendar en Calendario (.ics real) -->
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button type="button" onclick="downloadCalendarICS()" class="min-h-[48px] px-6 sm:px-7 py-3.5 rounded-full bg-olive text-cream text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] font-medium shadow-md hover:bg-sage transition inline-flex items-center gap-2.5 cursor-pointer touch-manipulation">
+            <i class="fa-regular fa-calendar-check text-gold"></i>
+            Agendar en Calendario
+          </button>
+        </div>
+
+        <a href="#cita-padres" class="inline-flex flex-col items-center mt-8 sm:mt-10 p-2 text-olive/70 hover:text-olive transition" aria-label="Continuar leyendo">
+          <i class="fa-solid fa-chevron-down animate-bounce text-goldDark text-sm"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. FRASE EDITORIAL -->
+    <section id="cita-padres" class="py-12 sm:py-16 px-4 max-w-3xl mx-auto text-center reveal visible">
+      <div class="w-12 h-px bg-gold mx-auto mb-5 sm:mb-6"></div>
+      <blockquote id="hero-quote" class="font-serif italic text-xl sm:text-3xl text-olive/90 max-w-2xl mx-auto leading-relaxed px-2">“Dos almas con un solo pensamiento, dos corazones que laten como uno solo. Con inmensa alegría queremos invitarte a ser testigo del comienzo de nuestro para siempre.”</blockquote>
+      <div class="w-12 h-px bg-gold mx-auto mt-5 sm:mt-6"></div>
+    </section>
+
+    <!-- 4. CUENTA REGRESIVA EN TIEMPO REAL -->
+    <section class="py-12 sm:py-16 px-4 bg-pearl/70 border-y border-gold/25 reveal visible">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] text-sage font-semibold mb-2">
+          La Cuenta Regresiva
+        </p>
+        <h2 class="font-serif text-2xl sm:text-4xl text-olive mb-6 sm:mb-8">
+          Faltan pocos días para el “Sí, acepto”
+        </h2>
+
+        <div class="grid grid-cols-4 gap-2 sm:gap-5">
+          <div class="bg-cream rounded-2xl py-4 sm:py-5 px-1.5 sm:px-2 border border-gold/35 shadow-2xs">
+            <span id="cd-days" class="block font-serif text-3xl sm:text-5xl font-normal text-olive">83</span>
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] text-sage mt-1 block">Días</span>
+          </div>
+          <div class="bg-cream rounded-2xl py-4 sm:py-5 px-1.5 sm:px-2 border border-gold/35 shadow-2xs">
+            <span id="cd-hours" class="block font-serif text-3xl sm:text-5xl font-normal text-olive">17</span>
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] text-sage mt-1 block">Horas</span>
+          </div>
+          <div class="bg-cream rounded-2xl py-4 sm:py-5 px-1.5 sm:px-2 border border-gold/35 shadow-2xs">
+            <span id="cd-minutes" class="block font-serif text-3xl sm:text-5xl font-normal text-olive">31</span>
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] text-sage mt-1 block">Minutos</span>
+          </div>
+          <div class="bg-cream rounded-2xl py-4 sm:py-5 px-1.5 sm:px-2 border border-gold/35 shadow-2xs">
+            <span id="cd-seconds" class="block font-serif text-3xl sm:text-5xl font-normal text-olive">41</span>
+            <span class="text-[9px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.22em] text-sage mt-1 block">Segundos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ITINERARIO / CUÁNDO Y DÓNDE (LUGAR ÚNICO: RANCHO JALISCO) -->
+    <section id="eventos" class="py-16 sm:py-20 px-4 max-w-4xl mx-auto reveal visible">
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] text-sage font-semibold mb-2">Cuándo y Dónde</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-olive">Ceremonia &amp; Recepción en un Mismo Lugar</h2>
+        <div class="w-16 h-px bg-gold mx-auto mt-4"></div>
+      </div>
+
+      <!-- Tarjeta única de ubicación compartida -->
+      <div class="bg-white/85 rounded-2xl p-6 sm:p-10 shadow-2xs border border-gold/35 text-center mb-6 sm:mb-8">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-cream border border-gold/45 flex items-center justify-center mx-auto mb-4 sm:mb-5 text-goldDark">
+          <i class="fa-solid fa-location-dot text-xl sm:text-2xl"></i>
+        </div>
+        <p class="uppercase tracking-[0.25em] sm:tracking-[0.28em] text-[10px] sm:text-[11px] text-sage font-semibold mb-1">
+          Sede Única del Evento
+        </p>
+        <h3 id="venue-name" class="font-serif text-3xl sm:text-4xl text-olive mb-2">Rancho Jalisco</h3>
+        <p id="venue-address" class="text-sm sm:text-base text-charcoal/80 mb-6 sm:mb-7 leading-relaxed">Vía / Progreso</p>
+
+        <a id="venue-map-link" href="https://maps.app.goo.gl/4spgcpndc35HZwYu9" target="_blank" rel="noopener noreferrer" class="min-h-[48px] px-6 sm:px-7 py-3.5 rounded-full bg-olive text-cream text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] font-medium hover:bg-sage transition inline-flex items-center justify-center gap-2.5 shadow-xs touch-manipulation">
+          <i class="fa-solid fa-map-location-dot text-gold"></i>
+          <span>Abrir en Google Maps</span>
+        </a>
+      </div>
+
+      <!-- Línea de tiempo de Ceremonia y Recepción/Fiesta en Rancho Jalisco -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="bg-white/80 rounded-2xl p-6 border border-gold/30 text-center">
+          <p id="ceremony-time" class="text-goldDark font-semibold tracking-[0.22em] text-xs uppercase mb-2">13:00</p>
+          <h4 class="font-serif text-2xl text-olive mb-1">Ceremonia Religiosa</h4>
+          <p id="ceremony-place" class="text-xs text-charcoal/75">Rancho Jalisco</p>
+        </div>
+
+        <div class="bg-white/80 rounded-2xl p-6 border border-gold/30 text-center">
+          <p id="reception-time" class="text-goldDark font-semibold tracking-[0.22em] text-xs uppercase mb-2">15:00</p>
+          <h4 class="font-serif text-2xl text-olive mb-1">Recepción &amp; Fiesta</h4>
+          <p id="reception-place" class="text-xs text-charcoal/75">Rancho Jalisco</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CÓDIGO DE VESTIMENTA (DRESS CODE) -->
+    <section id="dresscode" class="py-20 px-4 bg-pearl/70 border-y border-gold/25 reveal visible">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="uppercase tracking-[0.35em] text-[11px] text-sage font-semibold mb-2">Etiqueta</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-olive mb-3">Código de Vestimenta</h2>
+        <p id="dresscode-title" class="font-serif italic text-2xl text-goldDark mb-8">Formal / Etiqueta</p>
+
+        <!-- Ilustraciones minimalistas Traje Formal & Vestido Largo -->
+        <div class="flex items-center justify-center gap-10 sm:gap-16 mb-8 text-olive">
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-cream border border-gold/40 flex items-center justify-center mb-3">
+              <svg class="w-10 h-10 text-olive" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M13 8L20 13L27 8L31 13V33H9V13L13 8Z"></path>
+                <path d="M16 8L20 21L24 8"></path>
+                <path d="M20 13V33"></path>
+                <polygon points="18,11 22,11 20,14" fill="currentColor"></polygon>
+              </svg>
+            </div>
+            <span class="text-xs uppercase tracking-[0.2em] font-medium">Traje Formal</span>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-cream border border-gold/40 flex items-center justify-center mb-3">
+              <svg class="w-10 h-10 text-olive" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
+                <path d="M15 8L17 15H23L25 8"></path>
+                <path d="M17 15L11 33H29L23 15"></path>
+                <path d="M16 19H24"></path>
+              </svg>
+            </div>
+            <span class="text-xs uppercase tracking-[0.2em] font-medium">Vestido Largo</span>
+          </div>
+        </div>
+
+        <!-- Paleta de colores sugerida en círculos elegantes -->
+        <div class="bg-cream rounded-2xl p-5 sm:p-8 border border-gold/35 max-w-xl mx-auto">
+          <p class="text-[11px] uppercase tracking-[0.25em] text-sage font-semibold mb-4">
+            Paleta de Colores Sugerida
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-5 mb-5">
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="w-9 h-9 rounded-full bg-[#3A3D32] border border-gold/40 shadow-sm"></span>
+              <span class="text-[10px] text-charcoal/70">Oliva</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="w-9 h-9 rounded-full bg-[#6B705C] border border-gold/40 shadow-sm"></span>
+              <span class="text-[10px] text-charcoal/70">Salvia</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="w-9 h-9 rounded-full bg-[#B89B72] border border-gold/40 shadow-sm"></span>
+              <span class="text-[10px] text-charcoal/70">Dorado</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="w-9 h-9 rounded-full bg-[#8C6D62] border border-gold/40 shadow-sm"></span>
+              <span class="text-[10px] text-charcoal/70">Taupe</span>
+            </div>
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="w-9 h-9 rounded-full bg-[#262626] border border-gold/40 shadow-sm"></span>
+              <span class="text-[10px] text-charcoal/70">Negro</span>
+            </div>
+          </div>
+
+          <p id="dresscode-note" class="text-xs sm:text-sm text-charcoal/80 italic">Agradecemos reservar el color blanco, marfil y beige claro exclusivamente para la novia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. GALERÍA FOTOGRÁFICA EDITORIAL (CUADRÍCULA ASIMÉTRICA ESTILO REVISTA) -->
+    <section id="galeria" class="py-16 sm:py-20 px-4 max-w-6xl mx-auto reveal visible">
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] text-sage font-semibold mb-2">Nuestros Recuerdos</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-olive">Galería Editorial</h2>
+        <div class="w-16 h-px bg-gold mx-auto mt-4"></div>
+      </div>
+
+      <!-- Cuadrícula asimétrica tipo revista adaptable a móvil -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-5 auto-rows-[165px] sm:auto-rows-[260px]">
+        <!-- Foto 1 (Grande destacada 2x2) -->
+        <div class="col-span-2 row-span-2 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-0')">
+          <img id="gallery-img-0" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&amp;fit=crop&amp;w=1000&amp;q=85" onerror="this.src='https://placehold.co/800x800/F2EDE4/6B705C?text=Yermi+%26+Genesis+1'" alt="Galería 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-0" onclick="triggerDirectPhotoChange(event, 'gallery-img-0')" title="Cambiar esta fotografía" class="absolute top-2.5 right-2.5 z-20 min-h-[36px] px-3 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1.5 cursor-pointer touch-manipulation hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Cambiar foto</span>
+          </button>
+          <div class="absolute inset-0 bg-olive/15 opacity-0 group-hover:opacity-100 transition flex items-center justify-center pointer-events-none">
+            <span class="w-10 h-10 rounded-full bg-cream/90 text-olive flex items-center justify-center shadow">
+              <i class="fa-solid fa-expand text-xs"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="col-span-1 row-span-1 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-1')">
+          <img id="gallery-img-1" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&amp;fit=crop&amp;w=700&amp;q=85" onerror="this.src='https://placehold.co/600x600/F2EDE4/6B705C?text=Foto+2'" alt="Galería 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-1" onclick="triggerDirectPhotoChange(event, 'gallery-img-1')" title="Cambiar esta fotografía" class="absolute top-3 right-3 z-20 px-2.5 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1 cursor-pointer hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Foto</span>
+          </button>
+        </div>
+
+        <!-- Foto 3 (Vertical alta 1x2) -->
+        <div class="col-span-1 row-span-2 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-2')">
+          <img id="gallery-img-2" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&amp;fit=crop&amp;w=700&amp;q=85" onerror="this.src='https://placehold.co/600x900/F2EDE4/6B705C?text=Foto+3'" alt="Galería 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-2" onclick="triggerDirectPhotoChange(event, 'gallery-img-2')" title="Cambiar esta fotografía" class="absolute top-3 right-3 z-20 px-2.5 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1 cursor-pointer hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Foto</span>
+          </button>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="col-span-1 row-span-1 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-3')">
+          <img id="gallery-img-3" src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&amp;fit=crop&amp;w=700&amp;q=85" onerror="this.src='https://placehold.co/600x600/F2EDE4/6B705C?text=Foto+4'" alt="Galería 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-3" onclick="triggerDirectPhotoChange(event, 'gallery-img-3')" title="Cambiar esta fotografía" class="absolute top-3 right-3 z-20 px-2.5 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1 cursor-pointer hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Foto</span>
+          </button>
+        </div>
+
+        <!-- Foto 5 (Panorámica 2x1) -->
+        <div class="col-span-2 row-span-1 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-4')">
+          <img id="gallery-img-4" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&amp;fit=crop&amp;w=900&amp;q=85" onerror="this.src='https://placehold.co/800x500/F2EDE4/6B705C?text=Foto+5'" alt="Galería 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-4" onclick="triggerDirectPhotoChange(event, 'gallery-img-4')" title="Cambiar esta fotografía" class="absolute top-3 right-3 z-20 px-3 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1.5 cursor-pointer hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Cambiar foto</span>
+          </button>
+        </div>
+
+        <!-- Foto 6 (Panorámica 2x1) -->
+        <div class="col-span-2 row-span-1 relative group rounded-2xl overflow-hidden shadow-xs border border-gold/30 cursor-pointer bg-pearl" onclick="openLightbox('gallery-img-5')">
+          <img id="gallery-img-5" src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&amp;fit=crop&amp;w=900&amp;q=85" onerror="this.src='https://placehold.co/800x500/F2EDE4/6B705C?text=Foto+6'" alt="Galería 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <button type="button" data-quick-photo-btn="gallery-img-5" onclick="triggerDirectPhotoChange(event, 'gallery-img-5')" title="Cambiar esta fotografía" class="absolute top-3 right-3 z-20 px-3 py-1.5 rounded-full bg-cream/95 text-olive border border-gold/50 text-[10px] uppercase tracking-wider font-semibold shadow-md hover:bg-olive hover:text-cream transition items-center gap-1.5 cursor-pointer hidden">
+            <i class="fa-solid fa-camera text-goldDark"></i>
+            <span>Cambiar foto</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. MESA DE REGALOS / LLUVIA DE SOBRES CON TARJETA DESPLEGABLE -->
+    <section id="regalos" class="py-20 px-4 bg-pearl/70 border-y border-gold/25 reveal visible">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="w-16 h-16 rounded-full bg-cream border border-gold/45 flex items-center justify-center mx-auto mb-5 text-goldDark">
+          <i class="fa-solid fa-envelope-open-text text-xl"></i>
+        </div>
+        <p class="uppercase tracking-[0.35em] text-[11px] text-sage font-semibold mb-2">Detalle de Amor</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-olive mb-4">Lluvia de Sobres &amp; Regalos</h2>
+        <p class="text-sm sm:text-base text-charcoal/80 leading-relaxed mb-7">
+          Su presencia es nuestro mayor regalo. Si desean tener un detalle con nosotros para nuestra luna de miel y nuevo hogar, pueden hacerlo mediante lluvia de sobres el día del evento o por transferencia bancaria.
+        </p>
+
+        <!-- Botón desplegable para mostrar datos bancarios -->
+        <button type="button" id="toggle-bank-btn" onclick="toggleBankCard()" class="min-h-[48px] px-6 sm:px-7 py-3 rounded-full border border-gold bg-cream text-olive text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.22em] font-medium hover:bg-gold hover:text-cream transition inline-flex items-center gap-2.5 cursor-pointer touch-manipulation">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Ver Datos Bancarios</span>
+          <i id="bank-chevron" class="fa-solid fa-chevron-down text-[10px] transition-transform duration-300"></i>
+        </button>
+
+        <!-- Tarjeta desplegable con datos bancarios -->
+        <div id="bank-details-card" class="hidden mt-6 bg-cream rounded-2xl p-5 sm:p-8 border border-gold/40 shadow-xs text-left transition-all">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-gold/20 pb-3 mb-3">
+            <span class="text-[11px] uppercase tracking-wider text-sage">Institución</span>
+            <span id="bank-name" class="font-medium text-sm text-charcoal">Banco Guayaquil — Cuenta Ahorros</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-gold/20 pb-3 mb-3">
+            <span class="text-[11px] uppercase tracking-wider text-sage">Titular</span>
+            <span id="bank-holder" class="font-medium text-sm text-charcoal">Yermi &amp; Génesis</span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+            <div>
+              <span class="block text-[11px] uppercase tracking-wider text-sage">Número de Cuenta</span>
+              <span id="bank-account" class="font-serif text-2xl font-semibold text-olive tracking-wider">0059444837</span>
+            </div>
+            <button type="button" onclick="copyBankAccount()" class="min-h-[44px] w-full sm:w-auto justify-center px-4 py-2.5 rounded-full bg-olive text-cream text-xs uppercase tracking-wider font-medium hover:bg-sage transition flex items-center gap-2 cursor-pointer touch-manipulation">
+              <i class="fa-regular fa-copy"></i> Copiar cuenta
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONFIRMACIÓN DE ASISTENCIA (RSVP) POR WHATSAPP + MURO DE BUENOS DESEOS -->
+    <section id="rsvp" class="py-16 sm:py-20 px-4 max-w-5xl mx-auto reveal visible">
+      <div class="text-center mb-10 sm:mb-14">
+        <p class="uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[10px] sm:text-[11px] text-sage font-semibold mb-2">Acompáñanos</p>
+        <h2 class="font-serif text-3xl sm:text-5xl text-olive">Confirmación de Asistencia</h2>
+        <div class="w-16 h-px bg-gold mx-auto mt-4"></div>
+        <p class="text-sm text-charcoal/75 mt-4 max-w-lg mx-auto">
+          Completa el formulario para enviarnos tu confirmación directa por WhatsApp y dejar tus buenos deseos en nuestro muro.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
+        <!-- Formulario RSVP -->
+        <form id="rsvp-form" class="lg:col-span-6 bg-white/90 rounded-2xl p-5 sm:p-8 shadow-2xs border border-gold/35 space-y-5">
+          <div>
+            <label for="guest-name" class="block text-[11px] uppercase tracking-wider text-sage font-semibold mb-1.5">
+              Nombre Completo *
+            </label>
+            <input type="text" id="guest-name" required="" placeholder="Ej. María Fernanda López" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-cream border border-gold/30 text-base sm:text-sm focus:outline-none focus:border-olive">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="guest-attending" class="block text-[11px] uppercase tracking-wider text-sage font-semibold mb-1.5">
+                ¿Asistirás? *
+              </label>
+              <select id="guest-attending" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-cream border border-gold/30 text-base sm:text-sm focus:outline-none focus:border-olive">
+                <option value="Sí asistiré">Sí asistiré</option>
+                <option value="No podré asistir">No podré asistir</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="guest-count" class="block text-[11px] uppercase tracking-wider text-sage font-semibold mb-1.5">
+                Número de Acompañantes
+              </label>
+              <select id="guest-count" class="w-full min-h-[46px] px-4 py-3 rounded-xl bg-cream border border-gold/30 text-base sm:text-sm focus:outline-none focus:border-olive">
+                <option value="Solo yo (1)">Solo yo (1 lugar)</option>
+                <option value="1 acompañante (2 en total)">1 acompañante (2 lugares)</option>
+                <option value="2 acompañantes (3 en total)">2 acompañantes (3 lugares)</option>
+                <option value="3 acompañantes (4 en total)">3 acompañantes (4 lugares)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="guest-message" class="block text-[11px] uppercase tracking-wider text-sage font-semibold mb-1.5">
+              Mensaje para los novios
+            </label>
+            <textarea id="guest-message" rows="3" placeholder="Escribe unas palabras especiales para Yermi &amp; Génesis..." class="w-full px-4 py-3 rounded-xl bg-cream border border-gold/30 text-base sm:text-sm focus:outline-none focus:border-olive resize-none"></textarea>
+          </div>
+
+          <div class="pt-1">
+            <button type="submit" class="w-full min-h-[50px] py-3.5 px-5 sm:px-6 rounded-full bg-olive text-cream text-[11px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.22em] font-semibold hover:bg-sage transition shadow-md flex items-center justify-center gap-2.5 cursor-pointer touch-manipulation">
+              <i class="fa-brands fa-whatsapp text-base text-[#6be899]"></i>
+              Confirmar por WhatsApp y Publicar
+            </button>
+          </div>
+        </form>
+
+        <!-- Muro de Buenos Deseos -->
+        <div class="lg:col-span-6 bg-pearl/85 rounded-2xl p-6 sm:p-8 border border-gold/35">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="font-serif text-2xl text-olive">Muro de Buenos Deseos</h3>
+            <span id="wishes-counter" class="text-[11px] px-3 py-1 rounded-full bg-cream text-goldDark border border-gold/30">0 mensajes</span>
+          </div>
+
+          <div id="wishes-list" class="space-y-4 max-h-[380px] overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PIE DE PÁGINA CON MONOGRAMA (TRIPLE TOQUE SECRETO ACTIVA EDICIÓN) -->
+    <footer class="py-12 px-4 text-center bg-cream reveal visible">
+      <div class="max-w-md mx-auto">
+        <div id="footer-monogram-secret" title="Triple clic para editar datos y fotos" class="w-16 h-16 mx-auto mb-4 rounded-full border border-gold/65 flex items-center justify-center select-none cursor-default bg-pearl/40">
+          <p id="footer-monogram-text" class="font-serif text-lg tracking-[0.2em] text-goldDark font-semibold">Y&amp;G</p>
+        </div>
+
+        <p id="footer-names" class="font-serif text-2xl sm:text-3xl text-olive mb-1">Yermi &amp; Génesis</p>
+        <p id="footer-date" class="text-xs uppercase tracking-[0.3em] text-goldDark mb-2">13 . 02 . 2027</p>
+        <p id="footer-venue" class="font-serif italic text-sm text-sage">Rancho Jalisco • Vía / Progreso</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- LIGHTBOX PARA GALERÍA                                                 -->
+  <!-- ===================================================================== -->
+  <div id="lightbox-modal" onclick="closeLightbox()" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs hidden items-center justify-center p-4">
+    <button type="button" onclick="closeLightbox()" aria-label="Cerrar imagen" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/15 text-white hover:bg-white/30 flex items-center justify-center transition cursor-pointer">
+      <i class="fa-solid fa-xmark text-lg"></i>
+    </button>
+    <img id="lightbox-img" src="" alt="Vista ampliada" onclick="event.stopPropagation()" class="max-w-full max-h-[88vh] rounded-2xl shadow-2xl border border-gold/40 object-contain">
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 10. CAJÓN LATERAL DE EDICIÓN Y EXPORTACIÓN HTML                       -->
+  <!-- ===================================================================== -->
+  <div id="customizer-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs justify-end hidden">
+    <div class="bg-cream border-l border-gold/40 shadow-2xl w-full max-w-lg h-full max-h-[100dvh] flex flex-col overflow-hidden">
+      <div class="px-5 sm:px-6 py-4 bg-pearl border-b border-gold/30 flex items-center justify-between gap-3">
+        <div>
+          <h3 class="font-serif text-xl sm:text-2xl text-olive font-semibold">Editar Invitación</h3>
+          <p class="text-[11px] text-charcoal/70">Personaliza cada detalle y descarga tu HTML listo para publicar</p>
+        </div>
+        <button id="close-customizer-btn" type="button" class="w-10 h-10 shrink-0 rounded-full bg-cream border border-gold/30 text-olive hover:bg-gold hover:text-white transition flex items-center justify-center cursor-pointer touch-manipulation">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-base sm:text-sm flex-1">
+        <!-- Datos Principales -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-olive uppercase tracking-wider border-b border-gold/25 pb-1">
+            1. Novios y Fecha
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Nombres de los Novios</label>
+              <input id="cfg-names" type="text" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Iniciales Monograma</label>
+              <input id="cfg-initials" type="text" maxlength="6" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Fecha Escrita</label>
+              <input id="cfg-date-text" type="text" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Fecha Corta (Sobre)</label>
+              <input id="cfg-date-dots" type="text" placeholder="13 . 02 . 2027" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Fecha y Hora Exacta (Contador y Calendario)</label>
+            <input id="cfg-date-iso" type="datetime-local" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Frase Principal</label>
+            <textarea id="cfg-quote" rows="2" class="w-full px-3 py-2 rounded-xl bg-white border border-gold/30"></textarea>
+          </div>
+        </div>
+
+        <!-- Lugar Único y Horarios del Itinerario -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-olive uppercase tracking-wider border-b border-gold/25 pb-1">
+            2. Lugar Único e Itinerario
+          </p>
+          <div>
+            <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Nombre del Salón / Quinta</label>
+            <input id="cfg-venue-name" placeholder="Ej. Rancho Jalisco" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Dirección Exacta</label>
+            <input id="cfg-venue-address" placeholder="Ej. Vía / Progreso" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+          <div>
+            <label class="block text-[11px] font-semibold text-sage uppercase mb-1">Enlace Google Maps</label>
+            <input id="cfg-venue-map" placeholder="https://maps.app.goo.gl/..." class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label class="block text-[10px] font-semibold text-sage uppercase mb-1">Ceremonia</label>
+              <input id="cfg-ceremony-time" placeholder="13:00" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30 text-sm">
+            </div>
+            <div>
+              <label class="block text-[10px] font-semibold text-sage uppercase mb-1">Fiesta</label>
+              <input id="cfg-reception-time" placeholder="15:00" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30 text-sm">
+            </div>
+          </div>
+        </div>
+
+        <!-- Vestimenta, Regalos y WhatsApp -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-olive uppercase tracking-wider border-b border-gold/25 pb-1">
+            3. Vestimenta, Regalos y WhatsApp
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <input id="cfg-dresscode-title" placeholder="Tipo Vestimenta (Ej. Formal / Etiqueta)" class="min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            <input id="cfg-whatsapp" type="tel" placeholder="WhatsApp (Ej. 0982936022)" class="min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+          <input id="cfg-dresscode-note" placeholder="Nota de colores reservados" class="w-full min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <input id="cfg-bank-name" placeholder="Banco" class="min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            <input id="cfg-bank-holder" placeholder="Titular" class="min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+            <input id="cfg-bank-account" placeholder="N° Cuenta" class="min-h-[42px] px-3 py-2 rounded-xl bg-white border border-gold/30">
+          </div>
+        </div>
+
+        <!-- Subida de Fotos Propias -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-olive uppercase tracking-wider border-b border-gold/25 pb-1">
+            4. Fotografías (Portada y Galería)
+          </p>
+          <p class="text-[11px] text-charcoal/70">
+            Sube tus fotos desde tu celular o PC; se optimizarán automáticamente para que el archivo sea ligero.
+          </p>
+          <div class="grid grid-cols-2 gap-2.5 text-xs">
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-image text-goldDark"></i> Foto Portada
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'hero-bg-img')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 1 (Grande)
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-0')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 2
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-1')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 3 (Alta)
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-2')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 4
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-3')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 5
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-4')">
+            </label>
+            <label class="px-3 py-2.5 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer flex items-center gap-2 col-span-2">
+              <i class="fa-solid fa-camera text-goldDark"></i> Galería 6
+              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'gallery-img-5')">
+            </label>
+          </div>
+        </div>
+
+        <!-- Música de Fondo Subida por Ti -->
+        <div class="space-y-3">
+          <p class="text-xs font-bold text-olive uppercase tracking-wider border-b border-gold/25 pb-1">
+            5. Tu Música de Fondo (.mp3)
+          </p>
+          <p class="text-[11px] text-charcoal/70">
+            No hay música por defecto. Sube tu canción cuando quieras y quedará incluida al descargar el HTML.
+          </p>
+          <div class="flex flex-wrap items-center gap-2">
+            <label class="px-3.5 py-2 rounded-xl bg-white border border-gold/35 hover:bg-pearl cursor-pointer text-xs inline-flex items-center gap-2">
+              <i class="fa-solid fa-music text-goldDark"></i>
+              <span>Subir canción MP3</span>
+              <input type="file" accept="audio/*" class="hidden" onchange="handleAudioUpload(event)">
+            </label>
+            <button type="button" onclick="clearCustomAudio()" class="px-3 py-2 rounded-xl border border-gold/30 text-xs text-charcoal/80 hover:bg-pearl transition cursor-pointer">
+              Quitar música
+            </button>
+          </div>
+          <p id="custom-audio-status" class="text-[11px] text-goldDark font-medium">Sin música de fondo cargada</p>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 bg-pearl border-t border-gold/30 flex flex-col gap-2.5">
+        <div class="flex gap-2">
+          <button id="save-config-btn" type="button" class="flex-1 py-2.5 px-4 rounded-xl bg-olive text-cream text-xs uppercase tracking-wider font-semibold hover:bg-sage transition cursor-pointer">
+            Aplicar Cambios
+          </button>
+          <button id="lock-editor-btn" type="button" onclick="lockEditorMode()" class="px-3.5 py-2.5 rounded-xl border border-gold/45 text-olive text-xs font-medium hover:bg-cream transition cursor-pointer">
+            Ocultar edición
+          </button>
+          <button id="reset-config-btn" type="button" class="px-3.5 py-2.5 rounded-xl border border-red-300 text-red-700 text-xs font-medium hover:bg-red-50 transition cursor-pointer">
+            Restaurar
+          </button>
+        </div>
+
+        <button id="export-html-btn" type="button" class="w-full py-3 px-4 rounded-xl bg-goldDark text-white text-xs uppercase tracking-wider font-semibold hover:brightness-95 transition flex items-center justify-center gap-2 shadow-xs cursor-pointer">
+          <span>💾</span> Descargar HTML listo para publicar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- LÓGICA JAVASCRIPT COMPLETA                                            -->
+  <!-- ===================================================================== -->
+  <script>
+    /* ---------------------------------------------------------------------
+       1. CONFIGURACIÓN POR DEFECTO (Yermi & Génesis - 13 de febrero 2027)
+    --------------------------------------------------------------------- */
+    const DEFAULT_CONFIG = {
+  "names": "Yermi & Génesis",
+  "initials": "Y&G",
+  "dateText": "13 de Febrero, 2027",
+  "dateDots": "13 . 02 . 2027",
+  "dateISO": "2027-02-13T13:00",
+  "quote": "“Dos almas con un solo pensamiento, dos corazones que laten como uno solo. Con inmensa alegría queremos invitarte a ser testigo del comienzo de nuestro para siempre.”",
+  "venueName": "Rancho Jalisco",
+  "venueAddress": "Vía / Progreso",
+  "venueMap": "https://maps.app.goo.gl/4spgcpndc35HZwYu9",
+  "ceremonyTime": "13:00",
+  "receptionTime": "15:00",
+  "dresscodeTitle": "Formal / Etiqueta",
+  "dresscodeNote": "Agradecemos reservar el color blanco, marfil y beige claro exclusivamente para la novia.",
+  "whatsapp": "593982936022",
+  "bankName": "Banco Guayaquil — Cuenta Ahorros",
+  "bankHolder": "Yermi & Génesis",
+  "bankAccount": "0059444837",
+  "hideEditorOnLoad": true,
+  "customAudioData": "",
+  "customAudioName": ""
+};
+
+    function normalizeEcuadorWhatsApp(rawPhone) {
+      const digits = String(rawPhone || "").replace(/\D/g, "");
+      if (!digits) return "593982936022";
+      if (digits.startsWith("09") && digits.length === 10) {
+        return "593" + digits.slice(1);
+      }
+      if (digits.startsWith("9") && digits.length === 9) {
+        return "593" + digits;
+      }
+      return digits;
+    }
+
+    const STORAGE_KEY = "boda_yermi_genesis_config_v1";
+    const WISHES_KEY = "boda_yermi_genesis_wishes_v1";
+
+    function loadConfig() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return { ...DEFAULT_CONFIG };
+        const merged = { ...DEFAULT_CONFIG, ...JSON.parse(saved) };
+        merged.whatsapp = normalizeEcuadorWhatsApp(merged.whatsapp);
+        return merged;
+      } catch (err) {
+        return { ...DEFAULT_CONFIG };
+      }
+    }
+
+    let weddingConfig = loadConfig();
+
+    /* ---------------------------------------------------------------------
+       2. NOTIFICACIONES TOAST
+    --------------------------------------------------------------------- */
+    let toastTimeout = null;
+    function showToast(message) {
+      const toast = document.getElementById("toast-notification");
+      const textEl = document.getElementById("toast-message");
+      if (!toast || !textEl) return;
+      textEl.textContent = message;
+      toast.classList.remove("opacity-0", "pointer-events-none", "-translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "pointer-events-none", "-translate-y-4");
+      }, 3200);
+    }
+
+    /* ---------------------------------------------------------------------
+       3. APLICAR CONFIGURACIÓN A LA VISTA Y FORMULARIO
+    --------------------------------------------------------------------- */
+    function formatOpeningMonogram(initialsStr) {
+      const clean = String(initialsStr || "Y&G").replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ]/g, "");
+      if (clean.length >= 2) {
+        return `${clean[0].toUpperCase()} & ${clean[clean.length - 1].toUpperCase()}`;
+      }
+      return "Y & G";
+    }
+
+    function applyConfigToDOM() {
+      document.title = `Nuestra Boda — ${weddingConfig.names}`;
+
+      document.getElementById("env-monogram").textContent = formatOpeningMonogram(weddingConfig.initials);
+      document.getElementById("env-names").textContent = weddingConfig.names;
+      document.getElementById("env-date-dots").textContent = weddingConfig.dateDots;
+      document.getElementById("seal-initials").textContent = weddingConfig.initials;
+
+      document.getElementById("hero-names").textContent = weddingConfig.names;
+      document.getElementById("hero-date-text").textContent = weddingConfig.dateText;
+      document.getElementById("hero-quote").textContent = weddingConfig.quote;
+
+      const sharedVenue = weddingConfig.venueName || "Rancho Jalisco";
+      document.getElementById("venue-name").textContent = sharedVenue;
+      document.getElementById("venue-address").textContent = weddingConfig.venueAddress;
+      document.getElementById("venue-map-link").href = weddingConfig.venueMap || "https://maps.app.goo.gl/4spgcpndc35HZwYu9";
+
+      document.getElementById("ceremony-time").textContent = weddingConfig.ceremonyTime;
+      document.getElementById("ceremony-place").textContent = sharedVenue;
+      document.getElementById("reception-time").textContent = weddingConfig.receptionTime;
+      document.getElementById("reception-place").textContent = sharedVenue;
+
+      document.getElementById("dresscode-title").textContent = weddingConfig.dresscodeTitle;
+      document.getElementById("dresscode-note").textContent = weddingConfig.dresscodeNote;
+
+      document.getElementById("bank-name").textContent = weddingConfig.bankName;
+      document.getElementById("bank-holder").textContent = weddingConfig.bankHolder;
+      document.getElementById("bank-account").textContent = weddingConfig.bankAccount;
+
+      document.getElementById("footer-monogram-text").textContent = weddingConfig.initials;
+      document.getElementById("footer-names").textContent = weddingConfig.names;
+      document.getElementById("footer-date").textContent = weddingConfig.dateDots;
+      const footerVenueEl = document.getElementById("footer-venue");
+      if (footerVenueEl) {
+        footerVenueEl.textContent = `${sharedVenue} • ${weddingConfig.venueAddress}`;
+      }
+
+      const audioEl = document.getElementById("custom-audio-player");
+      const statusEl = document.getElementById("custom-audio-status");
+      const labelEl = document.getElementById("music-btn-label");
+      const changeMusicBtn = document.getElementById("change-music-btn");
+      const toggleBtn = document.getElementById("music-toggle-btn");
+
+      if (changeMusicBtn) {
+        if (weddingConfig.hideEditorOnLoad) {
+          changeMusicBtn.classList.add("hidden");
+          changeMusicBtn.classList.remove("flex");
+        } else {
+          changeMusicBtn.classList.remove("hidden");
+          changeMusicBtn.classList.add("flex");
+        }
+      }
+
+      if (weddingConfig.customAudioData) {
+        if (audioEl && audioEl.src !== weddingConfig.customAudioData) {
+          audioEl.src = weddingConfig.customAudioData;
+          audioEl.load();
+        }
+        if (statusEl) {
+          statusEl.textContent = `Canción cargada: ${weddingConfig.customAudioName || "Tu música"}`;
+        }
+        if (labelEl) {
+          labelEl.textContent = "Cambiar música";
+        }
+        if (toggleBtn) {
+          toggleBtn.classList.remove("hidden");
+          toggleBtn.classList.add("flex");
+        }
+      } else {
+        if (audioEl) {
+          audioEl.pause();
+          audioEl.removeAttribute("src");
+        }
+        if (statusEl) {
+          statusEl.textContent = "Sin música de fondo cargada";
+        }
+        if (labelEl) {
+          labelEl.textContent = "Agregar música";
+        }
+        if (toggleBtn) {
+          toggleBtn.classList.add("hidden");
+          toggleBtn.classList.remove("flex");
+        }
+      }
+
+      document.querySelectorAll("[data-quick-photo-btn]").forEach((btn) => {
+        if (weddingConfig.hideEditorOnLoad) {
+          btn.classList.add("hidden");
+          btn.classList.remove("inline-flex");
+        } else {
+          btn.classList.remove("hidden");
+          btn.classList.add("inline-flex");
+        }
+      });
+
+      updateCountdown();
+    }
+
+    function populateConfigInputs() {
+      document.getElementById("cfg-names").value = weddingConfig.names;
+      document.getElementById("cfg-initials").value = weddingConfig.initials;
+      document.getElementById("cfg-date-text").value = weddingConfig.dateText;
+      document.getElementById("cfg-date-dots").value = weddingConfig.dateDots;
+      document.getElementById("cfg-date-iso").value = weddingConfig.dateISO;
+      document.getElementById("cfg-quote").value = weddingConfig.quote;
+
+      document.getElementById("cfg-venue-name").value = weddingConfig.venueName;
+      document.getElementById("cfg-venue-address").value = weddingConfig.venueAddress;
+      document.getElementById("cfg-venue-map").value = weddingConfig.venueMap;
+      document.getElementById("cfg-ceremony-time").value = weddingConfig.ceremonyTime;
+      document.getElementById("cfg-reception-time").value = weddingConfig.receptionTime;
+
+      document.getElementById("cfg-dresscode-title").value = weddingConfig.dresscodeTitle;
+      document.getElementById("cfg-dresscode-note").value = weddingConfig.dresscodeNote;
+      document.getElementById("cfg-whatsapp").value = weddingConfig.whatsapp;
+      document.getElementById("cfg-bank-name").value = weddingConfig.bankName;
+      document.getElementById("cfg-bank-holder").value = weddingConfig.bankHolder;
+      document.getElementById("cfg-bank-account").value = weddingConfig.bankAccount;
+    }
+
+    function saveConfigFromInputs(persistStorage = true) {
+      weddingConfig.names = document.getElementById("cfg-names").value.trim() || DEFAULT_CONFIG.names;
+      weddingConfig.initials = (document.getElementById("cfg-initials").value.trim() || DEFAULT_CONFIG.initials).toUpperCase();
+      weddingConfig.dateText = document.getElementById("cfg-date-text").value.trim() || DEFAULT_CONFIG.dateText;
+      weddingConfig.dateDots = document.getElementById("cfg-date-dots").value.trim() || DEFAULT_CONFIG.dateDots;
+      weddingConfig.dateISO = document.getElementById("cfg-date-iso").value || DEFAULT_CONFIG.dateISO;
+      weddingConfig.quote = document.getElementById("cfg-quote").value.trim() || DEFAULT_CONFIG.quote;
+
+      weddingConfig.venueName = document.getElementById("cfg-venue-name").value.trim() || DEFAULT_CONFIG.venueName;
+      weddingConfig.venueAddress = document.getElementById("cfg-venue-address").value.trim() || DEFAULT_CONFIG.venueAddress;
+      weddingConfig.venueMap = document.getElementById("cfg-venue-map").value.trim() || DEFAULT_CONFIG.venueMap;
+      weddingConfig.ceremonyTime = document.getElementById("cfg-ceremony-time").value.trim() || DEFAULT_CONFIG.ceremonyTime;
+      weddingConfig.receptionTime = document.getElementById("cfg-reception-time").value.trim() || DEFAULT_CONFIG.receptionTime;
+
+      weddingConfig.dresscodeTitle = document.getElementById("cfg-dresscode-title").value.trim() || DEFAULT_CONFIG.dresscodeTitle;
+      weddingConfig.dresscodeNote = document.getElementById("cfg-dresscode-note").value.trim() || DEFAULT_CONFIG.dresscodeNote;
+      weddingConfig.whatsapp = normalizeEcuadorWhatsApp(document.getElementById("cfg-whatsapp").value.trim() || DEFAULT_CONFIG.whatsapp);
+      weddingConfig.bankName = document.getElementById("cfg-bank-name").value.trim() || DEFAULT_CONFIG.bankName;
+      weddingConfig.bankHolder = document.getElementById("cfg-bank-holder").value.trim() || DEFAULT_CONFIG.bankHolder;
+      weddingConfig.bankAccount = document.getElementById("cfg-bank-account").value.trim() || DEFAULT_CONFIG.bankAccount;
+
+      if (persistStorage) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(weddingConfig));
+        } catch (err) {
+          showToast("Cambios aplicados (almacenamiento local lleno por medios pesados)");
+        }
+      }
+
+      applyConfigToDOM();
+      showToast("Cambios aplicados en la invitación");
+    }
+
+    /* ---------------------------------------------------------------------
+       4. MÚSICA SUBIDA POR EL USUARIO (SIN MÚSICA POR DEFECTO)
+    --------------------------------------------------------------------- */
+    let isMusicPlaying = false;
+
+    function updateMusicButtonUI() {
+      const icon = document.getElementById("music-icon");
+      if (!icon) return;
+      icon.className = isMusicPlaying
+        ? "fa-solid fa-volume-high text-xs text-goldDark"
+        : "fa-solid fa-volume-xmark text-xs";
+    }
+
+    function startMusic() {
+      const customAudio = document.getElementById("custom-audio-player");
+      if (!weddingConfig.customAudioData || !customAudio) return;
+      isMusicPlaying = true;
+      updateMusicButtonUI();
+      customAudio.play().catch(() => {});
+    }
+
+    function stopMusic() {
+      const customAudio = document.getElementById("custom-audio-player");
+      isMusicPlaying = false;
+      updateMusicButtonUI();
+      if (customAudio && !customAudio.paused) {
+        customAudio.pause();
+      }
+    }
+
+    function handleAudioUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (file.size > 7 * 1024 * 1024) {
+        showToast("Elige un archivo de audio menor a 7 MB");
+        event.target.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        weddingConfig.customAudioData = e.target.result;
+        weddingConfig.customAudioName = file.name;
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(weddingConfig));
+        } catch (err) {}
+        applyConfigToDOM();
+        startMusic();
+        showToast(`Música cargada: ${file.name}`);
+      };
+      reader.readAsDataURL(file);
+      event.target.value = "";
+    }
+
+    function clearCustomAudio() {
+      weddingConfig.customAudioData = "";
+      weddingConfig.customAudioName = "";
+      isMusicPlaying = false;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(weddingConfig));
+      } catch (err) {}
+      applyConfigToDOM();
+      showToast("Música eliminada");
+    }
+
+    document.getElementById("music-toggle-btn").addEventListener("click", () => {
+      if (!weddingConfig.customAudioData) return;
+      if (isMusicPlaying) stopMusic();
+      else startMusic();
+    });
+
+    /* ---------------------------------------------------------------------
+       5. APERTURA DE SOBRE CON SELLO DE LACRE
+    --------------------------------------------------------------------- */
+    const openEnvelopeBtn = document.getElementById("open-envelope-btn");
+    if (openEnvelopeBtn) {
+      openEnvelopeBtn.addEventListener("click", () => {
+        const overlay = document.getElementById("envelope-overlay");
+        if (overlay) {
+          overlay.classList.add("opening");
+        }
+        if (weddingConfig.customAudioData) {
+          startMusic();
+        }
+        setTimeout(() => {
+          if (overlay) {
+            overlay.classList.add("opened");
+          }
+        }, 360);
+      });
+    }
+
+    /* ---------------------------------------------------------------------
+       6. CUENTA REGRESIVA EN TIEMPO REAL
+    --------------------------------------------------------------------- */
+    function updateCountdown() {
+      const target = new Date(weddingConfig.dateISO).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
+      document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("cd-minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("cd-seconds").textContent = String(seconds).padStart(2, "0");
+    }
+    setInterval(updateCountdown, 1000);
+
+    /* ---------------------------------------------------------------------
+       7. DESCARGAR ARCHIVO .ICS PARA CALENDARIO
+    --------------------------------------------------------------------- */
+    function formatICSDate(dateObj) {
+      const pad = (n) => String(n).padStart(2, "0");
+      return (
+        dateObj.getUTCFullYear() +
+        pad(dateObj.getUTCMonth() + 1) +
+        pad(dateObj.getUTCDate()) +
+        "T" +
+        pad(dateObj.getUTCHours()) +
+        pad(dateObj.getUTCMinutes()) +
+        pad(dateObj.getUTCSeconds()) +
+        "Z"
+      );
+    }
+
+    function downloadCalendarICS() {
+      const start = new Date(weddingConfig.dateISO);
+      const safeStart = isNaN(start.getTime()) ? new Date("2027-02-13T13:00:00") : start;
+      const end = new Date(safeStart.getTime() + 6 * 60 * 60 * 1000);
+
+      const icsContent = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Invitacion Boda//ES",
+        "BEGIN:VEVENT",
+        `UID:boda-${Date.now()}@invitacion.local`,
+        `DTSTAMP:${formatICSDate(new Date())}`,
+        `DTSTART:${formatICSDate(safeStart)}`,
+        `DTEND:${formatICSDate(end)}`,
+        `SUMMARY:Boda de ${weddingConfig.names}`,
+        `LOCATION:${weddingConfig.venueName} - ${weddingConfig.venueAddress}`,
+        `DESCRIPTION:Acompáñanos a celebrar la boda de ${weddingConfig.names} en ${weddingConfig.venueName}.`,
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Boda-${weddingConfig.names.replace(/\s+/g, "-")}.ics`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      showToast("Evento descargado para tu calendario");
+    }
+
+    /* ---------------------------------------------------------------------
+       8. TARJETA BANCARIA DESPLEGABLE Y COPIAR CUENTA
+    --------------------------------------------------------------------- */
+    function toggleBankCard() {
+      const card = document.getElementById("bank-details-card");
+      const chevron = document.getElementById("bank-chevron");
+      const isHidden = card.classList.contains("hidden");
+      card.classList.toggle("hidden", !isHidden);
+      if (chevron) {
+        chevron.style.transform = isHidden ? "rotate(180deg)" : "rotate(0deg)";
+      }
+    }
+
+    function copyBankAccount() {
+      const accountNumber = document.getElementById("bank-account").textContent.trim();
+      const tempInput = document.createElement("textarea");
+      tempInput.value = accountNumber;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        showToast("Número de cuenta copiado");
+      } catch (err) {
+        showToast("No se pudo copiar automáticamente");
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    /* ---------------------------------------------------------------------
+       9. LIGHTBOX GALERÍA
+    --------------------------------------------------------------------- */
+    function openLightbox(imgId) {
+      const sourceImg = document.getElementById(imgId);
+      if (!sourceImg) return;
+      document.getElementById("lightbox-img").src = sourceImg.src;
+      const modal = document.getElementById("lightbox-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById("lightbox-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    /* ---------------------------------------------------------------------
+       10. RSVP POR WHATSAPP + MURO DE BUENOS DESEOS
+    --------------------------------------------------------------------- */
+    const DEFAULT_WISHES = [];
+
+    function loadWishes() {
+      try {
+        const saved = localStorage.getItem(WISHES_KEY);
+        if (!saved) return [...DEFAULT_WISHES];
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed) ? parsed : [...DEFAULT_WISHES];
+      } catch (err) {
+        return [...DEFAULT_WISHES];
+      }
+    }
+
+    let wishesList = loadWishes();
+
+    function escapeHTML(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderWishes() {
+      const container = document.getElementById("wishes-list");
+      const counter = document.getElementById("wishes-counter");
+      if (!container || !counter) return;
+
+      counter.textContent = `${wishesList.length} ${wishesList.length === 1 ? "mensaje" : "mensajes"}`;
+      container.innerHTML = wishesList
+        .map(
+          (w) => `
+          <div class="bg-cream rounded-2xl p-4 border border-gold/25 shadow-2xs">
+            <div class="flex items-center justify-between gap-2 mb-1.5">
+              <span class="font-serif text-lg font-semibold text-olive">${escapeHTML(w.name)}</span>
+              <span class="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
+                w.attending === "Sí asistiré"
+                  ? "bg-sage/15 text-olive"
+                  : "bg-champagne text-charcoal/70"
+              }">${escapeHTML(w.attending)}</span>
+            </div>
+            <p class="text-[11px] text-goldDark mb-2">${escapeHTML(w.count)} • ${escapeHTML(w.date)}</p>
+            <p class="text-xs sm:text-sm text-charcoal/85 italic leading-relaxed">
+              “${escapeHTML(w.message || "¡Muchas felicidades en su boda!")}”
+            </p>
+          </div>
+        `
+        )
+        .join("");
+    }
+
+    document.getElementById("rsvp-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("guest-name").value.trim();
+      const attending = document.getElementById("guest-attending").value;
+      const count = document.getElementById("guest-count").value;
+      const message = document.getElementById("guest-message").value.trim() || "¡Muchas felicidades en su boda!";
+
+      if (!name) return;
+
+      wishesList.unshift({
+        name,
+        attending,
+        count,
+        message,
+        date: "Ahora mismo"
+      });
+      try {
+        localStorage.setItem(WISHES_KEY, JSON.stringify(wishesList));
+      } catch (err) {}
+      renderWishes();
+
+      const rawPhone = normalizeEcuadorWhatsApp(weddingConfig.whatsapp || DEFAULT_CONFIG.whatsapp);
+      const waMessage =
+        `Hola *${weddingConfig.names}*, confirmo mi asistencia para su boda:\n` +
+        `• *Invitado:* ${name}\n` +
+        `• *Asistencia:* ${attending}\n` +
+        `• *Acompañantes:* ${count}\n` +
+        `• *Mensaje:* ${message}`;
+      const encodedMsg = encodeURIComponent(waMessage);
+      const waUrl = `https://wa.me/${rawPhone}?text=${encodedMsg}`;
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || "");
+
+      showToast("Deseo publicado. Abriendo WhatsApp...");
+      e.target.reset();
+
+      if (isMobileDevice) {
+        window.location.href = waUrl;
+      } else {
+        const openedWindow = window.open(waUrl, "_blank", "noopener,noreferrer");
+        if (!openedWindow) {
+          window.location.href = waUrl;
+        }
+      }
+    });
+
+    /* ---------------------------------------------------------------------
+       11. SUBIDA Y COMPRESIÓN LIGERA DE FOTOS (EN PANEL Y DIRECTA)
+    --------------------------------------------------------------------- */
+    let activeDirectPhotoTarget = null;
+
+    function applyCompressedPhotoFile(file, targetImgId) {
+      if (!file || !targetImgId) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement("canvas");
+          const maxDim = 1200;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.82);
+          const targetEl = document.getElementById(targetImgId);
+          if (targetEl) {
+            targetEl.setAttribute("src", compressedDataUrl);
+            targetEl.src = compressedDataUrl;
+          }
+          showToast("Fotografía actualizada (lista para guardar/exportar)");
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleImageUpload(event, targetImgId) {
+      const file = event.target.files && event.target.files[0];
+      applyCompressedPhotoFile(file, targetImgId);
+      event.target.value = "";
+    }
+
+    function triggerDirectPhotoChange(event, targetImgId) {
+      event.stopPropagation();
+      event.preventDefault();
+      activeDirectPhotoTarget = targetImgId;
+      const input = document.getElementById("direct-photo-input");
+      if (input) {
+        input.click();
+      }
+    }
+
+    function handleDirectPhotoInput(event) {
+      const file = event.target.files && event.target.files[0];
+      if (file && activeDirectPhotoTarget) {
+        applyCompressedPhotoFile(file, activeDirectPhotoTarget);
+      }
+      activeDirectPhotoTarget = null;
+      event.target.value = "";
+    }
+
+    function activateEditorMode(openModalAfter = false) {
+      weddingConfig.hideEditorOnLoad = false;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(weddingConfig));
+      } catch (err) {}
+      applyConfigToDOM();
+      if (openModalAfter) {
+        openCustomizerModal();
+      }
+      showToast("Modo edición privado activado");
+    }
+
+    function lockEditorMode() {
+      weddingConfig.hideEditorOnLoad = true;
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(weddingConfig));
+      } catch (err) {}
+      applyConfigToDOM();
+      closeCustomizerModal();
+      showToast("Modo edición oculto");
+    }
+
+    /* ---------------------------------------------------------------------
+       12. PANEL DE EDICIÓN, RESTAURAR Y EXPORTAR HTML LIMPIO
+    --------------------------------------------------------------------- */
+    const customizerModal = document.getElementById("customizer-modal");
+
+    function openCustomizerModal() {
+      populateConfigInputs();
+      customizerModal.classList.remove("hidden");
+      customizerModal.classList.add("flex");
+    }
+
+    function closeCustomizerModal() {
+      customizerModal.classList.add("hidden");
+      customizerModal.classList.remove("flex");
+    }
+
+    document.getElementById("close-customizer-btn").addEventListener("click", closeCustomizerModal);
+    customizerModal.addEventListener("click", (e) => {
+      if (e.target === customizerModal) closeCustomizerModal();
+    });
+
+    document.getElementById("save-config-btn").addEventListener("click", () => {
+      saveConfigFromInputs(true);
+      closeCustomizerModal();
+    });
+
+    document.getElementById("reset-config-btn").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      weddingConfig = { ...DEFAULT_CONFIG };
+      applyConfigToDOM();
+      populateConfigInputs();
+      showToast("Datos restaurados a valores iniciales");
+    });
+
+    document.getElementById("export-html-btn").addEventListener("click", () => {
+      saveConfigFromInputs(false);
+
+      const clone = document.documentElement.cloneNode(true);
+      const changeMusicClone = clone.querySelector("#change-music-btn");
+      if (changeMusicClone) {
+        changeMusicClone.classList.add("hidden");
+        changeMusicClone.classList.remove("flex");
+      }
+
+      clone.querySelectorAll("[data-quick-photo-btn]").forEach((btn) => {
+        btn.classList.add("hidden");
+        btn.classList.remove("inline-flex");
+      });
+
+      const customizerClone = clone.querySelector("#customizer-modal");
+      if (customizerClone) {
+        customizerClone.classList.add("hidden");
+        customizerClone.classList.remove("flex");
+      }
+
+      const envelopeClone = clone.querySelector("#envelope-overlay");
+      if (envelopeClone) {
+        envelopeClone.classList.remove("opened", "opening");
+      }
+
+      const exportedConfig = { ...weddingConfig, hideEditorOnLoad: true };
+      const scripts = clone.querySelectorAll("script");
+      scripts.forEach((sc) => {
+        if (sc.textContent && sc.textContent.includes("const DEFAULT_CONFIG =")) {
+          sc.textContent = sc.textContent.replace(
+            /const DEFAULT_CONFIG = \{[\s\S]*?\};/,
+            `const DEFAULT_CONFIG = ${JSON.stringify(exportedConfig, null, 2)};`
+          );
+        }
+      });
+
+      const finalHtml = "<!DOCTYPE html>\n" + clone.outerHTML;
+      const blob = new Blob([finalHtml], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "index.html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Archivo index.html descargado y listo para publicar");
+    });
+
+    function registerSecretTrigger(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      let taps = 0;
+      let timer = null;
+      el.addEventListener("click", () => {
+        taps++;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          taps = 0;
+        }, 900);
+
+        if (taps >= 3) {
+          taps = 0;
+          activateEditorMode(true);
+        }
+      });
+    }
+
+    registerSecretTrigger("ghost-editor-trigger");
+    registerSecretTrigger("footer-monogram-secret");
+
+    /* ---------------------------------------------------------------------
+       13. ANIMACIONES DE SCROLL Y DESTELLOS DORADOS SUTILES EN CANVAS
+    --------------------------------------------------------------------- */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+    const canvas = document.getElementById("petals-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initParticles() {
+      const count = window.innerWidth < 640 ? 14 : 26;
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: 1.2 + Math.random() * 2.2,
+        vy: 0.25 + Math.random() * 0.45,
+        vx: (Math.random() - 0.5) * 0.35,
+        alpha: 0.18 + Math.random() * 0.35
+      }));
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        p.y += p.vy;
+        p.x += p.vx;
+        if (p.y > canvas.height + 10) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(184, 155, 114, ${p.alpha})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener("resize", () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    resizeCanvas();
+    initParticles();
+    animateParticles();
+    applyConfigToDOM();
+    renderWishes();
+  </script>
+
+</body></html>
