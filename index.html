@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="es"><head><script data-bard-client-injected="true">(function(firebaseConfig, initialAuthToken, appId) {
+        window.__firebase_config = firebaseConfig;
+        window.__initial_auth_token = initialAuthToken;
+        window.__app_id = appId;
+            })("\n{\n  \"apiKey\": \"AIzaSyCqyCcs2R2e7AegGjvFAwG98wlamtbHvZY\",\n  \"authDomain\": \"bard-frontend.firebaseapp.com\",\n  \"projectId\": \"bard-frontend\",\n  \"storageBucket\": \"bard-frontend.firebasestorage.app\",\n  \"messagingSenderId\": \"175205271074\",\n  \"appId\": \"1:175205271074:web:2b7bd4d34d33bf38e6ec7b\"\n}\n","eyJhbGciOiJSUzI1NiIsImtpZCI6IjExNjRiNzdiNDMzZDdhMDAyMWI4NjE4YjhjYTU3ZTMyZGI5MWUxMTMiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiJmaXJlYmFzZS1hZG1pbnNkay1mYnN2Y0BiYXJkLWZyb250ZW5kLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eXRvb2xraXQuZ29vZ2xlYXBpcy5jb20vZ29vZ2xlLmlkZW50aXR5LmlkZW50aXR5dG9vbGtpdC52MS5JZGVudGl0eVRvb2xraXQiLCJ1aWQiOiIwMTU1MTAyMzQ1NzE4ODU4OTQ5OSIsImlzcyI6ImZpcmViYXNlLWFkbWluc2RrLWZic3ZjQGJhcmQtZnJvbnRlbmQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20iLCJjbGFpbXMiOnsiYXBwSWQiOiJjXzlhMWI0MDM3ZWNhMmMzYjZfc2ltdWxhZG9yX2FudF90aXBvX2EuaHRtbC03OTMifSwiZXhwIjoxNzk1ODM2MTA1LCJpYXQiOjE3OTU4MzI1MDUsImFsZyI6IlJTMjU2In0.Wwp5ZhfvX-kN-Q5opA3KGG6-Kd8TdZXNXjzhP6fnJmU42YM_8lxt6MOHfH2kudKIKLfPhyJ8KBMpL3XuPefVcfXN62SI3R2gC1y-L-mdRz6hUfuOohlUcX8ilKA5PSUN0B2c0rYjAGEZFeHUCHfdMQjYrQEj1gBlU3S9edM00TJp4VMPmQWdsV-4OjY-8hvthrHGojegAa4WF5CojL5BovQFTxLiLjiiNmKynETS1ASdJwlzXhvRcDZk9iQoBCnrzMtKDyVZYFDnFQpINdAT2kkbuv9ietraOjzv5UTR-qrgtKdMgXr1rQIR5A6lYJsECrOFrz0Abg01fGHatTduZw","c_9a1b4037eca2c3b6_simulador_ant_tipo_a.html-793")</script><script data-bard-client-injected="true">
+  document.addEventListener('input', (event) => {
+    if (event.target && (event.target.isContentEditable || event.target.hasAttribute('contenteditable'))) {
+      const clonedDoc = document.cloneNode(true);
+      const injectedScripts = clonedDoc.querySelectorAll('[data-bard-client-injected="true"]');
+      injectedScripts.forEach(el => el.remove());
+      window.parent.postMessage({
+        type: 'inlineEdit',
+        html: '<!DOCTYPE html>\n' + clonedDoc.documentElement.outerHTML
+      }, '*');
+    }
+  });
+</script><script data-bard-client-injected="true">(function(){'use strict';window.addEventListener("message",a=>{a.data&&a.data.type==="SUPPLEMENTAL_DATA_UPDATE"&&window.dispatchEvent(new CustomEvent("supplementaldataupdate",{detail:a.data.data}))});}).call(this);
+</script><script data-bard-client-injected="true">(function() {
+  const SCROLL_KEYS = new Set([
+    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+    ' ', 'Spacebar', 'PageUp', 'PageDown', 'Home', 'End',
+  ]);
+  const HORIZONTAL_KEYS = new Set(['ArrowLeft', 'ArrowRight']);
+
+  function isTextEntryTarget(target) {
+    if (!target) return false;
+    const tagName = target.tagName;
+    return tagName === 'INPUT' || tagName === 'TEXTAREA' ||
+        tagName === 'SELECT' || target.isContentEditable === true;
+  }
+
+  // An element absorbs the key only if it both overflows on the axis being
+  // scrolled and is configured to scroll on that axis. The cheap dimension
+  // test runs first because getComputedStyle forces a style recalc, and this
+  // runs on every keypress. Each axis is read from its own longhand: the
+  // 'overflow' shorthand serializes as two values when the axes differ, which
+  // is the common 'overflow-x: hidden; overflow-y: auto' pane.
+  function canScroll(node, horizontal) {
+    const overflows = horizontal ? node.scrollWidth > node.clientWidth
+                                 : node.scrollHeight > node.clientHeight;
+    if (!overflows) return false;
+    const style = window.getComputedStyle(node);
+    const overflow = horizontal ? style.overflowX : style.overflowY;
+    return overflow === 'auto' || overflow === 'scroll';
+  }
+
+  // Walks up from the event target so nested scrollers keep their behavior.
+  // <body> is included because pages that pin the root height make it the
+  // scroll container.
+  function hasScrollableAncestor(target, horizontal) {
+    let node = target;
+    while (node && node !== document.documentElement) {
+      if (canScroll(node, horizontal)) return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  function rootCanScroll(horizontal) {
+    const scroller = document.scrollingElement || document.documentElement;
+    if (!scroller) return false;
+    // Tolerate a pixel of rounding so subpixel layouts do not look scrollable.
+    return horizontal ? scroller.scrollWidth > window.innerWidth + 1
+                      : scroller.scrollHeight > window.innerHeight + 1;
+  }
+
+  window.addEventListener('keydown', function(event) {
+    if (!SCROLL_KEYS.has(event.key)) return;
+    if (event.defaultPrevented) return;
+    // Alt and Meta turn arrows into browser history navigation, and Ctrl is
+    // reserved for shortcuts, so none of them are scroll intent.
+    if (event.altKey || event.metaKey || event.ctrlKey) return;
+
+    const target = event.target;
+    if (isTextEntryTarget(target)) return;
+
+    // Anything that can still absorb the scroll gets to keep it.
+    const horizontal = HORIZONTAL_KEYS.has(event.key);
+    if (rootCanScroll(horizontal)) return;
+    if (hasScrollableAncestor(target, horizontal)) return;
+
+    event.preventDefault();
+  }, {capture: true, passive: false});
+})();</script><script data-bard-client-injected="true">(function() {
+  // Ensure this script is executed only once
+  if (window.firebaseAuthBridgeScriptLoaded) {
+    return;
+  }
+  window.firebaseAuthBridgeScriptLoaded = true;
+
+  let nextTokenPromiseId = 0;
+
+  // Stores { resolve, reject } for ongoing token requests
+  const pendingTokenPromises = {};
+
+  // Listen for messages from the Host Application
+  window.addEventListener('message', function(event) {
+
+    const messageData = event.data;
+
+  if (messageData && messageData.type === 'RESOLVE_NEW_FIREBASE_TOKEN') {
+      const { success, token, error, promiseId } = messageData ?? {};
+      if (pendingTokenPromises[promiseId]) {
+        if (success) {
+          pendingTokenPromises[promiseId].resolve(token);
+        } else {
+          pendingTokenPromises[promiseId].reject(new Error(error || 'Token refresh failed from host.'));
+        }
+        delete pendingTokenPromises[promiseId];
+      }
+    }
+  });
+
+  // Expose a function for the Generated App to request a new Firebase token
+  window.requestNewFirebaseToken = function() {
+    const currentPromiseId = nextTokenPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingTokenPromises[currentPromiseId] = { resolve, reject };
+    });
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({
+        type: 'REQUEST_NEW_FIREBASE_TOKEN',
+        promiseId: currentPromiseId
+      }, '*');
+    } else {
+      pendingTokenPromises[currentPromiseId].reject(new Error('No parent window to request token from.'));
+      delete pendingTokenPromises[currentPromiseId];
+    }
+    return promise;
+  };
+})();</script><script data-bard-client-injected="true">
+let realOriginalGetUserMedia = null;
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  realOriginalGetUserMedia = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+}
+
+(function() {
+  if (navigator.mediaDevices && navigator.mediaDevices.__proto__) {
+    try {
+      Object.defineProperty(navigator.mediaDevices.__proto__, 'getUserMedia', {
+        get: function() {
+          return undefined; // Or throw an error
+        },
+        configurable: false
+      });
+    } catch (error) {
+      console.error("Error defining prototype getter:", error);
+    }
+  }
+})();
+
+(function() {
+  const pendingMediaResolvers = {};
+  let nextMediaPromiseId = 0;
+
+  function requestMediaPermissions(constraints) {
+    const mediaPromiseId = nextMediaPromiseId++;
+    const promise = new Promise((resolve, reject) => {
+      pendingMediaResolvers[mediaPromiseId] = (granted) => {
+        delete pendingMediaResolvers[mediaPromiseId];
+        resolve(granted);
+      };
+    });
+
+    window.parent.postMessage({
+      type: 'requestMediaPermission',
+      constraints: constraints,
+      promiseId: mediaPromiseId,
+    }, '*');
+
+    return promise;
+  }
+
+  let originalGetUserMedia = realOriginalGetUserMedia;
+
+  function interceptGetUserMedia() {
+    if (navigator.mediaDevices) {
+      Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+        value: function(constraints) {
+          return requestMediaPermissions(constraints).then((granted) => {
+            if (granted) {
+              if (originalGetUserMedia) {
+                return originalGetUserMedia(constraints);
+              } else {
+                throw new Error("Original getUserMedia not available.");
+              }
+            } else {
+              throw new DOMException('Permission denied', 'NotAllowedError');
+            }
+          });
+        },
+        writable: false,
+        configurable: false
+      });
+    }
+  }
+
+  interceptGetUserMedia();
+
+  const observer = new MutationObserver(function(mutationsList, observer) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'reconfigured' && mutation.name === 'getUserMedia' && mutation.object === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'attributes' && mutation.attributeName === 'getUserMedia' && mutation.target === navigator.mediaDevices) {
+        interceptGetUserMedia();
+      } else if (mutation.type === 'childList' && mutation.addedNodes) {
+        mutation.addedNodes.forEach(node => {
+          if (node === navigator.mediaDevices) {
+            interceptGetUserMedia();
+          }
+        });
+      }
+    }
+  });
+
+  function interceptSpeechRecognition() {
+    if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+      return;
+    }
+
+    const OriginalSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const SpeechRecognitionWrapper = function(...args) {
+      const recognizer = new OriginalSpeechRecognition(...args);
+      const originalStart = recognizer.start.bind(recognizer);
+
+      recognizer.start = function() {
+        requestMediaPermissions({ audio: true }).then(granted => {
+          if (granted) {
+            originalStart();
+          } else {
+            const errorEvent = new SpeechRecognitionErrorEvent('error');
+            errorEvent.error = 'not-allowed'; // This is the standard error for permission denial.
+            recognizer.dispatchEvent(errorEvent);
+          }
+        });
+      };
+
+      return recognizer;
+    };
+
+    SpeechRecognitionWrapper.prototype = OriginalSpeechRecognition.prototype;
+    SpeechRecognitionWrapper.prototype.constructor = SpeechRecognitionWrapper;
+
+    if (window.SpeechRecognition) {
+      window.SpeechRecognition = SpeechRecognitionWrapper;
+    }
+    if (window.webkitSpeechRecognition) {
+      window.webkitSpeechRecognition = SpeechRecognitionWrapper;
+    }
+  }
+
+  interceptSpeechRecognition();
+
+  window.addEventListener('message', function(event) {
+    if (event.data) {
+      if (event.data.type === 'resolveMediaPermission') {
+        const { promiseId, granted } = event.data;
+        if (pendingMediaResolvers[promiseId]) {
+          pendingMediaResolvers[promiseId](granted);
+        }
+      }
+    }
+  });
+
+})();</script><script ws-interception-config="{&quot;parentOrigin&quot;:&quot;https://gemini.google.com&quot;,&quot;proxiedDomains&quot;:[]}" data-bard-client-injected="true">(function(){'use strict';var u=typeof Object.defineProperties=="function"?Object.defineProperty:function(b,d,e){if(b==Array.prototype||b==Object.prototype)return b;b[d]=e.value;return b};function v(b){b=["object"==typeof globalThis&&globalThis,b,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var d=0;d<b.length;++d){var e=b[d];if(e&&e.Math==Math)return e}throw Error("Cannot find global object");}var w=v(this);
+function y(b,d){if(d)a:{var e=w;b=b.split(".");for(var h=0;h<b.length-1;h++){var k=b[h];if(!(k in e))break a;e=e[k]}b=b[b.length-1];h=e[b];d=d(h);d!=h&&d!=null&&u(e,b,{configurable:!0,writable:!0,value:d})}}function z(b){function d(h){return b.next(h)}function e(h){return b.throw(h)}return new Promise(function(h,k){function m(n){n.done?h(n.value):Promise.resolve(n.value).then(d,e).then(m,k)}m(b.next())})}y("globalThis",function(b){return b||w});/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function A(b,d){function e(){}e.prototype=d.prototype;b.i=d.prototype;b.prototype=new e;b.prototype.constructor=b;b.h=function(h,k,m){for(var n=Array(arguments.length-2),p=2;p<arguments.length;p++)n[p-2]=arguments[p];return d.prototype[k].apply(h,n)}};function B(b,d,e="*"){function h(a){if(typeof a==="string")return F.encode(a).buffer;if(a instanceof ArrayBuffer)return a.slice(0);if(ArrayBuffer.isView(a))return a.buffer.slice(a.byteOffset,a.byteOffset+a.byteLength);throw Error("Invalid data type");}function k(a){a=h(a);var f={type:"send",data:new Uint8Array(a)},g;(g=r)==null||g.postMessage(f,[a])}function m(){if(!r)throw Error("Data port not captured yet.");r.onmessage=a=>{if(a.data.type==="message"){a=new MessageEvent("message",{data:G.decode(a.data.data)});
+let f;(f=c.onmessage)==null||f.call(c,a);c.dispatchEvent(a)}}}function n(){if(!t)throw Error("Control port not captured yet.");t.onmessage=a=>{switch(a.data.type){case "open":l=1;var f=new Event("open"),g;(g=c.onopen)==null||g.call(c,f);c.dispatchEvent(f);q.forEach(H=>{k(H)});q=[];break;case "close":g=a.data;l=3;g=new CloseEvent("close",{code:g.code,reason:g.reason,wasClean:g.wasClean});(f=c.onclose)==null||f.call(c,g);c.dispatchEvent(g);break;case "error":l=3;f=new Event("error");let x;(x=c.onerror)==
+null||x.call(c,f);c.dispatchEvent(f)}}}function p(a){return z(function*(){var f=new MessageChannel;t=f.port1;var g=new MessageChannel;r=g.port1;n();m();window.parent.postMessage({type:"websocket_open",portOrdering:["control","data"],url:b,protocols:a||[],connectionId:I},e,[f.port2,g.port2])}())}var c=Reflect.construct(EventTarget,[],new.target);c.CONNECTING=0;c.OPEN=1;c.CLOSING=2;c.CLOSED=3;c.url=b;c.binaryType="arraybuffer";c.protocol="";c.extensions="";var l=0,t=null,r=null,q=[],F=new TextEncoder,
+G=new TextDecoder;c.onopen=null;c.onmessage=null;c.onclose=null;c.onerror=null;Object.defineProperty(c,"readyState",{get:()=>l,enumerable:!0,configurable:!0});Object.defineProperty(c,"bufferedAmount",{get:()=>{var a=0;q.forEach(f=>{a+=typeof f==="string"?f.length:f.byteLength});return a},enumerable:!0,configurable:!0});var I=function(){var a;return((a=globalThis.crypto)==null?0:a.randomUUID)?globalThis.crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,f=>{var g=Math.random()*
+16|0;return(f==="x"?g:g&3|8).toString(16)})}();c.send=a=>{if(l===1)a instanceof Blob?a.arrayBuffer().then(f=>{k(f)}):k(a);else if(l===0)if(typeof a==="string")q.push(a);else if(a instanceof ArrayBuffer||ArrayBuffer.isView(a))q.push(h(a));else throw Error("Sending Blob is not supported before the connection is open.");else console.debug("WebSocket send called in CLOSING or CLOSED state; ignored.")};c.close=(a=1E3,f="")=>{if(l!==2&&l!==3){l=2;a={type:"close",code:a,reason:f,wasClean:a===1E3};var g;
+(g=t)==null||g.postMessage(a)}};Promise.resolve().then(()=>p(d));return c}A(B,EventTarget);var C=document.currentScript,D=C==null?void 0:C.getAttribute("ws-interception-config");if(!D)throw Error("WebSocket Interceptor: Missing ws-interception-config attribute in the script tag.");var E=JSON.parse(D);if(!E.parentOrigin||typeof E.parentOrigin!=="string")throw Error("WebSocket Interceptor: Invalid parentOrigin in ws-interception-config");
+(function(b){var d=Object.getOwnPropertyDescriptor(window,"WebSocket");if(!d||d.writable||d.configurable)d=Object.assign(function(e,h){try{let k=(new URL(e)).hostname;if(b.proxiedDomains.some(m=>k===m||k.endsWith(`.${m}`)))return new B(e,h,b.parentOrigin)}catch(k){throw window.parent.postMessage({type:"websocket_blocked",url:e,reason:"blocked_invalid_url"},b.parentOrigin),new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");}window.parent.postMessage({type:"websocket_blocked",
+url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMException(`WebSocket connection to '${e}' is not allowed in Canvas.`,"SecurityError");},{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3}),Object.defineProperty(window,"WebSocket",{value:d,writable:!1,configurable:!1})})({proxiedDomains:E.proxiedDomains||[],parentOrigin:E.parentOrigin});}).call(this);
+</script><script data-bard-client-injected="true">((function(modelInformation) {
+  const originalFetch = window.fetch;
+  // TODO: b/421908508 - Move these out of the script and match all generative AI model calls.
+  let googleLlmBaseApiUrls = [
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':streamGenerateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.textModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageEditModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.imageTransformModelName + ':generateContent',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predict',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.videoModelName + ':predictLongRunning',
+    'https://generativelanguage.googleapis.com/v1beta/models/' + modelInformation.ttsModelName + ':generateContent',
+  ];
+  modelInformation.deprecatedTextModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+    );
+  });
+  modelInformation.deprecatedImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predict',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':predictLongRunning',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedGenerateImageModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+  modelInformation.deprecatedImageTransformModelNames.forEach((modelName) => {
+    googleLlmBaseApiUrls.push(
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/' + modelName + ':streamGenerateContent',
+    );
+  });
+
+  const pendingFetchResolvers = {};
+  let nextPromiseId = 0;
+
+  function handleStringInput(input, optionsArgument) {
+    const actualUrl = input;
+    const fetchCallArgs = [actualUrl, optionsArgument];
+    const effectiveOptions = optionsArgument || {};
+    const bodyForApiKeyCheck = effectiveOptions.body;
+    const bodyForPostMessage = effectiveOptions.body;
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  function handleRequestInput(input, optionsArgument) {
+    const actualUrl = input.url;
+    const fetchCallArgs = [input, optionsArgument];
+    const effectiveOptions = { method: input.method, headers: new Headers(input.headers) };
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (optionsArgument) {
+      if (optionsArgument.method) effectiveOptions.method = optionsArgument.method;
+      if (optionsArgument.headers) effectiveOptions.headers = new Headers(optionsArgument.headers);
+      if ('body' in optionsArgument) {
+        bodyForApiKeyCheck = optionsArgument.body;
+        bodyForPostMessage = optionsArgument.body;
+      } else {
+        bodyForApiKeyCheck = undefined;
+        bodyForPostMessage = input.body;
+      }
+    } else {
+      bodyForApiKeyCheck = undefined;
+      bodyForPostMessage = input.body;
+    }
+    return { actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage };
+  }
+
+  window.fetch = function(input, optionsArgument) {
+    let actualUrl;
+    let fetchCallArgs;
+    let effectiveOptions = {};
+    let bodyForApiKeyCheck;
+    let bodyForPostMessage;
+
+    if (typeof input === 'string') {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleStringInput(input, optionsArgument));
+    } else if (input instanceof Request) {
+      ({actualUrl, fetchCallArgs, effectiveOptions, bodyForApiKeyCheck, bodyForPostMessage} = handleRequestInput(input, optionsArgument));
+    } else {
+      return originalFetch.apply(window, [input, optionsArgument]);
+    }
+
+    effectiveOptions.method = effectiveOptions.method || 'GET';
+    if (!effectiveOptions.headers) {
+      effectiveOptions.headers = new Headers();
+    }
+
+
+    if (typeof actualUrl === 'string' && googleLlmBaseApiUrls.some((url) => actualUrl.startsWith(url))) {
+      let apiKeyIsNull = true;
+
+      const regex = new RegExp("models/([^:]+)");
+      const modelNameMatch = actualUrl.match(regex);
+      const modelName = modelNameMatch ? modelNameMatch[1] : 'unspecified';
+
+
+      try {
+        const urlObject = new URL(actualUrl);  // Use URL object for robust parsing
+        const apiKeyParam = urlObject.searchParams.get('key');
+        if (apiKeyParam) {
+          apiKeyIsNull = false;
+        }
+      } catch (e) {
+        // Continue checks even if URL parsing fails
+      }
+
+      if (apiKeyIsNull && effectiveOptions.headers) {
+        const h = new Headers(effectiveOptions.headers);
+        const apiKeyHeaderValue = h.get('X-API-Key') || h.get('x-api-key');
+        if (apiKeyHeaderValue) {
+          apiKeyIsNull = false;
+          return originalFetch.apply(window, fetchCallArgs);
+        }
+      }
+
+      if (apiKeyIsNull && effectiveOptions.method && ['POST', 'PUT', 'PATCH'].includes(effectiveOptions.method.toUpperCase()) && typeof bodyForApiKeyCheck === 'string') {
+        try {
+          const bodyData = JSON.parse(bodyForApiKeyCheck);
+          if (bodyData && bodyData.apiKey) {
+            apiKeyIsNull = false;
+            return originalFetch.apply(window, fetchCallArgs);
+          }
+        } catch (e) {
+          // Ignore JSON parsing errors
+        }
+      }
+
+      if(apiKeyIsNull) {
+        const promiseId = nextPromiseId++;
+        const promise = new Promise((resolve) => {
+          pendingFetchResolvers[promiseId] = (resolvedResponse) => {
+            delete pendingFetchResolvers[promiseId];
+            resolve(resolvedResponse);
+          };
+        });
+
+        let serializedBodyForPostMessage;
+        if (typeof bodyForPostMessage === 'string' || bodyForPostMessage == null) {
+            serializedBodyForPostMessage = bodyForPostMessage;
+        } else if (bodyForPostMessage instanceof ReadableStream) {
+            serializedBodyForPostMessage = null;
+        } else {
+            try {
+                serializedBodyForPostMessage = JSON.stringify(bodyForPostMessage);
+            } catch (e) {
+                serializedBodyForPostMessage = null;
+            }
+        }
+
+        const messageOptions = {
+            method: effectiveOptions.method,
+            headers: Object.fromEntries(new Headers(effectiveOptions.headers).entries()),
+            body: serializedBodyForPostMessage
+        };
+
+        window.parent.postMessage({
+          type: 'requestFetch',
+          url: actualUrl,
+          modelName: modelName,
+          options: messageOptions,
+          promiseId: promiseId,
+        }, '*');
+
+        return promise;
+      }
+      return originalFetch.apply(window, fetchCallArgs);
+    }
+    return originalFetch.apply(window, fetchCallArgs);
+  };
+
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resolveFetch') {
+      const { promiseId, response } = event.data;
+      if (pendingFetchResolvers[promiseId]) {
+        try {
+          const reconstructedResponse = new Response(response.body, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: new Headers(response.headers),
+          });
+          pendingFetchResolvers[promiseId](reconstructedResponse);
+        } catch (error) {
+          pendingFetchResolvers[promiseId](new Response(null, { status: 500, statusText: "Interceptor Response Reconstruction Error" }));
+        }
+      }
+    }
+  });
+
+}))({"textModelName":"gemini-3-flash-preview","imageModelName":"imagen-4.0-generate-001","imageEditModelName":"gemini-3.1-flash-image","imageTransformModelName":"gemini-3-pro-image","videoModelName":"veo-2.0-generate-001","ttsModelName":"gemini-2.5-flash-preview-tts","deprecatedTextModelNames":["gemini-2.0-flash","gemini-2.5-flash","gemini-2.5-flash-preview-04-17","gemini-2.5-flash-preview-05-20","gemini-2.5-flash-preview-09-2025"],"deprecatedImageModelNames":["imagen-3.0-generate-001","imagen-3.0-generate-002"],"deprecatedGenerateImageModelNames":["gemini-2.5-flash-image-preview","gemini-2.5-flash-image","gemini-3.1-flash-image-preview"],"deprecatedImageTransformModelNames":["gemini-3-pro-image-preview-11-2025"]})</script><script data-bard-client-injected="true">(function() {
+  const OVERLAY_SELECTOR =
+    'dialog[open], [role="dialog"], [role="alertdialog"], [role="menu"], [role="listbox"], [role="combobox"]';
+
+  function isVisibleOverlay(element) {
+    if (element.closest('[hidden], [aria-hidden="true"], [inert]')) {
+      return false;
+    }
+    if (window.getComputedStyle(element).visibility === 'hidden') {
+      return false;
+    }
+    for (let cur = element; cur; cur = cur.parentElement) {
+      if (window.getComputedStyle(cur).display === 'none') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function hasOpenOverlay() {
+    const candidates = document.querySelectorAll(OVERLAY_SELECTOR);
+    for (let i = 0; i < candidates.length; i++) {
+      if (isVisibleOverlay(candidates[i])) {
+        return true;
+      }
+    }
+    try {
+      if (document.querySelector('[popover]:popover-open')) {
+        return true;
+      }
+    } catch (e) {
+      // Ignore engines that do not support :popover-open.
+    }
+    return false;
+  }
+
+  function isNonEmptySearchInput(target) {
+    return (
+      Boolean(target) &&
+      target.tagName === 'INPUT' &&
+      typeof target.type === 'string' &&
+      target.type.toLowerCase() === 'search' &&
+      typeof target.value === 'string' &&
+      target.value.length > 0
+    );
+  }
+
+  function shouldIgnoreEscape(event) {
+    return (
+      event.key !== 'Escape' ||
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.shiftKey ||
+      event.isComposing ||
+      event.repeat ||
+      event.keyCode === 229 ||
+      isNonEmptySearchInput(event.target)
+    );
+  }
+
+  let shouldIgnoreCaptureState = false;
+
+  window.addEventListener(
+    'keydown',
+    function(event) {
+      if (event.key === 'Escape') {
+        shouldIgnoreCaptureState =
+          hasOpenOverlay() || isNonEmptySearchInput(event.target);
+      }
+    },
+    {capture: true},
+  );
+
+  window.addEventListener('keydown', function(event) {
+    if (
+      shouldIgnoreEscape(event) ||
+      event.defaultPrevented ||
+      shouldIgnoreCaptureState
+    ) {
+      return;
+    }
+    const wasBlockedOnCapture = shouldIgnoreCaptureState;
+    queueMicrotask(function() {
+      if (event.defaultPrevented || wasBlockedOnCapture) {
+        return;
+      }
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({'type': 'escapeKey'}, '*');
+      }
+    });
+  });
+})();</script><script data-bard-client-injected="true">(function() {
+  function normalizeSlug(str) {
+    try {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^p{L}p{N}s_-]/gu, '')
+        .replace(/s+/g, '-');
+    } catch (e) {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9s_-]/g, '')
+        .replace(/s+/g, '-');
+    }
+  }
+
+  function findTargetElement(hash) {
+    if (!hash || hash === '#') {
+      return null;
+    }
+    const rawId = hash.startsWith('#') ? hash.slice(1) : hash;
+    let decodedId = rawId;
+    try {
+      decodedId = decodeURIComponent(rawId);
+    } catch (e) {
+      // Ignore URI malformed errors.
+    }
+
+    // 1. Direct ID match (raw and decoded).
+    let target = document.getElementById(rawId) || document.getElementById(decodedId);
+    if (target) {
+      return target;
+    }
+
+    // 2. Name attribute match (<a name="...">).
+    try {
+      if (typeof CSS !== 'undefined' && CSS.escape) {
+        target =
+          document.querySelector('[name="' + CSS.escape(rawId) + '"]') ||
+          document.querySelector('[name="' + CSS.escape(decodedId) + '"]');
+      } else {
+        const namedElements = document.getElementsByName(rawId);
+        if (namedElements && namedElements.length > 0) {
+          return namedElements[0];
+        }
+      }
+    } catch (e) {
+      // Ignore querySelector syntax errors.
+    }
+    if (target) {
+      return target;
+    }
+
+    // 3. Match heading text by slug (for Markdown TOCs where headings lack explicit IDs).
+    const targetSlug = normalizeSlug(decodedId);
+    if (targetSlug) {
+      for (const heading of document.querySelectorAll('h1, h2, h3, h4, h5, h6')) {
+        if (normalizeSlug(heading.textContent || '') === targetSlug) {
+          return heading;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  document.addEventListener('click', function(event) {
+    const target = event.target;
+    const anchor = target && typeof target.closest === 'function' ? target.closest('a') : null;
+    if (!anchor) {
+      return;
+    }
+
+    const href = anchor.getAttribute('href');
+    if (
+      !href ||
+      href.trim().toLowerCase().startsWith('javascript:') ||
+      anchor.hasAttribute('download')
+    ) {
+      return;
+    }
+
+    // Check if the link is an in-page hash / anchor link.
+    if (href.startsWith('#')) {
+      event.preventDefault();
+      const targetElement = findTargetElement(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+      return;
+    }
+
+    // Check if the URL has the same origin/pathname but with a hash.
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      if (
+        url.hash &&
+        url.origin === window.location.origin &&
+        url.pathname === window.location.pathname
+      ) {
+        event.preventDefault();
+        const targetElement = findTargetElement(url.hash);
+        if (targetElement) {
+          targetElement.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+        return;
+      }
+    } catch (e) {
+      // Fall through if URL parsing fails.
+    }
+
+    // For all external or full navigation links, prevent iframe-level navigation
+    // (which breaks in AGSA WebView or sandboxed iframes) and ensure they open
+    // safely in a new tab/window.
+    if (anchor.target !== '_blank') {
+      event.preventDefault();
+      window.open(anchor.href, '_blank', 'noopener,noreferrer');
+    }
+  }, {capture: true});
+})();</script><script data-bard-client-injected="true">(function(){'use strict';function a(){window.parent.postMessage({type:"interaction"},"*")}window.addEventListener("click",a,{capture:!0,passive:!0});window.addEventListener("touchstart",a,{capture:!0,passive:!0});window.addEventListener("keydown",a,{capture:!0,passive:!0});}).call(this);
+</script><script data-bard-client-injected="true">(function() {
+  const originalConsoleLog = console.log;
+  const originalConsoleError = console.error;
+
+    /**
+   * Normalizes an error event or a promise rejection reason into a structured error object.
+   * @param {*} errorEventOrReason The error object or reason.
+   * @return {object} Structured error data { message, name, stack }.
+   */
+  function getErrorObject(errorEventOrReason) {
+    if (errorEventOrReason instanceof Error) {
+      return {
+        message: errorEventOrReason.message,
+        name: errorEventOrReason.name,
+        stack: errorEventOrReason.stack,
+      };
+    }
+    // Fallback for non-Error objects.
+    try {
+      return {
+        message: JSON.stringify(errorEventOrReason),
+        name: 'UnknownErrorType',
+        stack: null,
+      };
+    } catch (e) {
+      return {
+        message: String(errorEventOrReason),
+        name: 'UnknownErrorTypeNonStringifiable',
+        stack: null,
+      };
+    }
+  }
+
+  /**
+   * Converts an array of arguments (from log/error) into a single string.
+   * Handles Error objects specially to include their message and stack.
+   * @param {Array<*>} args - Arguments passed to console methods.
+   * @return {string} A string representation of the arguments.
+   */
+  function stringifyArgs(args) {
+    return args
+      .map((arg) => {
+        if (arg instanceof Error) {
+          const {message, stack} = arg;
+          return `Error: ${message}${stack ? ('\nStack: ' + stack) : ''}`;
+        }
+        if (typeof arg === 'object' && arg !== null) {
+          try {
+            return JSON.stringify(arg);
+          } catch (error) {
+            return '[Circular Object]';
+          }
+        } else {
+          return String(arg);
+        }
+      })
+      .join(' ');
+  }
+
+  console.log = function(...args) {
+    const logString = stringifyArgs(args);
+    window.parent.postMessage({ type: 'log', message: logString }, '*');
+    originalConsoleLog.apply(console, args);
+  };
+
+  console.error = function(...args) {
+    let errorData;
+    if (args.length > 0 && args[0] instanceof Error) {
+      const err = args[0];
+      // If the first arg is an Error, capture its details.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        ...getErrorObject(err),
+        rawArgsString: stringifyArgs(args.slice(1)),
+        timestamp: new Date().toISOString(),
+      };
+    } else {
+      // If not an Error object, treat all args as a general error message.
+      errorData = {
+        type: 'error',
+        source: 'CONSOLE_ERROR',
+        message: stringifyArgs(args),
+        name: 'ConsoleLoggedError',
+        stack: null,
+        timestamp: new Date().toISOString(),
+      };
+    }
+    window.parent.postMessage(errorData, '*');
+    originalConsoleError.apply(console, args);
+  };
+
+  // Listen for global unhandled synchronous errors.
+  window.addEventListener('error', function(event) {
+    const errorDetails = event.error ? getErrorObject(event.error) : {
+      message: event.message,
+      name: 'GlobalError',
+      stack: null,
+      filename: event.filename,
+      lineno: event.lineno,
+      colno: event.colno,
+    };
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'global',
+      ...errorDetails,
+      message: errorDetails.message || event.message,
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+  // Listen for unhandled promise rejections (asynchronous errors).
+  window.addEventListener('unhandledrejection', function(event) {
+    const errorDetails = getErrorObject(event.reason);
+
+    window.parent.postMessage({
+      type: 'error',
+      source: 'unhandledrejection',
+      ...errorDetails,
+      message: errorDetails.message || 'Unhandled Promise Rejection',
+      timestamp: new Date().toISOString(),
+    }, '*');
+  });
+
+})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador Oficial ANT - Licencia Tipo A (162 Preguntas)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .option-card {
+      transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .option-card:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
+    .fade-in {
+      animation: fadeIn 0.22s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Scrollbar limpio para mapa de preguntas */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border-width:0}.fixed{position:fixed}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.z-30{z-index:30}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-5{margin-top:1.25rem;margin-bottom:1.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-2\.5{height:0.625rem}.h-6{height:1.5rem}.h-full{height:100%}.max-h-56{max-height:14rem}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-2\.5{width:0.625rem}.w-6{width:1.5rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-8{grid-template-columns:repeat(8, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-b{border-bottom-width:1px}.border-b-4{border-bottom-width:4px}.border-t{border-top-width:1px}.border-amber-400{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-rose-200{--tw-border-opacity:1;border-color:rgb(254 205 211 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-white\/15{border-color:rgb(255 255 255 / 0.15)}.bg-amber-100{--tw-bg-opacity:1;background-color:rgb(254 243 199 / var(--tw-bg-opacity, 1))}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36 / var(--tw-bg-opacity, 1))}.bg-amber-600{--tw-bg-opacity:1;background-color:rgb(217 119 6 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230 / var(--tw-bg-opacity, 1))}.bg-rose-50{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-300{--tw-bg-opacity:1;background-color:rgb(203 213 225 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/20{background-color:rgb(255 255 255 / 0.2)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.from-blue-600{--tw-gradient-from:#2563eb var(--tw-gradient-from-position);--tw-gradient-to:rgb(37 99 235 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-blue-700{--tw-gradient-to:#1d4ed8 var(--tw-gradient-to-position)}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-3\.5{padding-left:0.875rem;padding-right:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-3{padding-bottom:0.75rem}.pb-6{padding-bottom:1.5rem}.pr-1{padding-right:0.25rem}.pt-2{padding-top:0.5rem}.pt-3{padding-top:0.75rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[11px\]{font-size:11px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-wider{letter-spacing:0.05em}.text-amber-600{--tw-text-opacity:1;color:rgb(217 119 6 / var(--tw-text-opacity, 1))}.text-amber-700{--tw-text-opacity:1;color:rgb(180 83 9 / var(--tw-text-opacity, 1))}.text-amber-800{--tw-text-opacity:1;color:rgb(146 64 14 / var(--tw-text-opacity, 1))}.text-blue-100{--tw-text-opacity:1;color:rgb(219 234 254 / var(--tw-text-opacity, 1))}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-700{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.text-rose-700{--tw-text-opacity:1;color:rgb(190 18 60 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-90{opacity:0.9}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.selection\:bg-blue-600 *::selection{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.selection\:bg-blue-600::selection{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.after\:absolute::after{content:var(--tw-content);position:absolute}.after\:left-\[2px\]::after{content:var(--tw-content);left:2px}.after\:top-\[2px\]::after{content:var(--tw-content);top:2px}.after\:h-5::after{content:var(--tw-content);height:1.25rem}.after\:w-5::after{content:var(--tw-content);width:1.25rem}.after\:rounded-full::after{content:var(--tw-content);border-radius:9999px}.after\:border::after{content:var(--tw-content);border-width:1px}.after\:border-slate-300::after{content:var(--tw-content);--tw-border-opacity:1;border-color:rgb(203 213 225 / var(--tw-border-opacity, 1))}.after\:bg-white::after{content:var(--tw-content);--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.after\:transition-all::after{content:var(--tw-content);transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.after\:content-\[\'\'\]::after{--tw-content:'';content:var(--tw-content)}.hover\:border-amber-400:hover{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.hover\:border-blue-500:hover{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.hover\:border-slate-400:hover{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.hover\:bg-amber-50\/40:hover{background-color:rgb(255 251 235 / 0.4)}.hover\:bg-amber-700:hover{--tw-bg-opacity:1;background-color:rgb(180 83 9 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-50\/40:hover{background-color:rgb(239 246 255 / 0.4)}.hover\:bg-blue-500:hover{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-700:hover{--tw-bg-opacity:1;background-color:rgb(29 78 216 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-100:hover{--tw-bg-opacity:1;background-color:rgb(255 228 230 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-50:hover{--tw-bg-opacity:1;background-color:rgb(255 241 242 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-200:hover{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:from-blue-700:hover{--tw-gradient-from:#1d4ed8 var(--tw-gradient-from-position);--tw-gradient-to:rgb(29 78 216 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.hover\:to-blue-800:hover{--tw-gradient-to:#1e40af var(--tw-gradient-to-position)}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.hover\:shadow-lg:hover{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.disabled\:cursor-not-allowed:disabled{cursor:not-allowed}.disabled\:opacity-40:disabled{opacity:0.4}.group:hover .group-hover\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.peer:checked ~ .peer-checked\:bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11 / var(--tw-bg-opacity, 1))}.peer:checked ~ .peer-checked\:bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.peer:checked ~ .peer-checked\:after\:translate-x-full::after{content:var(--tw-content);--tw-translate-x:100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.peer:checked ~ .peer-checked\:after\:border-white::after{content:var(--tw-content);--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.peer:focus ~ .peer-focus\:outline-none{outline:2px solid transparent;outline-offset:2px}@media (min-width: 640px){.sm\:inline{display:inline}.sm\:w-auto{width:auto}.sm\:flex-initial{flex:0 1 auto}.sm\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:gap-3{gap:0.75rem}.sm\:gap-4{gap:1rem}.sm\:p-5{padding:1.25rem}.sm\:p-8{padding:2rem}.sm\:py-8{padding-top:2rem;padding-bottom:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}</style></head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Barra Superior Institucional -->
+  <header class="bg-slate-900 text-white shadow-md sticky top-0 z-30 border-b-4 border-amber-400">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shrink-0 shadow-inner">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="5.5" cy="17.5" r="3.5"></circle>
+            <circle cx="18.5" cy="17.5" r="3.5"></circle>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 6h2l3 4.5M9 17.5l3-6.5h4l2.5 6.5M5.5 17.5L9 11h3"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-400 text-slate-950">ANT Ecuador</span>
+            <span class="text-xs text-slate-300 hidden sm:inline">Banco Oficial Completo · 162 Preguntas</span>
+          </div>
+          <h1 class="text-base sm:text-lg font-bold leading-tight">Simulador Licencia Tipo A</h1>
+        </div>
+      </div>
+
+      <!-- Acciones Superiores -->
+      <div class="flex items-center gap-2">
+        <button id="btn-download-index" onclick="downloadIndexHtml()" title="Descargar index.html listo para GitHub" class="text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5">
+          <span>⬇ index.html</span>
+        </button>
+        <button id="btn-grid-toggle" onclick="toggleQuestionGrid()" class="hidden text-xs sm:text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white px-3 py-2 rounded-xl shadow-xs transition flex items-center gap-1.5">
+          <span># Mapa</span>
+        </button>
+        <button id="btn-home" onclick="confirmExit()" class="hidden text-xs sm:text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-2 rounded-xl border border-slate-700 transition">
+          Inicio
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-8">
+
+    <!-- PANTALLA 1: INICIO Y SELECCIÓN DE MODO -->
+    <section id="screen-start" class="fade-in space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
+          <div>
+            <span class="inline-block text-xs font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full mb-2">
+              Cuestionario Oficial Completo (139 Generales + 23 Tipo A)
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Prepárate para tu Licencia Tipo A</h2>
+            <p class="text-slate-600 mt-1 text-sm sm:text-base">
+              Practica las <strong>162 preguntas oficiales</strong> de la Agencia Nacional de Tránsito haciendo clic directamente en cada alternativa.
+            </p>
+          </div>
+        </div>
+
+        <!-- Barra de Progreso Guardado (LocalStorage) -->
+        <div id="saved-progress-banner" class="hidden mt-5 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <p class="text-sm font-bold text-emerald-900">Tienes progreso guardado en el Banco Completo</p>
+            <p id="saved-progress-desc" class="text-xs text-emerald-700 mt-0.5">0 de 162 respondidas · 0 aciertos</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="startQuiz('completo', false, true)" class="px-3.5 py-2 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition">
+              Continuar donde quedé
+            </button>
+            <button onclick="resetSavedProgress()" class="px-3 py-2 rounded-lg text-xs font-semibold bg-white hover:bg-rose-50 text-rose-700 border border-emerald-200 transition">
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <!-- Configuración de Temporizador y Orden -->
+        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="flex items-center justify-between gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2.5">
+              <span class="text-blue-600 font-bold">⏱</span>
+              <div>
+                <p class="text-sm font-semibold text-slate-800">Temporizador de examen</p>
+                <p class="text-xs text-slate-500">20 min en simulacro / libre en estudio</p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="toggle-timer" class="sr-only peer" checked="">
+              <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            </label>
+          </div>
+
+          <div class="flex items-center justify-between gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <div class="flex items-center gap-2.5">
+              <span class="text-amber-600 font-bold">🔀</span>
+              <div>
+                <p class="text-sm font-semibold text-slate-800">Mezclar preguntas en Banco</p>
+                <p class="text-xs text-slate-500">Orden aleatorio o secuencial 1 → 162</p>
+              </div>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="toggle-shuffle" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Tarjetas de Modos de Práctica -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <!-- Modo 1: Banco Completo 162 -->
+          <button onclick="startQuiz('completo')" class="text-left group bg-gradient-to-br from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white p-5 rounded-2xl shadow-md hover:shadow-lg transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider bg-white/20 px-2.5 py-1 rounded-lg">Cuestionario Íntegro</span>
+                <span class="text-lg font-extrabold" id="count-total">162 preg.</span>
+              </div>
+              <h3 class="text-lg font-bold">Todas las Preguntas (1–162)</h3>
+              <p class="text-blue-100 text-xs mt-1.5 leading-relaxed">
+                Las 139 preguntas generales + las 23 específicas de motocicleta. Incluye mapa numérico para saltar a cualquier pregunta y filtros por bloque.
+              </p>
+            </div>
+            <div class="mt-5 pt-3 border-t border-white/15 flex items-center justify-between text-sm font-semibold">
+              <span>Practicar las 162 preguntas</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </button>
+
+          <!-- Modo 2: Examen Simulacro -->
+          <button onclick="startQuiz('simulacro')" class="text-left group bg-white hover:bg-blue-50/40 border-2 border-slate-200 hover:border-blue-500 p-5 rounded-2xl shadow-sm transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800 px-2.5 py-1 rounded-lg">Evaluación Real</span>
+                <span class="text-lg font-extrabold text-slate-800">20 preg.</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900">Examen Simulacro ANT</h3>
+              <p class="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                20 preguntas aleatorias del banco completo (generales + moto). Nota mínima aprobatoria: <strong>16/20</strong>.
+              </p>
+            </div>
+            <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-blue-700">
+              <span>Iniciar simulacro</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </button>
+
+          <!-- Modo 3: Solo Generales -->
+          <button onclick="startQuiz('generales')" class="text-left group bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-400 p-5 rounded-2xl shadow-sm transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg">Bloque 1</span>
+                <span class="text-lg font-extrabold text-slate-800" id="count-generales">139 preg.</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900">Solo Preguntas Generales</h3>
+              <p class="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                Normativa vial, señales reglamentarias, preventivas, informativas, marcas viales y sanciones del COIP.
+              </p>
+            </div>
+            <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-slate-700">
+              <span>Practicar generales (1–139)</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </button>
+
+          <!-- Modo 4: Específicas Tipo A -->
+          <button onclick="startQuiz('especificas')" class="text-left group bg-white hover:bg-amber-50/40 border-2 border-slate-200 hover:border-amber-400 p-5 rounded-2xl shadow-sm transition flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2.5 py-1 rounded-lg">Bloque 2 · Moto</span>
+                <span class="text-lg font-extrabold text-slate-800" id="count-especificas">23 preg.</span>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900">Específicas Licencia Tipo A</h3>
+              <p class="text-slate-600 text-xs mt-1.5 leading-relaxed">
+                Las 23 preguntas oficiales exclusivas de conducción de motocicletas, triciclos y cuadrones.
+              </p>
+            </div>
+            <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-amber-700">
+              <span>Practicar específicas (1–23)</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: SIMULADOR EN CURSO -->
+    <section id="screen-quiz" class="hidden fade-in space-y-4">
+      <!-- Panel Desplegable: Mapa / Rejilla de Preguntas y Filtros -->
+      <div id="question-grid-panel" class="hidden bg-white rounded-2xl shadow-md border border-slate-200 p-4 sm:p-5 fade-in">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Navegación rápida de preguntas</h3>
+            <p class="text-xs text-slate-500">Haz clic en cualquier número para saltar directamente</p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 text-xs">
+            <button onclick="filterGrid('all')" id="filter-all" class="px-2.5 py-1 rounded-lg font-semibold bg-slate-900 text-white">Todas</button>
+            <button onclick="filterGrid('general')" id="filter-general" class="px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Generales</button>
+            <button onclick="filterGrid('especifica')" id="filter-especifica" class="px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200">Tipo A</button>
+            <button onclick="filterGrid('wrong')" id="filter-wrong" class="px-2.5 py-1 rounded-lg font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100">Falladas</button>
+          </div>
+        </div>
+        <div id="grid-numbers" class="mt-3 max-h-56 overflow-y-auto grid grid-cols-8 sm:grid-cols-12 md:grid-cols-15 gap-1.5 pr-1">
+          <!-- Números generados dinámicamente -->
+        </div>
+        <div class="mt-3 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center gap-1"><i class="w-2.5 h-2.5 rounded-xs bg-emerald-500 inline-block"></i> Correcta</span>
+            <span class="flex items-center gap-1"><i class="w-2.5 h-2.5 rounded-xs bg-rose-500 inline-block"></i> Incorrecta</span>
+            <span class="flex items-center gap-1"><i class="w-2.5 h-2.5 rounded-xs bg-blue-600 inline-block"></i> Actual</span>
+          </div>
+          <button onclick="toggleQuestionGrid()" class="font-semibold text-blue-600 hover:underline">Cerrar mapa</button>
+        </div>
+      </div>
+
+      <!-- Barra de Estado y Progreso -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm mb-3">
+          <div class="flex items-center gap-2">
+            <span id="badge-category" class="font-bold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700">General #1</span>
+            <span class="text-slate-500 font-medium">Pregunta <strong id="q-current" class="text-slate-900">1</strong> de <strong id="q-total" class="text-slate-900">162</strong></span>
+          </div>
+
+          <div class="flex items-center gap-2 sm:gap-3">
+            <span class="inline-flex items-center gap-1 font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg">
+              ✓ <span id="score-correct">0</span>
+            </span>
+            <span class="inline-flex items-center gap-1 font-semibold text-rose-700 bg-rose-50 px-2.5 py-1 rounded-lg">
+              ✕ <span id="score-wrong">0</span>
+            </span>
+            <span id="timer-box" class="inline-flex items-center gap-1.5 font-mono font-bold text-slate-800 bg-slate-100 px-3 py-1 rounded-lg">
+              ⏱ <span id="timer-display">20:00</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Barra de progreso -->
+        <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+          <div id="progress-bar" class="bg-blue-600 h-full transition-all duration-300 rounded-full" style="width: 1%"></div>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Pregunta -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-8">
+        <div class="w-full">
+          <h2 id="question-text" class="text-lg sm:text-xl font-bold text-slate-900 leading-snug">
+            Cargando pregunta...
+          </h2>
+
+          <!-- Contenedor de Imagen / Señal SVG (si aplica) -->
+          <div id="question-visual" class="hidden my-5 flex justify-center">
+            <div id="visual-inner" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex items-center justify-center shadow-inner"></div>
+          </div>
+
+          <!-- Lista de Opciones Clicables -->
+          <div id="options-container" class="mt-6 space-y-3">
+            <!-- Botones generados dinámicamente -->
+          </div>
+
+          <!-- Retroalimentación Inmediata -->
+          <div id="feedback-box" class="hidden mt-5 p-4 rounded-xl border text-sm leading-relaxed fade-in">
+            <div class="flex items-start gap-3">
+              <span id="feedback-icon" class="text-lg font-bold mt-0.5"></span>
+              <div>
+                <p id="feedback-title" class="font-bold"></p>
+                <p id="feedback-text" class="mt-1 opacity-90"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles Inferiores: Anterior y Siguiente -->
+          <div class="mt-6 flex items-center justify-between gap-3">
+            <button id="btn-prev" onclick="prevQuestion()" class="px-4 py-3.5 rounded-xl font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-1.5 text-sm">
+              <span>←</span>
+              <span>Anterior</span>
+            </button>
+
+            <button id="btn-next" onclick="nextQuestion()" class="flex-1 sm:flex-initial px-6 py-3.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition flex items-center justify-center gap-2 text-sm sm:text-base">
+              <span id="btn-next-label">Siguiente pregunta</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 3: RESULTADOS FINALES -->
+    <section id="screen-results" class="hidden fade-in space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 text-center">
+        <div id="result-badge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-extrabold uppercase tracking-wider mb-4">
+          APROBADO
+        </div>
+        <h2 id="result-heading" class="text-2xl sm:text-3xl font-extrabold text-slate-900">¡Excelente trabajo!</h2>
+        <p id="result-subtitle" class="text-slate-600 mt-1 text-sm sm:text-base">Has superado el puntaje mínimo requerido por la ANT (16/20).</p>
+
+        <!-- Métricas -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-6 max-w-2xl mx-auto">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <p class="text-xs text-slate-500 font-medium">Nota sobre 20</p>
+            <p id="res-grade" class="text-2xl sm:text-3xl font-extrabold text-blue-600 mt-1">18.0</p>
+          </div>
+          <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+            <p class="text-xs text-emerald-700 font-medium">Aciertos</p>
+            <p id="res-correct" class="text-2xl sm:text-3xl font-extrabold text-emerald-700 mt-1">18/20</p>
+          </div>
+          <div class="bg-rose-50 p-4 rounded-2xl border border-rose-200">
+            <p class="text-xs text-rose-700 font-medium">Errores</p>
+            <p id="res-wrong" class="text-2xl sm:text-3xl font-extrabold text-rose-700 mt-1">2</p>
+          </div>
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200">
+            <p class="text-xs text-slate-500 font-medium">Tiempo</p>
+            <p id="res-time" class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">04:12</p>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button id="btn-retry-mistakes" onclick="retryMistakesOnly()" class="hidden w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-amber-600 hover:bg-amber-700 shadow-sm transition">
+            Practicar solo mis errores
+          </button>
+          <button onclick="restartSameMode()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition">
+            Repetir este modo
+          </button>
+          <button onclick="goHome()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition">
+            Elegir otro modo
+          </button>
+        </div>
+      </div>
+
+      <!-- Revisión de Preguntas Falladas -->
+      <div id="mistakes-section" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+        <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-700 text-xs font-extrabold flex items-center justify-center">!</span>
+          Repaso de preguntas incorrectas
+        </h3>
+        <div id="mistakes-list" class="space-y-4"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal de Confirmación Personalizado -->
+  <div id="exit-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-slate-200 fade-in">
+      <h3 class="text-lg font-bold text-slate-900">¿Volver al menú principal?</h3>
+      <p class="text-sm text-slate-600 mt-2">En el modo Banco Completo tu progreso queda guardado automáticamente.</p>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeExitModal()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition">Seguir practicando</button>
+        <button onclick="goHome()" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 transition">Ir al inicio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="text-center text-xs text-slate-500 py-5 px-4 border-t border-slate-200 bg-white">
+    Cuestionario Oficial Completo de Licencias Tipo A (162 preguntas) — Agencia Nacional de Tránsito (ANT Ecuador).
+  </footer>
+
+  <script>
+    // =========================================================================
+    // ILUSTRACIONES SVG COMPLETAS PARA SEÑALES, MARCAS VIALES E INTERSECCIONES
+    // =========================================================================
+    const SIGNALS = {
+      // Intersecciones y Semáforos
+      semaforoGiroPeaton: `<svg width="160" height="125" viewBox="0 0 160 125"><rect width="160" height="125" rx="10" fill="#e2e8f0"/><rect x="45" y="10" width="70" height="105" fill="#475569"/><rect x="15" y="45" width="130" height="45" fill="#475569"/><g fill="#ffffff"><rect x="48" y="34" width="64" height="5"/><rect x="48" y="96" width="64" height="5"/></g><rect x="68" y="75" width="16" height="24" rx="3" fill="#2563eb"/><path d="M76 74 Q76 58 96 58" fill="none" stroke="#22c55e" stroke-width="3" stroke-dasharray="4 3"/><polygon points="102,58 94,53 94,63" fill="#22c55e"/><circle cx="116" cy="60" r="5" fill="#f59e0b"/><rect x="126" y="16" width="16" height="36" rx="4" fill="#0f172a"/><circle cx="134" cy="24" r="3.5" fill="#334155"/><circle cx="134" cy="34" r="3.5" fill="#334155"/><circle cx="134" cy="44" r="3.5" fill="#22c55e"/></svg>`,
+      cruceSinSenalG98: `<svg width="150" height="140" viewBox="0 0 150 140"><rect width="150" height="140" rx="10" fill="#86efac"/><rect x="50" y="0" width="50" height="140" fill="#64748b"/><rect x="0" y="45" width="150" height="50" fill="#64748b"/><rect x="55" y="102" width="16" height="26" rx="3" fill="#ef4444"/><text x="63" y="119" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">B</text><rect x="108" y="52" width="26" height="16" rx="3" fill="#3b82f6"/><text x="121" y="64" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">A</text></svg>`,
+      cruceCruz: `<svg width="150" height="140" viewBox="0 0 150 140"><rect width="150" height="140" rx="10" fill="#86efac"/><rect x="50" y="0" width="50" height="140" fill="#64748b"/><rect x="0" y="45" width="150" height="50" fill="#64748b"/><rect x="78" y="102" width="16" height="26" rx="3" fill="#ef4444"/><text x="86" y="119" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">A</text><rect x="16" y="75" width="26" height="16" rx="3" fill="#eab308"/><text x="29" y="87" text-anchor="middle" fill="#000" font-size="11" font-weight="bold">B</text></svg>`,
+
+      // Marcas Viales Horizontales
+      lineaContinua: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="22" y1="10" x2="22" y2="90" stroke="#ffffff" stroke-width="3"/><line x1="138" y1="10" x2="138" y2="90" stroke="#ffffff" stroke-width="3"/><line x1="80" y1="10" x2="80" y2="90" stroke="#facc15" stroke-width="5"/></svg>`,
+      lineaDiscontinua: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="22" y1="10" x2="22" y2="90" stroke="#ffffff" stroke-width="3"/><line x1="138" y1="10" x2="138" y2="90" stroke="#ffffff" stroke-width="3"/><line x1="80" y1="12" x2="80" y2="88" stroke="#ffffff" stroke-width="5" stroke-dasharray="14 10"/></svg>`,
+      lineaMixta: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="75" y1="10" x2="75" y2="90" stroke="#facc15" stroke-width="4"/><line x1="85" y1="12" x2="85" y2="88" stroke="#facc15" stroke-width="4" stroke-dasharray="12 9"/></svg>`,
+      dobleContinua: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="75" y1="10" x2="75" y2="90" stroke="#facc15" stroke-width="4"/><line x1="85" y1="10" x2="85" y2="90" stroke="#facc15" stroke-width="4"/></svg>`,
+      rebasarCiclista: `<svg width="170" height="110" viewBox="0 0 170 110"><rect x="10" y="10" width="150" height="90" rx="8" fill="#475569"/><line x1="85" y1="12" x2="85" y2="98" stroke="#ffffff" stroke-width="3" stroke-dasharray="10 8"/><circle cx="122" cy="40" r="6" fill="#38bdf8"/><rect x="119" y="46" width="6" height="14" fill="#38bdf8"/><rect x="96" y="64" width="20" height="30" rx="4" fill="#ef4444"/><path d="M106 64 Q106 42 74 42 L74 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-dasharray="4 3"/><polygon points="74,18 69,26 79,26" fill="#22c55e"/></svg>`,
+      bordeBlanco: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="24" y1="10" x2="24" y2="90" stroke="#ffffff" stroke-width="5"/><line x1="136" y1="10" x2="136" y2="90" stroke="#ffffff" stroke-width="5"/><line x1="80" y1="12" x2="80" y2="88" stroke="#ffffff" stroke-width="3" stroke-dasharray="10 8"/></svg>`,
+      bordeAmarillo: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="24" y1="10" x2="24" y2="90" stroke="#facc15" stroke-width="5"/><line x1="136" y1="10" x2="136" y2="90" stroke="#facc15" stroke-width="5"/></svg>`,
+      cruceCiclovia: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><rect x="10" y="34" width="140" height="32" fill="#16a34a" opacity="0.35"/><line x1="12" y1="34" x2="148" y2="34" stroke="#ffffff" stroke-width="4" stroke-dasharray="10 8"/><line x1="12" y1="66" x2="148" y2="66" stroke="#ffffff" stroke-width="4" stroke-dasharray="10 8"/></svg>`,
+      flechasCarril: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><line x1="80" y1="10" x2="80" y2="90" stroke="#ffffff" stroke-width="3"/><path d="M45 78 V32 M36 42 L45 30 L54 42" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/><path d="M115 78 V46 Q115 36 126 36 H134 M126 28 L136 36 L126 44" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/></svg>`,
+      pasoCebra: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><g fill="#ffffff"><rect x="24" y="32" width="14" height="36"/><rect x="46" y="32" width="14" height="36"/><rect x="68" y="32" width="14" height="36"/><rect x="90" y="32" width="14" height="36"/><rect x="112" y="32" width="14" height="36"/></g></svg>`,
+      vel40Suelo: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><text x="80" y="64" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-weight="800" font-size="38">40</text></svg>`,
+      prohibidoEstSuelo: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><rect x="28" y="26" width="104" height="48" fill="none" stroke="#facc15" stroke-width="4"/><line x1="28" y1="26" x2="132" y2="74" stroke="#facc15" stroke-width="4"/><line x1="132" y1="26" x2="28" y2="74" stroke="#facc15" stroke-width="4"/></svg>`,
+      berma: `<svg width="160" height="100" viewBox="0 0 160 100"><rect x="10" y="10" width="140" height="80" rx="8" fill="#475569"/><rect x="122" y="10" width="28" height="80" fill="#94a3b8"/><line x1="122" y1="10" x2="122" y2="90" stroke="#ffffff" stroke-width="4"/><text x="136" y="54" text-anchor="middle" fill="#0f172a" font-size="9" font-weight="bold" transform="rotate(-90 136 54)">BERMA</text></svg>`,
+
+      // Señales Regulatorias
+      unaVia: `<svg width="140" height="75" viewBox="0 0 160 80"><rect x="6" y="12" width="148" height="56" rx="8" fill="#0f172a"/><path d="M26 40 H126 M112 26 L130 40 L112 54" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="72" y="45" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-weight="800" font-size="16">UNA VÍA</text></svg>`,
+      max30: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="#ffffff" stroke="#dc2626" stroke-width="10"/><text x="60" y="72" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="36">30</text></svg>`,
+      max50: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="#ffffff" stroke="#dc2626" stroke-width="10"/><text x="60" y="72" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="36">50</text></svg>`,
+      noCambioCarril: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><line x1="60" y1="26" x2="60" y2="94" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6 4"/><path d="M74 82 Q74 60 46 50 V34" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/><polygon points="46,24 37,37 55,37" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noCambioCarrilIzq: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><path d="M76 82 V60 Q76 48 44 42" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/><polygon points="34,40 48,33 46,50" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      pare: `<svg width="110" height="110" viewBox="0 0 120 120"><polygon points="36,6 84,6 114,36 114,84 84,114 36,114 6,84 6,36" fill="#dc2626" stroke="#ffffff" stroke-width="4"/><polygon points="38,10 82,10 110,38 110,82 82,110 38,110 10,82 10,38" fill="none" stroke="#ffffff" stroke-width="2"/><text x="60" y="69" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-weight="800" font-size="28">PARE</text></svg>`,
+      ceda: `<svg width="115" height="105" viewBox="0 0 120 110"><polygon points="60,102 8,12 112,12" fill="#ffffff" stroke="#dc2626" stroke-width="10" stroke-linejoin="round"/><text x="60" y="42" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="13">CEDA EL</text><text x="60" y="58" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="13">PASO</text></svg>`,
+      noGirarIzq: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><path d="M72 86 V54 Q72 44 62 44 H42" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/><polygon points="30,44 46,33 46,55" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noU: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><path d="M74 82 V50 A14 14 0 0 0 46 50 V72" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/><polygon points="46,84 34,66 58,66" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noUoIzq: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><path d="M74 84 V50 A12 12 0 0 0 50 50 V72 M74 52 H38" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/><polygon points="50,82 40,68 60,68" fill="#0f172a"/><polygon points="28,52 42,42 42,62" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noPesados: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><rect x="30" y="46" width="38" height="22" rx="2" fill="#0f172a"/><rect x="70" y="52" width="18" height="16" rx="2" fill="#0f172a"/><circle cx="40" cy="72" r="5" fill="#0f172a"/><circle cx="78" cy="72" r="5" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noAdelantar: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><rect x="30" y="50" width="24" height="18" rx="3" fill="#0f172a"/><rect x="66" y="50" width="24" height="18" rx="3" fill="#0f172a"/><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      dobleViaReg: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><path d="M40 24 V56 M28 44 L40 58 L52 44" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M80 58 V26 M68 38 L80 24 L92 38" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="60" y="84" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="16">DOBLE</text><text x="60" y="102" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="16">VÍA</text></svg>`,
+      noEstacionar: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><text x="60" y="76" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="48">E</text><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noEstacionarDetener: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><text x="60" y="76" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="48">E</text><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/><line x1="90" y1="30" x2="30" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noEstacionarDer: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="54" r="36" fill="none" stroke="#dc2626" stroke-width="8"/><text x="60" y="68" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="40">E</text><line x1="34" y1="28" x2="86" y2="80" stroke="#dc2626" stroke-width="8"/><path d="M32 108 H84 M74 99 L88 108 L74 117" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round"/></svg>`,
+      noEstacionarIzq: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="54" r="36" fill="none" stroke="#dc2626" stroke-width="8"/><text x="60" y="68" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="40">E</text><line x1="34" y1="28" x2="86" y2="80" stroke="#dc2626" stroke-width="8"/><path d="M88 108 H36 M46 99 L32 108 L46 117" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round"/></svg>`,
+      noEstacionarAmbos: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="54" r="36" fill="none" stroke="#dc2626" stroke-width="8"/><text x="60" y="68" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="40">E</text><line x1="34" y1="28" x2="86" y2="80" stroke="#dc2626" stroke-width="8"/><path d="M34 108 H86 M44 100 L30 108 L44 116 M76 100 L90 108 L76 116" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/></svg>`,
+      noEntre: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="44" fill="#dc2626"/><rect x="26" y="51" width="68" height="18" rx="3" fill="#ffffff"/></svg>`,
+      estacionamientoPermitido: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><ellipse cx="60" cy="60" rx="34" ry="44" fill="none" stroke="#16a34a" stroke-width="9"/><text x="60" y="76" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="48">E</text></svg>`,
+      zonaPagada: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><ellipse cx="60" cy="48" rx="28" ry="34" fill="none" stroke="#16a34a" stroke-width="8"/><text x="60" y="62" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="38">E</text><text x="60" y="102" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="14">ZONA</text><text x="60" y="118" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="14">PAGADA</text></svg>`,
+      paradaBus: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><rect x="36" y="24" width="48" height="54" rx="8" fill="#0f172a"/><rect x="42" y="32" width="36" height="22" rx="3" fill="#ffffff"/><circle cx="46" cy="68" r="4" fill="#ffffff"/><circle cx="74" cy="68" r="4" fill="#ffffff"/><text x="60" y="110" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="18">PARADA</text></svg>`,
+      largoMax10: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><text x="60" y="66" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="24">10m</text><path d="M28 80 H92 M34 75 L26 80 L34 85 M86 75 L94 80 L86 85" fill="none" stroke="#0f172a" stroke-width="3"/></svg>`,
+      carrilBiciPeaton: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><ellipse cx="60" cy="60" rx="36" ry="44" fill="none" stroke="#16a34a" stroke-width="8"/><text x="60" y="54" text-anchor="middle" fill="#0f172a" font-size="24">🚲</text><text x="60" y="84" text-anchor="middle" fill="#0f172a" font-size="22">🚶</text></svg>`,
+      terminaCarrilBici: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><ellipse cx="60" cy="48" rx="28" ry="34" fill="none" stroke="#16a34a" stroke-width="7"/><text x="60" y="56" text-anchor="middle" fill="#0f172a" font-size="22">🚲</text><text x="60" y="110" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="16">TERMINA</text></svg>`,
+      zonaEscolar20: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#a3e635" stroke="#0f172a" stroke-width="3"/><text x="60" y="46" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="12">ZONA</text><text x="60" y="60" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="12">ESCOLAR</text><circle cx="60" cy="84" r="18" fill="#ffffff" stroke="#dc2626" stroke-width="4"/><text x="60" y="89" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="14">20</text></svg>`,
+      zonaEscolar: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#a3e635" stroke="#0f172a" stroke-width="3"/><text x="60" y="66" text-anchor="middle" fill="#0f172a" font-size="34">🚸</text></svg>`,
+      paradaEscolar: `<svg width="110" height="125" viewBox="0 0 120 135"><rect x="6" y="6" width="108" height="123" rx="12" fill="#a3e635" stroke="#0f172a" stroke-width="3"/><text x="60" y="54" text-anchor="middle" fill="#0f172a" font-size="34">🚌</text><text x="60" y="92" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="14">PARADA</text><text x="60" y="110" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="14">ESCOLAR</text></svg>`,
+      noMotos: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><text x="60" y="70" text-anchor="middle" fill="#0f172a" font-size="32">🏍️</text><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+      noMotorizados: `<svg width="110" height="110" viewBox="0 0 120 120"><rect x="6" y="6" width="108" height="108" rx="12" fill="#ffffff" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="42" fill="none" stroke="#dc2626" stroke-width="9"/><text x="60" y="70" text-anchor="middle" fill="#0f172a" font-size="32">🚗</text><line x1="30" y1="30" x2="90" y2="90" stroke="#dc2626" stroke-width="9"/></svg>`,
+
+      // Señales Preventivas Amarillas
+      prevViaLateral: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M54 32 V88 M54 60 H84" stroke="#0f172a" stroke-width="11"/></svg>`,
+      redondel: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><circle cx="60" cy="60" r="22" fill="none" stroke="#0f172a" stroke-width="6" stroke-dasharray="28 14"/><polygon points="60,32 68,42 52,42" fill="#0f172a"/><polygon points="86,66 76,74 76,58" fill="#0f172a"/><polygon points="34,66 44,58 44,74" fill="#0f172a"/></svg>`,
+      prevDobleVia: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M44 36 V80 M35 68 L44 82 L53 68 M76 82 V38 M67 50 L76 36 L85 50" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round"/></svg>`,
+      curvaAbiertaDer: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M48 84 Q48 48 76 38" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/><polygon points="86,34 70,30 76,47" fill="#0f172a"/></svg>`,
+      curvaContracurvaCerrada: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M44 84 V64 H76 V38" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><polygon points="76,26 66,40 86,40" fill="#0f172a"/></svg>`,
+      curvaContracurvaAbiertaIzq: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M72 84 C72 66, 46 64, 46 46 V36" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/><polygon points="46,25 36,39 56,39" fill="#0f172a"/></svg>`,
+      viaSinuosa: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M60 88 C42 78, 78 66, 60 54 C42 42, 70 36, 60 28" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/><polygon points="60,20 50,33 70,33" fill="#0f172a"/></svg>`,
+      viaSinuosaDer: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M60 88 C78 78, 42 66, 60 54 C78 42, 50 36, 60 28" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/><polygon points="60,20 50,33 70,33" fill="#0f172a"/></svg>`,
+      curvaU: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M46 82 V50 A14 14 0 0 1 74 50 V72" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/><polygon points="74,84 64,68 84,68" fill="#0f172a"/></svg>`,
+      bandasAlerta: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><rect x="34" y="48" width="52" height="5" fill="#0f172a"/><rect x="34" y="58" width="52" height="5" fill="#0f172a"/><rect x="34" y="68" width="52" height="5" fill="#0f172a"/></svg>`,
+      reductorVel: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M28 70 H44 Q60 44 76 70 H92" fill="#0f172a"/></svg>`,
+      angostamiento: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M40 84 V62 L48 52 V34 M80 84 V62 L72 52 V34" fill="none" stroke="#0f172a" stroke-width="7" stroke-linecap="round"/></svg>`,
+      curvaCerradaDer: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M46 84 V52 Q46 44 54 44 H76" fill="none" stroke="#0f172a" stroke-width="9" stroke-linecap="round"/><polygon points="88,44 72,33 72,55" fill="#0f172a"/></svg>`,
+      viaLateralCurva: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M46 84 V54 Q46 42 68 42 H82 M46 60 H74" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round"/></svg>`,
+      interseccionT: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M36 46 H84 M60 46 V86" stroke="#0f172a" stroke-width="11" stroke-linecap="square"/></svg>`,
+      parterreComienza: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M44 34 V56 L60 72 L76 56 V34 M60 72 V86" fill="none" stroke="#0f172a" stroke-width="6"/><polygon points="60,34 52,52 68,52" fill="#0f172a"/></svg>`,
+      parterreTermina: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M44 86 V64 L60 48 L76 64 V86 M60 48 V34" fill="none" stroke="#0f172a" stroke-width="6"/><polygon points="60,86 52,68 68,68" fill="#0f172a"/></svg>`,
+      ganado: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><text x="60" y="72" text-anchor="middle" font-size="38">🐄</text></svg>`,
+      tunel: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M42 78 V56 A18 18 0 0 1 78 56 V78 Z" fill="#0f172a"/></svg>`,
+      ciclistasVia: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><text x="60" y="72" text-anchor="middle" font-size="36">🚴</text></svg>`,
+      depresion: `<svg width="115" height="115" viewBox="0 0 120 120"><polygon points="60,8 112,60 60,112 8,60" fill="#facc15" stroke="#0f172a" stroke-width="3"/><path d="M28 54 H44 Q60 80 76 54 H92 V72 H28 Z" fill="#0f172a"/></svg>`,
+
+      // Señales Informativas y Obras
+      desvioObra: `<svg width="145" height="75" viewBox="0 0 160 80"><rect x="6" y="10" width="148" height="60" rx="8" fill="#f97316" stroke="#0f172a" stroke-width="3"/><text x="72" y="45" text-anchor="middle" fill="#0f172a" font-family="Inter,sans-serif" font-weight="800" font-size="18">DESVÍO</text><path d="M116 40 H138 M128 31 L140 40 L128 49" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round"/></svg>`,
+      informativaDestino: `<svg width="160" height="80" viewBox="0 0 170 85"><rect x="6" y="8" width="158" height="68" rx="8" fill="#15803d" stroke="#ffffff" stroke-width="3"/><text x="85" y="34" text-anchor="middle" fill="#ffffff" font-family="Inter,sans-serif" font-weight="800" font-size="15">GUAYAQUIL</text><path d="M85 66 V44 M76 53 L85 42 L94 53" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/></svg>`,
+
+      // Señales Manuales de Ciclista / Conductor
+      manoIzquierda: `<svg width="130" height="115" viewBox="0 0 130 115"><rect width="130" height="115" rx="12" fill="#f8fafc"/><circle cx="78" cy="30" r="10" fill="#0f172a"/><rect x="70" y="42" width="16" height="32" rx="6" fill="#2563eb"/><path d="M70 48 H28" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><polygon points="18,48 32,40 32,56" fill="#dc2626"/><text x="65" y="102" text-anchor="middle" fill="#475569" font-size="11" font-weight="bold">Brazo izq. horizontal</text></svg>`,
+      manoParar: `<svg width="130" height="115" viewBox="0 0 130 115"><rect width="130" height="115" rx="12" fill="#f8fafc"/><circle cx="78" cy="30" r="10" fill="#0f172a"/><rect x="70" y="42" width="16" height="32" rx="6" fill="#2563eb"/><path d="M70 48 H44 V78" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><polygon points="44,88 36,74 52,74" fill="#dc2626"/><text x="65" y="104" text-anchor="middle" fill="#475569" font-size="11" font-weight="bold">Antebrazo hacia abajo</text></svg>`,
+      manoDerecha: `<svg width="130" height="115" viewBox="0 0 130 115"><rect width="130" height="115" rx="12" fill="#f8fafc"/><circle cx="78" cy="34" r="10" fill="#0f172a"/><rect x="70" y="46" width="16" height="32" rx="6" fill="#2563eb"/><path d="M70 52 H44 V24" fill="none" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/><polygon points="44,14 36,28 52,28" fill="#dc2626"/><text x="65" y="104" text-anchor="middle" fill="#475569" font-size="11" font-weight="bold">Antebrazo hacia arriba</text></svg>`
+    };
+
+    // =========================================================================
+    // BANCO OFICIAL COMPLETO: 139 PREGUNTAS GENERALES + 23 ESPECÍFICAS TIPO A
+    // =========================================================================
+    const QUESTIONS = [
+      // ==================== PREGUNTAS GENERALES (1 - 139) ====================
+      { id: 'G-1', type: 'general', num: 1, text: 'El no acatar lo indicado en una señal de tránsito, ¿es una infracción?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Incumplir las señales de tránsito es una contravención sancionada en el COIP.' },
+      { id: 'G-2', type: 'general', num: 2, visual: 'semaforoGiroPeaton', text: 'En un semáforo con giro a la derecha o izquierda, si el conductor tiene el semáforo en verde, al igual que los peatones, ¿quién tiene la preferencia?', options: ['Los peatones', 'Los vehículos', 'Ambos'], correct: 0, explanation: 'Al girar en una intersección con luz verde, los conductores deben ceder el paso a los peatones que cruzan.' },
+      { id: 'G-3', type: 'general', num: 3, text: 'Cuando un cruce de vía está regulado por un agente de tránsito, ¿las señales manuales de éste prevalecen sobre cualquier otra existente, incluso semáforos?', options: ['A veces', 'Siempre', 'Nunca'], correct: 1, explanation: 'Las órdenes e indicaciones de los agentes de tránsito prevalecen sobre semáforos y señales verticales u horizontales.' },
+      { id: 'G-4', type: 'general', num: 4, visual: 'lineaContinua', text: '¿Una línea continua pintada en la calzada de color blanco o amarillo restringe la circulación vehicular de tal manera que ningún vehículo podrá cruzarla?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'La línea longitudinal continua prohíbe rebasar o cambiar de carril.' },
+      { id: 'G-5', type: 'general', num: 5, visual: 'lineaDiscontinua', text: 'Una línea discontinua de color amarillo o blanco pintada en la calzada, de acuerdo a la imagen, ¿qué indica?', options: ['Permite rebasar o adelantar sobre esta línea, siempre que exista seguridad para hacerlo', 'El conductor no puede realizar maniobras de adelantamiento cuando la línea es discontinua', 'Restringe la circulación vehicular de tal manera que ningún vehículo podrá cruzar esta línea'], correct: 0, explanation: 'La línea segmentada autoriza el adelantamiento siempre que exista visibilidad y seguridad.' },
+      { id: 'G-6', type: 'general', num: 6, visual: 'lineaMixta', text: '¿Cuando se encuentra frente a la combinación de línea continua y discontinua de color amarillo, puede realizar maniobras de adelantamiento desde el carril junto a la línea discontinua?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'En líneas mixtas se permite adelantar únicamente al vehículo que circula por el lado de la línea discontinua.' },
+      { id: 'G-7', type: 'general', num: 7, visual: 'dobleContinua', text: 'Cuando ve pintado de color blanco o amarillo en la calzada doble línea continua, ¿qué indica?', options: ['El conductor puede realizar maniobras de adelantamiento cuando tiene doble línea', 'Le permite al conductor rebasar o adelantar, siempre que exista la seguridad de hacerlo', 'Están totalmente prohibidas las maniobras para rebasar o adelantar por cualquiera de los carriles que se transite'], correct: 2, explanation: 'La doble línea continua prohíbe el adelantamiento en ambos sentidos de circulación.' },
+      { id: 'G-8', type: 'general', num: 8, visual: 'rebasarCiclista', text: '¿En vías con líneas discontinuas se puede rebasar a los ciclistas siempre y cuando exista seguridad para hacerlo?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Con línea discontinua y condiciones seguras se puede rebasar dejando al menos 1,5 m de separación lateral.' },
+      { id: 'G-9', type: 'general', num: 9, visual: 'unaVia', text: '¿Qué significa esta señal?', options: ['Circular por la derecha', 'Una vía a la derecha', 'Prohibido girar a la derecha'], correct: 1, explanation: 'Señal reglamentaria que indica circulación obligatoria en un solo sentido hacia la derecha.' },
+      { id: 'G-10', type: 'general', num: 10, visual: 'max30', text: 'De acuerdo a la imagen, esta señal indica: No exceder de 30 km/h.', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Señal reglamentaria de límite máximo de velocidad de 30 km/h.' },
+      { id: 'G-11', type: 'general', num: 11, visual: 'noCambioCarril', text: '¿Qué significa esta señal?', options: ['No cambiar de carril', 'Mantener su derecha', 'Prohibido rebasar'], correct: 0, explanation: 'Prohíbe el cambio de carril en tramos donde dicha maniobra resulta peligrosa.' },
+      { id: 'G-12', type: 'general', num: 12, visual: 'pare', text: '¿Qué debe hacer cuando usted observa esta señal?', options: ['Pasar la línea de pare y no ceder el paso', 'Detenerse completamente antes de la línea de pare y ceder el paso a todo tránsito', 'Reducir la velocidad y estar preparado para detenerse solamente si hay peligro de colisión'], correct: 1, explanation: 'La señal PARE obliga a detener totalmente la marcha antes de la línea de detención.' },
+      { id: 'G-13', type: 'general', num: 13, visual: 'noGirarIzq', text: '¿Qué significa esta señal?', options: ['No girar en "U"', 'No girar a la izquierda', 'Tener cuidado con el tráfico que gira'], correct: 1, explanation: 'Señal reglamentaria que prohíbe realizar el viraje hacia la izquierda.' },
+      { id: 'G-14', type: 'general', num: 14, visual: 'noU', text: '¿Qué significa esta señal?', options: ['No girar en "U"', 'No virar a la izquierda', 'Tener cuidado con el tráfico que vira'], correct: 0, explanation: 'Prohíbe realizar maniobras de giro en U o retorno.' },
+      { id: 'G-15', type: 'general', num: 15, visual: 'noPesados', text: '¿Qué significa esta señal?', options: ['Prohibido estacionar vehículos pesados', 'Tránsito pesado a la derecha', 'Prohibido el ingreso o circulación de vehículos pesados'], correct: 2, explanation: 'Prohíbe la circulación de vehículos de carga pesada en el tramo señalizado.' },
+      { id: 'G-16', type: 'general', num: 16, visual: 'noPesados', text: 'De acuerdo a la imagen, esta señal significa: Prohibido el ingreso o circulación de vehículos pesados.', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'La señal con el pictograma de camión tachado prohíbe el paso de vehículos pesados.' },
+      { id: 'G-17', type: 'general', num: 17, visual: 'noAdelantar', text: '¿Qué significa esta señal?', options: ['Solo tránsito liviano', 'Prohibido doble columna', 'Prohibido adelantar o rebasar'], correct: 2, explanation: 'Prohíbe adelantar a otros vehículos motorizados en ese sector.' },
+      { id: 'G-18', type: 'general', num: 18, visual: 'noAdelantar', text: 'De acuerdo a la imagen, esta señal significa: Prohibido adelantar o rebasar.', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Corresponde a la señal reglamentaria de Prohibido Adelantar.' },
+      { id: 'G-19', type: 'general', num: 19, visual: 'dobleViaReg', text: '¿Qué significa esta señal?', options: ['Cambio de carril', 'No entre', 'Comienza doble vía, pueden venir vehículos en sentido contrario. Precaución'], correct: 2, explanation: 'Indica el inicio de circulación bidireccional en una calzada.' },
+      { id: 'G-20', type: 'general', num: 20, visual: 'noEstacionarDetener', text: '¿Qué significa esta señal?', options: ['Prohibido estacionarse o detenerse', 'Prohibido estacionarse', 'Permite detenerse por un minuto solamente'], correct: 0, explanation: 'La X roja sobre la E prohíbe tanto estacionar como detenerse momentáneamente.' },
+      { id: 'G-21', type: 'general', num: 21, visual: 'noEntre', text: '¿Qué significa esta señal?', options: ['No entre', 'No estacionar', 'Pare, alto'], correct: 0, explanation: 'Señal reglamentaria de prohibición de ingreso (contravía).' },
+      { id: 'G-22', type: 'general', num: 22, visual: 'noUoIzq', text: '¿Qué significa esta señal?', options: ['No girar en "U" o a la izquierda', 'No girar en "U"', 'No girar a la izquierda'], correct: 0, explanation: 'Prohíbe simultáneamente girar a la izquierda y retornar en U.' },
+      { id: 'G-23', type: 'general', num: 23, visual: 'noCambioCarrilIzq', text: '¿Qué significa esta señal?', options: ['Prohibido cambio de carril a la izquierda', 'Mantener su izquierda', 'Prohibido girar a la izquierda'], correct: 0, explanation: 'Prohíbe desplazarse hacia el carril izquierdo.' },
+      { id: 'G-24', type: 'general', num: 24, visual: 'noEstacionar', text: '¿Cuáles son las consecuencias del incumplimiento de la señal de Prohibido Estacionarse?', options: ['Sanción con multa equivalente al 10% del salario básico unificado', 'Pena privativa de libertad', 'Retiro definitivo de la licencia de conducir'], correct: 0, explanation: 'Estacionar en lugares prohibidos se sanciona con multa del 10% de un SBU.' },
+      { id: 'G-25', type: 'general', num: 25, visual: 'noEstacionarDer', text: '¿Qué significa esta señal?', options: ['Prohibido estacionar a la derecha', 'Prohibido estacionar a la izquierda', 'Prohibido estacionar en ambos lados'], correct: 0, explanation: 'La flecha inferior indica que la prohibición rige hacia el lado derecho de la señal.' },
+      { id: 'G-26', type: 'general', num: 26, visual: 'noEstacionarIzq', text: '¿Qué significa esta señal?', options: ['Prohibido estacionar a la izquierda', 'Prohibido estacionar a la derecha', 'Estacionamiento permitido a la izquierda'], correct: 0, explanation: 'La flecha hacia la izquierda delimita el tramo donde está prohibido estacionarse.' },
+      { id: 'G-27', type: 'general', num: 27, visual: 'noEstacionarAmbos', text: '¿Qué significa esta señal?', options: ['Prohibido estacionar a ambos lados (antes y después de la señal)', 'Estacionamiento permitido a ambos lados', 'Parada de buses'], correct: 0, explanation: 'La flecha bidireccional indica que la restricción aplica antes y después de la señal.' },
+      { id: 'G-28', type: 'general', num: 28, visual: 'estacionamientoPermitido', text: '¿Qué significa esta señal?', options: ['Estacionamiento tarifado', 'Prohibición de estacionar', 'Estacionamiento permitido'], correct: 2, explanation: 'La letra E dentro de un círculo u óvalo verde autoriza el estacionamiento.' },
+      { id: 'G-29', type: 'general', num: 29, visual: 'zonaPagada', text: '¿Qué significa esta señal?', options: ['Estacionamiento tarifado o zona pagada', 'Estacionamiento gratuito', 'Prohibido estacionar'], correct: 0, explanation: 'Indica área de estacionamiento regulado sujeto al pago de tarifa.' },
+      { id: 'G-30', type: 'general', num: 30, text: '¿Quiénes pueden utilizar los espacios de estacionamiento señalizados con el símbolo internacional de accesibilidad (discapacidad)?', options: ['Cualquier conductor por menos de 5 minutos', 'Únicamente vehículos que transporten o sean conducidos por personas con discapacidad debidamente acreditadas', 'Vehículos de carga y descarga'], correct: 1, explanation: 'Son espacios exclusivos para personas con discapacidad debidamente identificadas.' },
+      { id: 'G-31', type: 'general', num: 31, text: '¿Es una contravención estacionar un vehículo en sitios destinados para personas con discapacidad o mujeres embarazadas sin tener la acreditación correspondiente?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Ocupar indebidamente espacios preferenciales constituye una contravención de tránsito.' },
+      { id: 'G-32', type: 'general', num: 32, visual: 'paradaBus', text: '¿Qué significa esta señal?', options: ['Parada de buses', 'Prohibido transporte público', 'Terminal terrestre'], correct: 0, explanation: 'Señal reglamentaria que delimita el sitio exclusivo de parada del transporte público.' },
+      { id: 'G-33', type: 'general', num: 33, visual: 'largoMax10', text: '¿Qué significa esta señal?', options: ['Velocidad mínima 10 km/h', 'Largo máximo permitido de vehículo 10 metros', 'Distancia de seguimiento 10 metros'], correct: 1, explanation: 'Restringe el paso a vehículos cuya longitud total supere los 10 metros.' },
+      { id: 'G-34', type: 'general', num: 34, visual: 'carrilBiciPeaton', text: '¿Qué significa esta señal?', options: ['Vía compartida o carril exclusivo para ciclistas y peatones', 'Prohibido ciclistas y peatones', 'Parque infantil'], correct: 0, explanation: 'Indica vía o carril destinado al tránsito de ciclistas y peatones.' },
+      { id: 'G-35', type: 'general', num: 35, visual: 'terminaCarrilBici', text: '¿Qué significa esta señal?', options: ['Inicia ciclovía', 'Termina ciclovía o carril exclusivo para ciclistas', 'Prohibido bicicletas'], correct: 1, explanation: 'La leyenda TERMINA advierte la finalización de la ciclovía.' },
+      { id: 'G-36', type: 'general', num: 36, visual: 'ceda', text: '¿Qué debe hacer al observar la siguiente señal regulatoria?', options: ['Ceder el paso solo a los peatones', 'Ceder el paso a los conductores, peatones y ciclistas', 'Ceder el paso solo a los conductores'], correct: 1, explanation: 'Obliga a disminuir la velocidad o detenerse para dar prioridad a todos los usuarios de la vía transversal.' },
+      { id: 'G-37', type: 'general', num: 37, visual: 'prevViaLateral', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante cruce de vía lateral', 'Cierre de vía a la derecha', 'Prohibido girar a la derecha'], correct: 0, explanation: 'Advierte la aproximación de una empalme o vía lateral en el tramo siguiente.' },
+      { id: 'G-38', type: 'general', num: 38, visual: 'redondel', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante vire en U', 'Aproximación a redondel', 'Más adelante zona de derrumbes'], correct: 1, explanation: 'Advierte la cercanía de una glorieta o redondel.' },
+      { id: 'G-39', type: 'general', num: 39, visual: 'prevDobleVia', text: '¿Qué significa esta señal preventiva?', options: ['Aproximación a circulación en doble vía', 'Vía unidireccional', 'Adelantamiento permitido'], correct: 0, explanation: 'Advierte que más adelante el tránsito pasará a circular en ambos sentidos.' },
+      { id: 'G-40', type: 'general', num: 40, visual: 'curvaAbiertaDer', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva abierta a la derecha', 'Más adelante curva cerrada a la derecha', 'Vire a la derecha'], correct: 0, explanation: 'Advierte la proximidad de una curva suave o abierta hacia la derecha.' },
+      { id: 'G-41', type: 'general', num: 41, visual: 'curvaContracurvaCerrada', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva y contracurva cerradas a la derecha', 'Vía sinuosa', 'Desvío obligatorio'], correct: 0, explanation: 'Advierte dos curvas consecutivas en sentido opuesto de radio cerrado.' },
+      { id: 'G-42', type: 'general', num: 42, visual: 'curvaContracurvaAbiertaIzq', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva y contracurva abiertas a la izquierda', 'Más adelante curva cerrada', 'Camino resbaladizo'], correct: 0, explanation: 'Advierte la presencia de curva y contracurva abiertas iniciando hacia la izquierda.' },
+      { id: 'G-43', type: 'general', num: 43, visual: 'viaSinuosa', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva y contra curva cerradas a la izquierda', 'Más adelante curva pronunciada a la izquierda', 'Más adelante vía sinuosa a la izquierda'], correct: 2, explanation: 'Advierte una sucesión de tres o más curvas continuas.' },
+      { id: 'G-44', type: 'general', num: 44, visual: 'curvaU', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva en "U" a la derecha', 'Permitido girar en U', 'Aproximación a redondel'], correct: 0, explanation: 'Advierte una curva muy cerrada con cambio de dirección de casi 180 grados.' },
+      { id: 'G-45', type: 'general', num: 45, visual: 'bandasAlerta', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante bandas transversales de alerta o sonorizadoras', 'Paso cebra', 'Puente levadizo'], correct: 0, explanation: 'Advierte franjas rugosas en el pavimento diseñadas para alertar al conductor y reducir la velocidad.' },
+      { id: 'G-46', type: 'general', num: 46, visual: 'reductorVel', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante reductor de velocidad (resalto)', 'Depresión en la vía', 'Puente angosto'], correct: 0, explanation: 'Advierte la presencia de un resalto o lomo de burro para moderar la velocidad.' },
+      { id: 'G-47', type: 'general', num: 47, visual: 'angostamiento', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante angostamiento de vía a ambos lados', 'Ensanchamiento de calzada', 'Doble vía'], correct: 0, explanation: 'Advierte que el ancho de la calzada se reduce simétricamente más adelante.' },
+      { id: 'G-48', type: 'general', num: 48, visual: 'curvaCerradaDer', text: '¿Cómo debe actuar un conductor frente a la señal de curva cerrada?', options: ['Acelerar', 'Disminuir la velocidad antes de ingresar a la curva', 'Mantener la misma velocidad en la que se encuentra circulando'], correct: 1, explanation: 'Se debe frenar antes de entrar en la curva para mantener estabilidad y adherencia.' },
+      { id: 'G-49', type: 'general', num: 49, visual: 'curvaCerradaDer', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante curva cerrada a la derecha', 'Vire a la derecha', 'Una vía'], correct: 0, explanation: 'Advierte una curva pronunciada hacia la derecha que exige reducción significativa de velocidad.' },
+      { id: 'G-50', type: 'general', num: 50, visual: 'viaLateralCurva', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante empalme o vía lateral en curva', 'Intersección en T', 'Cierre de vía'], correct: 0, explanation: 'Advierte la incorporación de una vía secundaria justo en el desarrollo de una curva.' },
+      { id: 'G-51', type: 'general', num: 51, visual: 'desvioObra', text: '¿Qué indica esta señal de color naranja?', options: ['Desvío provisional por trabajos o construcciones en la vía', 'Ruta turística', 'Estacionamiento cercano'], correct: 0, explanation: 'Las señales color naranja son transitorias de obra y advierten desvíos o trabajos en la calzada.' },
+      { id: 'G-52', type: 'general', num: 52, visual: 'informativaDestino', text: '¿A qué grupo pertenecen las señales de tránsito de fondo verde con letras y flechas blancas?', options: ['Señales informativas de orientación o destino', 'Señales reglamentarias', 'Señales preventivas'], correct: 0, explanation: 'Las señales verdes orientan al conductor sobre destinos, direcciones y distancias.' },
+      { id: 'G-53', type: 'general', num: 53, visual: 'zonaEscolar', text: '¿Qué indica esta señal de color verde limón fluorescente?', options: ['Proximidad a zona escolar / cruce de niños', 'Parque de diversiones', 'Prohibido peatones'], correct: 0, explanation: 'El color amarillo-verde fluorescente identifica zonas escolares y de alta vulnerabilidad peatonal.' },
+      { id: 'G-54', type: 'general', num: 54, visual: 'zonaEscolar20', text: '¿Qué le indica la siguiente señal?', options: ['Reducir la velocidad y conducir con precaución', 'La velocidad máxima de circulación en una zona escolar', 'Ambas'], correct: 2, explanation: 'Advierte zona escolar con precaución y fija el límite máximo en 20 km/h.' },
+      { id: 'G-55', type: 'general', num: 55, visual: 'paradaEscolar', text: '¿Qué significa esta señal?', options: ['Parada de transporte escolar', 'Estación de bomberos', 'Terminal de carga'], correct: 0, explanation: 'Señala el espacio reservado para el embarque y desembarque de estudiantes.' },
+      { id: 'G-56', type: 'general', num: 56, text: 'La luz amarilla intermitente en un semáforo significa:', options: ['Parar siempre y cuando lo pueda hacer con seguridad', 'Disminuir la velocidad y atravesar la intersección con mucha precaución', 'Parar, ceder el paso a todo el tráfico que cruza antes de atravesar la intersección'], correct: 1, explanation: 'Luz amarilla intermitente indica precaución: reduzca la velocidad y cruce atento.' },
+      { id: 'G-57', type: 'general', num: 57, text: 'Cuando la luz amarilla del semáforo se enciende de forma fija (después del verde), ¿qué debe hacer el conductor?', options: ['Acelerar para cruzar antes de que cambie a rojo', 'Detenerse antes de la línea de pare si puede hacerlo con seguridad', 'Tocar la bocina y cruzar'], correct: 1, explanation: 'La luz amarilla fija anuncia el cambio inminente a rojo y exige detenerse antes de la línea de parada.' },
+      { id: 'G-58', type: 'general', num: 58, text: '¿En cuál de las siguientes luces de semáforo debería siempre detener su vehículo?', options: ['Luces rojas y luces rojas intermitentes', 'Luces rojas continuas, flechas rojas y luces amarillas intermitentes', 'Luces rojas continuas, luces rojas intermitentes y luces amarillas'], correct: 0, explanation: 'Tanto la luz roja continua como la roja intermitente ordenan detención obligatoria.' },
+      { id: 'G-59', type: 'general', num: 59, visual: 'noMotos', text: '¿Qué significa esta señal?', options: ['Prohibido el ingreso o circulación de motocicletas', 'Estacionamiento exclusivo de motos', 'Vía exclusiva de motocicletas'], correct: 0, explanation: 'Prohíbe la circulación de motocicletas y similares en ese tramo o vía.' },
+      { id: 'G-60', type: 'general', num: 60, visual: 'noMotorizados', text: '¿Qué significa esta señal?', options: ['Prohibida la circulación de vehículos motorizados', 'Vía exclusiva de automóviles', 'Concesionario cercano'], correct: 0, explanation: 'Restringe el paso a todo tipo de vehículo motorizado.' },
+      { id: 'G-61', type: 'general', num: 61, visual: 'interseccionT', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante redondel', 'Más adelante intersección en "T"', 'Más adelante cruce de tren'], correct: 1, explanation: 'Advierte que la vía termina en una intersección perpendicular en forma de T.' },
+      { id: 'G-62', type: 'general', num: 62, visual: 'parterreComienza', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante comienza parterre o isla divisoria', 'Más adelante termina parterre', 'Puente angosto'], correct: 0, explanation: 'Advierte el inicio de un separador central (parterre) que divide los flujos vehiculares.' },
+      { id: 'G-63', type: 'general', num: 63, visual: 'parterreTermina', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante termina parterre o isla divisoria', 'Más adelante comienza parterre', 'Cruce de ferrocarril'], correct: 0, explanation: 'Advierte que finaliza la isla o parterre divisor central.' },
+      { id: 'G-64', type: 'general', num: 64, visual: 'ganado', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante cruce o presencia de ganado en la vía', 'Zona de zoológico', 'Prohibido transporte de animales'], correct: 0, explanation: 'Advierte la posible presencia de animales domésticos o ganado cruzando la calzada.' },
+      { id: 'G-65', type: 'general', num: 65, visual: 'tunel', text: '¿Qué significa esta señal preventiva?', options: ['Aproximación a túnel', 'Puente colgante', 'Estación de metro'], correct: 0, explanation: 'Advierte la cercanía de un túnel (recuerde encender las luces bajas antes de ingresar).' },
+      { id: 'G-66', type: 'general', num: 66, visual: 'viaSinuosaDer', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante vía sinuosa a la derecha', 'Curva en U', 'Camino cerrado'], correct: 0, explanation: 'Advierte sucesión de curvas continuas iniciando hacia la derecha.' },
+      { id: 'G-67', type: 'general', num: 67, visual: 'ciclistasVia', text: '¿Qué significa esta señal preventiva?', options: ['Presencia o cruce de ciclistas en la vía', 'Prohibido ciclistas', 'Taller de bicicletas'], correct: 0, explanation: 'Advierte la circulación frecuente de ciclistas; reduzca velocidad y guarde 1,5 m al rebasar.' },
+      { id: 'G-68', type: 'general', num: 68, visual: 'depresion', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante depresión o badén en la vía', 'Reductor de velocidad', 'Puente angosto'], correct: 0, explanation: 'Advierte un hundimiento o badén pronunciado en la superficie de la calzada.' },
+      { id: 'G-69', type: 'general', num: 69, visual: 'angostamiento', text: '¿Qué significa esta señal preventiva?', options: ['Más adelante puente angosto o estrechamiento', 'Autopista de 4 carriles', 'Retorno permitido'], correct: 0, explanation: 'Advierte reducción del ancho de la vía o puente estrecho.' },
+      { id: 'G-70', type: 'general', num: 70, visual: 'max50', text: '¿Qué significa esta señal reglamentaria?', options: ['Velocidad máxima permitida 50 km/h', 'Velocidad mínima 50 km/h', 'Distancia al próximo poblado 50 km'], correct: 0, explanation: 'Establece en 50 km/h el límite máximo de velocidad permitido.' },
+      { id: 'G-71', type: 'general', num: 71, text: 'La luz roja intermitente en un semáforo significa:', options: ['Parar siempre sin avanzar', 'Disminuir la velocidad y atravesar la intersección con mucha precaución', 'Parar, ceder el paso a todo el tráfico que cruza antes de atravesar la intersección'], correct: 2, explanation: 'Tiene el mismo valor reglamentario que una señal PARE.' },
+      { id: 'G-72', type: 'general', num: 72, text: 'La luz roja intermitente en una señal de PARE en el extremo lateral izquierdo de un transporte escolar, ¿qué significa?', options: ['Prohibido adelantar o rebasar al transporte escolar, hasta que se apague la luz intermitente y se guarde la señal de PARE', 'Disminuir la velocidad y adelantar con precaución al transporte escolar', 'Que se encendieron las luces de estacionamiento del transporte escolar'], correct: 0, explanation: 'Prohíbe el adelantamiento mientras los estudiantes suben o bajan del vehículo escolar.' },
+      { id: 'G-73', type: 'general', num: 73, text: 'La licencia digital es válida para circular en el Ecuador:', options: ['Sí', 'Solo si está impresa', 'Ninguna de las anteriores'], correct: 0, explanation: 'La licencia digital oficial emitida por la ANT/Gob.ec tiene plena validez legal.' },
+      { id: 'G-74', type: 'general', num: 74, text: '¿Es válido portar una copia simple de la licencia o matrícula para circular en el Ecuador?', options: ['No, nunca', 'Solo si está impresa', 'Ninguna de las anteriores'], correct: 0, explanation: 'Las fotocopias simples carecen de validez para acreditar habilitación de conducción.' },
+      { id: 'G-75', type: 'general', num: 75, text: '¿Cuántos puntos iniciales otorga la licencia de conducir al ser emitida por primera vez?', options: ['20 puntos', '30 puntos', '50 puntos'], correct: 1, explanation: 'Todas las licencias de conducir en Ecuador se otorgan con 30 puntos iniciales.' },
+      { id: 'G-76', type: 'general', num: 76, text: 'El no cancelar el valor de multas no le permitirá: renovar la licencia, realizar la revisión técnica vehicular y matricular su vehículo.', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Las multas pendientes bloquean los trámites de matriculación, RTV y renovación.' },
+      { id: 'G-77', type: 'general', num: 77, text: '¿El conductor que no haya sido sancionado durante el tiempo de vigencia de la licencia de conducir y mantenga los 30 puntos, se beneficiará del 50% de descuento en el pago del valor de la especie de la licencia?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'La normativa premia el buen historial sin sanciones con un incentivo en el valor de renovación.' },
+      { id: 'G-78', type: 'general', num: 78, text: 'Si conduce su vehículo con un nivel de alcohol por litro de sangre de 0,3 a 0,8 gramos, ¿qué sanción será aplicada?', options: ['Treinta días de privación de libertad y retención del vehículo por veinticuatro horas', 'Cinco días de privación de libertad, multa de 1 SBU, pérdida de 5 puntos y retención del vehículo por 24 horas', 'Ninguna de las anteriores'], correct: 1, explanation: 'Según el Art. 385 del COIP: 5 días de prisión, multa de 1 SBU, -5 puntos y retención vehicular por 24h.' },
+      { id: 'G-79', type: 'general', num: 79, text: 'El conductor que falte de obra a la autoridad o agente de tránsito, ¿será sancionado con pena privativa de libertad de tres días?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Faltar de obra a un agente de tránsito conlleva 3 días de pena privativa de libertad (Art. 386 COIP).' },
+      { id: 'G-80', type: 'general', num: 80, text: 'Si se queda sin combustible y por esa razón obstaculiza el tránsito vehicular, ¿está cometiendo una contravención?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Quedarse sin combustible obstruyendo la vía pública es contravención de tránsito.' },
+      { id: 'G-81', type: 'general', num: 81, text: '¿Es una contravención de tránsito, la o el conductor que conduzca con licencia caducada?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Conducir con la licencia caducada constituye una contravención de tránsito.' },
+      { id: 'G-82', type: 'general', num: 82, text: '¿Es una contravención de tránsito utilizar el teléfono celular mientras conduce sin dispositivo de manos libres?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Manipular el teléfono celular al conducir es una contravención sancionada con multa.' },
+      { id: 'G-83', type: 'general', num: 83, text: 'La o el conductor que invada con su vehículo circulando o estacionándose, en las vías asignadas para uso exclusivo de los ciclistas, ¿corresponde a una contravención de tránsito?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Invadir ciclovías circulando o estacionando es una contravención sancionada por la ley.' },
+      { id: 'G-84', type: 'general', num: 84, text: 'Los conductores que conduzcan en estado de embriaguez o bajo los efectos de sustancias estupefacientes y provoquen un siniestro del cual resulte la muerte, ¿qué sanción corresponde?', options: ['Pena privativa de la libertad de diez a doce años y revocatoria definitiva de la licencia para conducir', 'Solo multa económica', 'Ninguna de las anteriores'], correct: 0, explanation: 'Art. 376 COIP: 10 a 12 años de prisión y revocatoria definitiva de la licencia.' },
+      { id: 'G-85', type: 'general', num: 85, text: 'El conducir un vehículo cuyas llantas se encuentren lisas o en mal estado, ¿será sancionado con pena privativa de libertad de cinco a quince días?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Conducir con llantas lisas o en mal estado conlleva prisión de 5 a 15 días y retención del vehículo.' },
+      { id: 'G-86', type: 'general', num: 86, text: 'El conducir un vehículo con las luces no encendidas en horas de la noche o en sitios oscuros como túneles con las luces apagadas, ¿corresponde a una contravención de tránsito?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Circular sin luces encendidas de noche o dentro de túneles constituye contravención.' },
+      { id: 'G-87', type: 'general', num: 87, text: 'El conductor que derrame en la vía pública sustancias o materiales deslizantes, inflamables o contaminantes, ¿comete una contravención de tránsito?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Derramar sustancias peligrosas o deslizantes en la vía pública es contravención.' },
+      { id: 'G-88', type: 'general', num: 88, text: 'El conductor que transporte carga sin colocar en los extremos sobresalientes de la misma, banderines rojos en el día o luces en la noche, ¿comete una contravención?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'Toda carga sobresaliente debe señalizarse obligatoriamente de día y de noche.' },
+      { id: 'G-89', type: 'general', num: 89, text: 'El conductor que use inadecuada y reiteradamente la bocina u otros dispositivos sonoros, ¿comete una contravención de tránsito?', options: ['VERDADERO', 'FALSO', 'DESCONOCE'], correct: 0, explanation: 'El uso abusivo de la bocina es contravención (especialmente en zonas hospitalarias o escolares).' },
+      { id: 'G-90', type: 'general', num: 90, visual: 'bordeBlanco', text: '¿Qué indican las líneas continuas de color blanco pintadas en los bordes laterales de la calzada?', options: ['Delimitan el ancho de la calzada y separan el carril de circulación de la berma u espaldón', 'Indican zona de estacionamiento libre', 'Prohíben el paso de peatones'], correct: 0, explanation: 'Las líneas de borde delimitan el área destinada a la circulación vehicular.' },
+      { id: 'G-91', type: 'general', num: 91, visual: 'bordeAmarillo', text: '¿Qué indica una línea continua de color amarillo pintada junto al bordillo o acera?', options: ['Prohibición de estacionar en ese tramo', 'Estacionamiento permitido', 'Parada exclusiva de taxis'], correct: 0, explanation: 'El bordillo o línea lateral amarilla prohíbe estacionar vehículos.' },
+      { id: 'G-92', type: 'general', num: 92, visual: 'cruceCiclovia', text: '¿Qué indican estas líneas blancas segmentadas transversales en la calzada?', options: ['Cruce de ciclovía; los conductores deben ceder el paso a los ciclistas', 'Línea de parada de buses', 'Zona de carga'], correct: 0, explanation: 'Señalizan la intersección de una ciclovía donde los ciclistas tienen prioridad.' },
+      { id: 'G-93', type: 'general', num: 93, visual: 'flechasCarril', text: '¿Qué indican las flechas blancas pintadas sobre el pavimento dentro de cada carril?', options: ['La dirección o direcciones obligatorias de circulación permitidas desde ese carril', 'Velocidad recomendada', 'Solo transporte pesado'], correct: 0, explanation: 'Las flechas direccionales en el pavimento indican los movimientos obligatorios permitidos en cada carril.' },
+      { id: 'G-94', type: 'general', num: 94, visual: 'pasoCebra', text: '¿Qué indica esta demarcación horizontal en la calzada?', options: ['Paso cebra o cruce peatonal; el peatón tiene prioridad de paso', 'Zona de estacionamiento', 'Reductor de velocidad'], correct: 0, explanation: 'Las franjas blancas paralelas delimitan el cruce peatonal.' },
+      { id: 'G-95', type: 'general', num: 95, visual: 'vel40Suelo', text: '¿Qué indica este número pintado sobre el pavimento del carril?', options: ['Velocidad máxima permitida de 40 km/h en ese tramo', 'Número de ruta nacional', 'Distancia a la intersección'], correct: 0, explanation: 'Señal horizontal que refuerza el límite máximo de velocidad de 40 km/h.' },
+      { id: 'G-96', type: 'general', num: 96, visual: 'prohibidoEstSuelo', text: '¿Qué indica una cuadrícula o rectángulo amarillo con líneas diagonales cruzadas pintado en la calzada?', options: ['Prohibido estacionar o detenerse sobre esa área (área de no bloqueo)', 'Estacionamiento reservado', 'Zona de descarga'], correct: 0, explanation: 'Prohíbe estacionar o detener el vehículo bloqueando esa zona.' },
+      { id: 'G-97', type: 'general', num: 97, visual: 'prohibidoEstSuelo', text: 'Si el tránsito se detiene más adelante, ¿puede usted ingresar y quedar detenido encima de una cuadrícula amarilla marcada en una intersección?', options: ['No, nunca debe bloquear la intersección', 'Sí, si el semáforo estaba en verde', 'Solo por menos de 30 segundos'], correct: 0, explanation: 'Está prohibido ingresar a una intersección si no hay espacio libre al otro lado para cruzarla completamente.' },
+      { id: 'G-98', type: 'general', num: 98, visual: 'cruceSinSenalG98', text: 'Si los vehículos A y B llegan simultáneamente a una intersección sin señalización, ¿cuál tiene preferencia de paso?', options: ['El vehículo A (porque se aproxima por la derecha del vehículo B)', 'El vehículo B', 'El que circule más rápido'], correct: 0, explanation: 'En cruces sin señalizar, tiene prioridad el vehículo que aparece por la derecha.' },
+      { id: 'G-99', type: 'general', num: 99, visual: 'cruceCruz', text: 'Los vehículos A y B llegan al mismo tiempo a una intersección en cruz no señalizada por diferentes lados, ¿cuál tiene derecho de vía?', options: ['Cualquiera de los dos', 'El vehículo que se aproxima a la izquierda (B)', 'El vehículo que se aproxima a la derecha (A)'], correct: 2, explanation: 'Siempre tiene derecho de paso el vehículo que se aproxima por la derecha.' },
+      { id: 'G-100', type: 'general', num: 100, visual: 'manoIzquierda', text: '¿Qué indica un ciclista o conductor al extender su brazo izquierdo horizontalmente hacia afuera?', options: ['Que va a girar o cambiar de carril hacia la izquierda', 'Que va a detenerse', 'Que va a girar a la derecha'], correct: 0, explanation: 'El brazo izquierdo extendido horizontalmente indica viraje a la izquierda.' },
+      { id: 'G-101', type: 'general', num: 101, visual: 'manoParar', text: '¿Qué indica un ciclista o conductor al doblar su brazo izquierdo en ángulo hacia abajo con la palma hacia atrás?', options: ['Que va a disminuir la velocidad o detenerse', 'Que va a girar a la derecha', 'Que cede el paso para ser rebasado'], correct: 0, explanation: 'El brazo izquierdo doblado hacia abajo indica frenado o detención.' },
+      { id: 'G-102', type: 'general', num: 102, visual: 'manoDerecha', text: '¿Qué indica un ciclista o conductor al doblar su brazo izquierdo en ángulo recto hacia arriba?', options: ['Que va a girar o cambiar de carril hacia la derecha', 'Que va a girar a la izquierda', 'Que tiene una emergencia mecánica'], correct: 0, explanation: 'El brazo izquierdo doblado hacia arriba señala viraje hacia la derecha.' },
+      { id: 'G-103', type: 'general', num: 103, visual: 'berma', text: '¿Para qué está destinada la berma o espaldón lateral de una carretera?', options: ['Para circulación normal de motocicletas', 'Para detención momentánea en caso de emergencia mecánica o seguridad, nunca como carril de rebase', 'Para estacionamiento permanente'], correct: 1, explanation: 'La berma es una franja de seguridad para emergencias, no un carril de circulación o adelantamiento.' },
+      { id: 'G-104', type: 'general', num: 104, text: 'En un redondel, ¿qué vehículo tiene la prioridad de paso?', options: ['El vehículo que intenta ingresar al redondel', 'El vehículo que ya se encuentra circulando dentro del redondel', 'El vehículo de mayor tamaño'], correct: 1, explanation: 'Quien circula dentro de la glorieta o redondel tiene preferencia sobre quienes van a ingresar.' },
+      { id: 'G-105', type: 'general', num: 105, text: 'Al aproximarse a un vehículo de emergencia (ambulancia, bomberos, policía) con sirenas y balizas encendidas, ¿qué debe hacer?', options: ['Acelerar delante de él', 'Orillarse hacia la derecha, reducir la velocidad y detenerse si es necesario para cederle el paso', 'Seguirlo de cerca aprovechando el paso libre'], correct: 1, explanation: 'Todos los conductores deben ceder el paso inmediato a los vehículos de emergencia en servicio.' },
+      { id: 'G-106', type: 'general', num: 106, text: 'De acuerdo a la normativa, ¿dónde tienen derecho a circular los ciclistas?', options: ['Únicamente en las sendas especiales destinadas al uso de bicicletas', 'En las aceras, con cuidado respectivo a los peatones', 'Transitar por todas las vías del país con respeto y seguridad'], correct: 2, explanation: 'Los ciclistas tienen derecho a transitar por todas las vías del país (salvo prohibición expresa).' },
+      { id: 'G-107', type: 'general', num: 107, text: '¿Está permitido que un ciclista se sujete de otro vehículo en movimiento para impulsarse?', options: ['No, está totalmente prohibido por seguridad', 'Sí, en subidas pronunciadas', 'Solo si el conductor del otro vehículo lo autoriza'], correct: 0, explanation: 'Sujetarse a otro vehículo en marcha es una maniobra extremadamente peligrosa y prohibida.' },
+      { id: 'G-108', type: 'general', num: 108, text: '¿Cuál es la distancia mínima lateral que debe mantener un vehículo al rebasar a un ciclista en la vía?', options: ['0,5 metros', '1,5 metros', '3 metros'], correct: 1, explanation: 'Se debe dejar un margen lateral mínimo de 1,5 metros al adelantar a un ciclista.' },
+      { id: 'G-109', type: 'general', num: 109, text: '¿Cuál es la distancia mínima de seguimiento que debe mantener un vehículo detrás de un ciclista?', options: ['1 metro', '2 metros', '3 metros'], correct: 2, explanation: 'Al circular detrás de un ciclista se debe mantener al menos 3 metros de distancia.' },
+      { id: 'G-110', type: 'general', num: 110, text: 'En horas de la noche, ¿qué accesorios obligatorios debe tener una bicicleta para circular con seguridad?', options: ['Luz blanca delantera, luz roja posterior y elementos retroreflectivos', 'Solo timbre', 'Únicamente casco'], correct: 0, explanation: 'Las bicicletas deben llevar luz blanca adelante, luz roja atrás y reflectivos visibles.' },
+      { id: 'G-111', type: 'general', num: 111, text: '¿Qué debe hacer un conductor antes de abrir la puerta de su vehículo estacionado junto a la vía?', options: ['Abrirla rápidamente para bajar pronto', 'Verificar por los espejos y mirando hacia atrás que no se aproximen ciclistas, motociclistas o vehículos', 'Encender las luces altas'], correct: 1, explanation: 'Abrir la puerta sin precaución es una de las principales causas de siniestros contra ciclistas y motos.' },
+      { id: 'G-112', type: 'general', num: 112, text: 'Al subir o bajar una pendiente pronunciada, ¿qué vehículo tiene preferencia de paso en vías estrechas donde no pueden cruzarse dos vehículos?', options: ['El vehículo que sube', 'El vehículo que baja', 'El vehículo más liviano'], correct: 0, explanation: 'En vías estrechas con pendiente, tiene preferencia el vehículo que asciende.' },
+      { id: 'G-113', type: 'general', num: 113, text: '¿En qué lugares está estrictamente prohibido adelantar o rebasar a otro vehículo?', options: ['En curvas, puentes, túneles, pasos peatonales, intersecciones y cimas de cuestas sin visibilidad', 'En rectas con línea discontinua', 'En autopistas de varios carriles'], correct: 0, explanation: 'Está prohibido adelantar donde exista falta de visibilidad o zonas de riesgo como curvas, puentes y pasos cebra.' },
+      { id: 'G-114', type: 'general', num: 114, text: '¿A qué distancia mínima de una esquina o intersección está prohibido estacionar un vehículo?', options: ['A menos de 6 metros', 'A menos de 1 metro', 'A menos de 20 metros'], correct: 0, explanation: 'No se debe estacionar a menos de 6 metros de una esquina para no obstruir la visibilidad ni el giro.' },
+      { id: 'G-115', type: 'general', num: 115, text: '¿Está permitido estacionar un vehículo frente a hidrantes (tomas de agua contra incendios) o salidas de emergencia?', options: ['No, está prohibido en todo momento', 'Sí, si permanece el conductor dentro', 'Solo en horario nocturno'], correct: 0, explanation: 'Obstruir hidrantes o accesos de emergencia está terminantemente prohibido.' },
+      { id: 'G-116', type: 'general', num: 116, text: '¿Cuándo se deben encender las luces bajas del vehículo durante la conducción?', options: ['Entre las 18h00 y las 06h00 del día siguiente, y durante el día cuando exista neblina, lluvia o dentro de túneles', 'Únicamente cuando no haya alumbrado público', 'Solo en carreteras interprovinciales'], correct: 0, explanation: 'El uso de luces bajas es obligatorio de 18h00 a 06h00 y en condiciones de baja visibilidad o túneles.' },
+      { id: 'G-117', type: 'general', num: 117, text: 'Cuando circula de noche en carretera y se aproxima otro vehículo en sentido contrario, ¿qué debe hacer con las luces?', options: ['Mantener las luces altas para ver mejor', 'Cambiar de luces altas a luces bajas para no deslumbrar al otro conductor', 'Apagar todas las luces'], correct: 1, explanation: 'Debe realizar el cambio a luces bajas con anticipación para evitar el encandilamiento.' },
+      { id: 'G-118', type: 'general', num: 118, text: '¿Qué es el efecto "acuaplaneo" (aquaplaning) al conducir sobre pavimento mojado?', options: ['Cuando los neumáticos pierden contacto con el asfalto por una película de agua, perdiendo dirección y frenado', 'El enfriamiento rápido del motor por la lluvia', 'El empañamiento del parabrisas'], correct: 0, explanation: 'Ocurre cuando el dibujo de la llanta no logra evacuar el agua a alta velocidad y el vehículo patina.' },
+      { id: 'G-119', type: 'general', num: 119, text: '¿Cuál es la profundidad mínima reglamentaria del labrado (banda de rodadura) de los neumáticos para circular con seguridad?', options: ['1,6 milímetros', '0,5 milímetros', '5 milímetros'], correct: 0, explanation: 'Una profundidad inferior a 1,6 mm se considera llanta lisa y constituye contravención grave.' },
+      { id: 'G-120', type: 'general', num: 120, text: '¿Qué debe hacer si su vehículo sufre un desperfecto mecánico en carretera y debe detenerse?', options: ['Dejar el vehículo en el carril sin señalizar', 'Orillarlo fuera de la calzada, encender luces de parqueo y colocar los triángulos de seguridad', 'Permanecer dentro del vehículo en medio de la vía'], correct: 1, explanation: 'Debe apartar el vehículo, activar luces de emergencia y colocar los triángulos reflectivos reglamentarios.' },
+      { id: 'G-121', type: 'general', num: 121, text: '¿Cuándo debo llevar el kit de emergencia o carretero en mi vehículo?', options: ['Solo triángulos', 'Siempre', 'Solo en caso de emergencia'], correct: 1, explanation: 'El equipo de emergencia (triángulos, botiquín, extintor, herramientas básicas) debe portarse siempre.' },
+      { id: 'G-122', type: 'general', num: 122, text: '¿Cuál es el orden correcto de prioridad en la pirámide de la movilidad sostenible?', options: ['1. Peatones, 2. Ciclistas, 3. Transporte público, 4. Transporte de carga, 5. Vehículos particulares', '1. Vehículos particulares, 2. Transporte público, 3. Peatones', 'Todos tienen exactamente el mismo nivel'], correct: 0, explanation: 'La ley prioriza a los usuarios más vulnerables: peatones y ciclistas en primer lugar.' },
+      { id: 'G-123', type: 'general', num: 123, text: '¿Qué significa conducir a la defensiva?', options: ['Conducir agresivamente para ganar espacio', 'Anticiparse a los errores de otros usuarios y a las condiciones adversas de la vía para evitar siniestros', 'Circular siempre a la velocidad mínima'], correct: 1, explanation: 'La conducción defensiva consiste en prever riesgos y mantener márgenes seguros de reacción.' },
+      { id: 'G-124', type: 'general', num: 124, text: '¿A qué distancia mínima antes de una maniobra es obligatorio poner la respectiva luz intermitente?', options: ['Cuando ejecuto la maniobra', 'Mínimo 30 metros antes', 'Mínimo 10 metros antes'], correct: 1, explanation: 'Las luces direccionales deben activarse al menos 30 metros antes de girar o cambiar de carril.' },
+      { id: 'G-125', type: 'general', num: 125, text: 'En un paso cebra no regulado por semáforo ni agente, ¿quién tiene la preferencia de paso?', options: ['Los vehículos en circulación', 'Los peatones', 'El transporte público'], correct: 1, explanation: 'Los peatones tienen derecho de paso preferente en todo paso cebra no regulado.' },
+      { id: 'G-126', type: 'general', num: 126, text: '¿Qué debe hacer un conductor cuando observa a un peatón con bastón blanco o perro guía cruzando la calzada?', options: ['Tocar la bocina para advertirle', 'Detener completamente el vehículo y cederle el paso con total precaución', 'Pasar rápidamente por detrás'], correct: 1, explanation: 'Las personas con discapacidad visual tienen prioridad absoluta y protección especial en la vía.' },
+      { id: 'G-127', type: 'general', num: 127, text: '¿Qué efecto produce el consumo de alcohol en la conducción?', options: ['Mejora los reflejos nocturnos', 'Reduce el campo visual, aumenta el tiempo de reacción y altera la percepción de distancias y velocidades', 'No afecta si se bebe en poca cantidad'], correct: 1, explanation: 'Incluso pequeñas dosis de alcohol deterioran la coordinación, atención y tiempo de frenado.' },
+      { id: 'G-128', type: 'general', num: 128, text: '¿Qué es la fatiga o somnolencia al volante?', options: ['Un estado de cansancio que disminuye la concentración y puede provocar microsueños mortales', 'Una falla del sistema eléctrico', 'Algo que se soluciona abriendo la ventana y acelerando'], correct: 0, explanation: 'Ante síntomas de sueño o fatiga se debe detener el vehículo y descansar.' },
+      { id: 'G-129', type: 'general', num: 129, text: '¿Cuál es la distancia segura de seguimiento recomendada respecto al vehículo que va adelante en condiciones normales?', options: ['La regla de los 3 segundos (mantener al menos 3 segundos de separación)', 'Medio metro', 'Pegarse al parachoques trasero'], correct: 0, explanation: 'La regla de los 3 segundos garantiza tiempo suficiente para frenar ante un imprevisto.' },
+      { id: 'G-130', type: 'general', num: 130, text: '¿Qué se presume si un conductor se niega a realizarse pruebas para la detección de alcohol o de la presencia de sustancias estupefacientes?', options: ['No ocurre nada si no hay accidente', 'Será considerada como presunción de estar en el máximo grado de intoxicación', 'Solo aplica en el día'], correct: 1, explanation: 'La negativa a la prueba se sanciona con el máximo grado de embriaguez contemplado en el COIP.' },
+      { id: 'G-131', type: 'general', num: 131, text: '¿Cuál es el límite máximo de velocidad para vehículos livianos y motocicletas en zonas urbanas?', options: ['40 km/h', '50 km/h', '60 km/h'], correct: 1, explanation: 'En perímetro urbano el límite máximo general es 50 km/h (rango moderado hasta 60 km/h).' },
+      { id: 'G-132', type: 'general', num: 132, text: '¿Cuál es el límite máximo de velocidad para vehículos livianos y motocicletas en vías perimetrales?', options: ['80 km/h', '90 km/h', '100 km/h'], correct: 1, explanation: 'En vías perimetrales el límite máximo reglamentario es de 90 km/h.' },
+      { id: 'G-133', type: 'general', num: 133, text: '¿A qué velocidad se estima que el atropellamiento a un adulto sería mortal?', options: ['20 km/h', '40 km/h', '60 km/h'], correct: 2, explanation: 'A 60 km/h la energía cinética del impacto vuelve altamente mortal el atropellamiento de un adulto.' },
+      { id: 'G-134', type: 'general', num: 134, text: 'En caso de que no exista señalización horizontal y/o vertical, ¿quién tiene derecho de paso prioritario en la pirámide de movilidad?', options: ['Peatones', 'Biciusuarios', 'Transporte público de pasajeros'], correct: 0, explanation: 'Los peatones ocupan la cúspide de prioridad en la movilidad.' },
+      { id: 'G-135', type: 'general', num: 135, text: '¿A qué velocidad se estima que un atropellamiento de un niño/a sería mortal?', options: ['10 km/h', '15 km/h', '25 km/h'], correct: 2, explanation: 'Por su estatura y vulnerabilidad, un impacto a 25 km/h puede resultar fatal para un niño o niña.' },
+      { id: 'G-136', type: 'general', num: 136, text: '¿Qué son las zonas 30?', options: ['Zona en donde la velocidad máxima es 30 km/h', 'Es una zona peatonal exclusiva', 'Zona en donde la velocidad mínima es 30 km/h'], correct: 0, explanation: 'Son zonas urbanas de tráfico pacificado con velocidad máxima de 30 km/h.' },
+      { id: 'G-137', type: 'general', num: 137, text: '¿Cuál es el límite máximo de velocidad en zonas escolares?', options: ['20 km/h', '30 km/h', '40 km/h'], correct: 0, explanation: 'En zonas escolares la velocidad máxima permitida es 20 km/h.' },
+      { id: 'G-138', type: 'general', num: 138, text: '¿Qué son los puntos ciegos o ángulos muertos de un vehículo?', options: ['Áreas alrededor del vehículo que no pueden ser observadas directamente por el conductor a través de los espejos retrovisores', 'Zonas sin alumbrado público', 'Curvas sin señalización'], correct: 0, explanation: 'Son zonas ocultas fuera del campo de visión de los espejos que exigen girar brevemente la cabeza antes de cambiar de carril.' },
+      { id: 'G-139', type: 'general', num: 139, text: '¿En qué porcentaje disminuyen las probabilidades de muerte para un motociclista o ciclista durante un siniestro si utiliza casco homologado?', options: ['No disminuyen, aumentan', '1%', '39%'], correct: 2, explanation: 'El casco homologado disminuye en un 39% las probabilidades de muerte en caso de siniestro.' },
+
+      // ==================== 23 PREGUNTAS ESPECÍFICAS LICENCIA TIPO A ====================
+      { id: 'A-1', type: 'especifica', num: 1, text: 'Al viajar en una motocicleta: ¿qué persona debe utilizar el casco homologado de seguridad?', options: ['Conductor', 'Pasajero', 'Conductor y pasajero'], correct: 2, explanation: 'Tanto el conductor como el acompañante deben utilizar casco homologado debidamente abrochado.' },
+      { id: 'A-2', type: 'especifica', num: 2, text: '¿Cuál de los siguientes enunciados es una prohibición para los motociclistas?', options: ['Transitar en forma paralela, adelantar a otros vehículos por la derecha o entre vehículos que transiten por sus respectivos carriles', 'Utilizar siempre el carril libre a la izquierda del vehículo al sobrepasar', 'Ninguna de las anteriores'], correct: 0, explanation: 'Está prohibido circular en paralelo, adelantar por la derecha o zigzaguear entre carriles.' },
+      { id: 'A-3', type: 'especifica', num: 3, text: '¿Cuál de los siguientes enunciados es un deber de los motociclistas?', options: ['Transitar por la derecha de las vías a distancia no mayor de un (1) metro de la acera u orilla y nunca utilizar las vías exclusivas para servicio público', 'Sujetarse a cualquier otro vehículo que transite por la vía pública o viajar cerca de otro carruaje de mayor tamaño que lo oculte de la vista', 'Todas las anteriores'], correct: 0, explanation: 'Deben circular por el lado derecho sin invadir carriles exclusivos de transporte público ni sujetarse a otros vehículos.' },
+      { id: 'A-4', type: 'especifica', num: 4, text: 'Si al conducir una motocicleta, la visibilidad se ve afectada por la niebla o la lluvia, ¿usted qué debe hacer?', options: ['Retirar el casco para mejorar la visibilidad', 'Reducir la velocidad y observar las líneas de demarcación del pavimento, ya que serán una buena referencia', 'Acelerar y disminuir la distancia al vehículo de adelante para contar con una guía'], correct: 1, explanation: 'Con niebla o lluvia reduzca la velocidad y use las marcas del pavimento como guía sin quitarse el casco.' },
+      { id: 'A-5', type: 'especifica', num: 5, text: '¿Qué medida deben tomar los conductores de motocicletas para ser vistos por los demás conductores en la vía?', options: ['Vestir chalecos o chaquetas con cintas retroreflectivas', 'Encender las luces altas de la motocicleta para advertir su presencia', 'Conducir entre carriles'], correct: 0, explanation: 'El uso de prendas con material retroreflectivo mejora notablemente la visibilidad del motociclista.' },
+      { id: 'A-6', type: 'especifica', num: 6, text: 'Cuando un motociclista sufre un accidente: ¿qué es lo que nunca debe hacer?', options: ['Quitarse el casco', 'Utilizar el celular para llamar a un familiar', 'No soltar la motocicleta'], correct: 0, explanation: 'Nunca se debe retirar el casco tras un accidente para evitar agravar posibles lesiones cervicales o craneales.' },
+      { id: 'A-7', type: 'especifica', num: 7, text: 'En una vía urbana, ¿cuál es el límite máximo de velocidad en el que debe circular una motocicleta?', options: ['40 km/h', '50 km/h', '60 km/h'], correct: 1, explanation: 'El límite máximo de velocidad en vías urbanas es de 50 km/h.' },
+      { id: 'A-8', type: 'especifica', num: 8, text: 'En una vía perimetral, ¿cuál es el límite máximo de velocidad en el que debe circular una motocicleta?', options: ['90 km/h', '95 km/h', '100 km/h'], correct: 0, explanation: 'En vías perimetrales el límite máximo de velocidad para motocicletas es 90 km/h.' },
+      { id: 'A-9', type: 'especifica', num: 9, text: 'En una vía recta (carretera), ¿cuál es el límite máximo de velocidad en el que debe circular una motocicleta?', options: ['90 km/h', '100 km/h', '110 km/h'], correct: 1, explanation: 'En carreteras rectas el límite máximo reglamentario es 100 km/h.' },
+      { id: 'A-10', type: 'especifica', num: 10, text: '¿Qué tipo de licencia no profesional es aquella destinada para conducción de vehículos motorizados como: ciclomotores, motocicletas, tricar y cuadrones?', options: ['Tipo A', 'Tipo B', 'Tipo F'], correct: 0, explanation: 'La licencia no profesional Tipo A autoriza conducir ciclomotores, motocicletas, tricar y cuadrones.' },
+      { id: 'A-11', type: 'especifica', num: 11, text: '¿Cuál de los siguientes enunciados corresponde a una contravención de tránsito?', options: ['La persona que conduzca sin haber obtenido licencia de conducir', 'La persona que conduzca con la licencia de conducir vigente', 'Ninguna de las anteriores'], correct: 0, explanation: 'Conducir sin haber obtenido licencia constituye una contravención de tránsito de primera clase.' },
+      { id: 'A-12', type: 'especifica', num: 12, text: 'Al viajar en la motocicleta, la ubicación correcta del pasajero/a es:', options: ['Detrás del conductor y en ningún momento entre el conductor y el manubrio', 'Entre el conductor y el manubrio', 'Ninguna de las anteriores'], correct: 0, explanation: 'El acompañante debe ir siempre sentado detrás del conductor, nunca entre el conductor y el manubrio.' },
+      { id: 'A-13', type: 'especifica', num: 13, text: '¿Una motocicleta debe tener los dos espejos retrovisores?', options: ['Sólo cuando se transita en la zona urbana', 'Sólo cuando se transita en avenidas o autopistas', 'Siempre'], correct: 2, explanation: 'Toda motocicleta debe circular siempre con ambos espejos retrovisores en buen estado.' },
+      { id: 'A-14', type: 'especifica', num: 14, text: '¿Qué debe hacer si al conducir su motocicleta ésta comienza a tambalear?', options: ['Acelerar para eliminar el tambaleo', 'Sujetar el manubrio con firmeza y desacelerar gradualmente', 'Bajar marchas'], correct: 1, explanation: 'Sostenga el manubrio con firmeza sin movimientos bruscos y desacelere suavemente.' },
+      { id: 'A-15', type: 'especifica', num: 15, text: '¿Cuál es la protección que brinda el casco al conductor y pasajero de la motocicleta?', options: ['Reducen el ruido provocado por los vehículos que circulan alrededor', 'Reducen las lesiones en el cuello y cabeza porque absorben el impacto inicial en un siniestro', 'Ninguna de las anteriores'], correct: 1, explanation: 'El casco homologado absorbe la energía del impacto inicial protegiendo cabeza y cuello.' },
+      { id: 'A-16', type: 'especifica', num: 16, text: 'Cuando otro vehículo le está adelantando, ¿qué acción debe tomar?', options: ['Reducir la velocidad y moverse al lado izquierdo del carril', 'Reducir la velocidad y moverse al lado derecho del carril', 'Mantener su velocidad y permanecer en la parte central de su carril'], correct: 1, explanation: 'Facilite el adelantamiento reduciendo la velocidad y manteniéndose hacia el lado derecho del carril.' },
+      { id: 'A-17', type: 'especifica', num: 17, text: 'Los conductores de motocicletas y similares deberán abstenerse de:', options: ['Adelantar a otros vehículos por el lado derecho del carril', 'Transitar junto a vehículos, sobre la línea divisoria de carriles', 'Todas las anteriores'], correct: 2, explanation: 'Ambas maniobras están prohibidas por ser altamente peligrosas.' },
+      { id: 'A-18', type: 'especifica', num: 18, text: 'Si se carga mucho peso en la parte posterior de la motocicleta, ¿qué efecto causaría?', options: ['Elevación en la rueda delantera, por lo que se perderá adherencia y direccionalidad', 'Elevación en la rueda posterior, por lo que se perderá adherencia y direccionalidad', 'Elevación en la rueda delantera, por lo que se mejorará adherencia y direccionalidad'], correct: 0, explanation: 'El exceso de peso posterior descarga la rueda delantera provocando pérdida de agarre y dirección.' },
+      { id: 'A-19', type: 'especifica', num: 19, text: 'Las ráfagas de viento producidas por vehículos de gran tamaño que circulan en la vía junto a la motocicleta, ¿pueden afectar el control de la misma?', options: ['No, nunca', 'Sí, solo cuando se circula al límite máximo de velocidad', 'Sí, siempre'], correct: 2, explanation: 'La turbulencia de buses y camiones afecta el equilibrio de la moto a cualquier velocidad.' },
+      { id: 'A-20', type: 'especifica', num: 20, text: '¿Cuál es la distancia mínima de seguimiento que debe mantener entre vehículo y ciclista al conducir?', options: ['1 metro', '3 metros', '2 metros'], correct: 1, explanation: 'La distancia mínima de seguimiento detrás de un ciclista es de 3 metros.' },
+      { id: 'A-21', type: 'especifica', num: 21, text: 'Al momento de rebasar a un ciclista en circulación, ¿qué distancia mínima lateral debe tomar el vehículo?', options: ['1 metro', '1,5 metros', '50 centímetros'], correct: 1, explanation: 'Se debe dejar una separación lateral mínima de 1,5 metros al rebasar a un ciclista.' },
+      { id: 'A-22', type: 'especifica', num: 22, text: '¿A qué velocidad se estima que un atropellamiento de un niño/a sería mortal?', options: ['10 km/h', '15 km/h', '25 km/h'], correct: 2, explanation: 'Un impacto a partir de 25 km/h tiene alta probabilidad de ser mortal para un niño o niña.' },
+      { id: 'A-23', type: 'especifica', num: 23, text: 'En un paso cebra no regulado, ¿quién tiene la preferencia de paso?', options: ['Los vehículos en circulación', 'Los peatones', 'El transporte público'], correct: 1, explanation: 'Los peatones tienen prioridad absoluta en los pasos cebra no regulados.' }
+    ];
+
+    // =========================================================================
+    // ESTADO DEL SIMULADOR Y PERSISTENCIA
+    // =========================================================================
+    const STORAGE_KEY = 'ant_tipo_a_progress_v1';
+    let currentMode = 'completo';
+    let quizQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = {}; // { [questionId]: selectedIdx }
+    let timerInterval = null;
+    let secondsRemaining = 20 * 60;
+    let startTime = null;
+    let useTimer = false;
+    let activeGridFilter = 'all';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const genCount = QUESTIONS.filter(q => q.type === 'general').length;
+      const espCount = QUESTIONS.filter(q => q.type === 'especifica').length;
+      document.getElementById('count-generales').textContent = `${genCount} preg.`;
+      document.getElementById('count-especificas').textContent = `${espCount} preg.`;
+      document.getElementById('count-total').textContent = `${QUESTIONS.length} preg.`;
+      checkSavedProgress();
+    });
+
+    function checkSavedProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          document.getElementById('saved-progress-banner').classList.add('hidden');
+          return;
+        }
+        const saved = JSON.parse(raw);
+        const answeredKeys = Object.keys(saved.answers || {});
+        if (answeredKeys.length > 0) {
+          let hits = 0;
+          answeredKeys.forEach(id => {
+            const q = QUESTIONS.find(item => item.id === id);
+            if (q && saved.answers[id] === q.correct) hits++;
+          });
+          document.getElementById('saved-progress-desc').textContent =
+            `${answeredKeys.length} de ${QUESTIONS.length} respondidas · ${hits} aciertos`;
+          document.getElementById('saved-progress-banner').classList.remove('hidden');
+        } else {
+          document.getElementById('saved-progress-banner').classList.add('hidden');
+        }
+      } catch (e) {
+        console.warn('Error leyendo progreso guardado', e);
+      }
+    }
+
+    function saveProgress() {
+      if (currentMode !== 'completo') return;
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            currentIndex,
+            answers: userAnswers,
+            updatedAt: Date.now()
+          })
+        );
+      } catch (e) {
+        console.warn('No se pudo guardar en localStorage', e);
+      }
+    }
+
+    function resetSavedProgress() {
+      localStorage.removeItem(STORAGE_KEY);
+      checkSavedProgress();
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function startQuiz(mode, customList = null, resumeSaved = false) {
+      currentMode = mode;
+      const timerChecked = document.getElementById('toggle-timer').checked;
+      const shuffleChecked = document.getElementById('toggle-shuffle').checked;
+
+      userAnswers = {};
+      currentIndex = 0;
+
+      if (customList) {
+        quizQuestions = customList;
+        useTimer = false;
+      } else if (mode === 'simulacro') {
+        const esp = shuffleArray(QUESTIONS.filter(q => q.type === 'especifica')).slice(0, 8);
+        const gen = shuffleArray(QUESTIONS.filter(q => q.type === 'general')).slice(0, 12);
+        quizQuestions = shuffleArray([...esp, ...gen]);
+        useTimer = timerChecked;
+      } else if (mode === 'generales') {
+        const base = QUESTIONS.filter(q => q.type === 'general');
+        quizQuestions = shuffleChecked ? shuffleArray(base) : [...base];
+        useTimer = false;
+      } else if (mode === 'especificas') {
+        const base = QUESTIONS.filter(q => q.type === 'especifica');
+        quizQuestions = shuffleChecked ? shuffleArray(base) : [...base];
+        useTimer = false;
+      } else {
+        // Modo 'completo' (162 preguntas)
+        if (resumeSaved) {
+          try {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            quizQuestions = [...QUESTIONS];
+            userAnswers = saved.answers || {};
+            currentIndex = Math.min(saved.currentIndex || 0, quizQuestions.length - 1);
+          } catch (e) {
+            quizQuestions = [...QUESTIONS];
+          }
+        } else {
+          quizQuestions = shuffleChecked ? shuffleArray(QUESTIONS) : [...QUESTIONS];
+        }
+        useTimer = false;
+      }
+
+      startTime = Date.now();
+
+      document.getElementById('screen-start').classList.add('hidden');
+      document.getElementById('screen-results').classList.add('hidden');
+      document.getElementById('screen-quiz').classList.remove('hidden');
+      document.getElementById('btn-home').classList.remove('hidden');
+      document.getElementById('btn-grid-toggle').classList.remove('hidden');
+      document.getElementById('question-grid-panel').classList.add('hidden');
+
+      clearInterval(timerInterval);
+      const timerBox = document.getElementById('timer-box');
+      if (useTimer) {
+        timerBox.classList.remove('hidden');
+        secondsRemaining = 20 * 60;
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+          secondsRemaining--;
+          updateTimerDisplay();
+          if (secondsRemaining <= 0) {
+            clearInterval(timerInterval);
+            finishQuiz();
+          }
+        }, 1000);
+      } else {
+        timerBox.classList.add('hidden');
+      }
+
+      renderQuestion();
+      renderQuestionGrid();
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(Math.max(0, secondsRemaining) / 60);
+      const secs = Math.max(0, secondsRemaining) % 60;
+      document.getElementById('timer-display').textContent =
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      if (secondsRemaining <= 60) {
+        document.getElementById('timer-box').classList.add('text-rose-600', 'bg-rose-50');
+      } else {
+        document.getElementById('timer-box').classList.remove('text-rose-600', 'bg-rose-50');
+      }
+    }
+
+    function getCounts() {
+      let correct = 0;
+      let wrong = 0;
+      quizQuestions.forEach(q => {
+        if (userAnswers[q.id] !== undefined) {
+          if (userAnswers[q.id] === q.correct) correct++;
+          else wrong++;
+        }
+      });
+      return { correct, wrong };
+    }
+
+    function renderQuestion() {
+      const q = quizQuestions[currentIndex];
+      const total = quizQuestions.length;
+      const { correct, wrong } = getCounts();
+      const selectedIdx = userAnswers[q.id];
+      const isAnswered = selectedIdx !== undefined;
+
+      document.getElementById('q-current').textContent = currentIndex + 1;
+      document.getElementById('q-total').textContent = total;
+      document.getElementById('score-correct').textContent = correct;
+      document.getElementById('score-wrong').textContent = wrong;
+      document.getElementById('progress-bar').style.width = `${((currentIndex + 1) / total) * 100}%`;
+
+      const catBadge = document.getElementById('badge-category');
+      if (q.type === 'especifica') {
+        catBadge.textContent = `Específica Tipo A · #${q.num}`;
+        catBadge.className = 'font-bold px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800';
+      } else {
+        catBadge.textContent = `General · #${q.num}`;
+        catBadge.className = 'font-bold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700';
+      }
+
+      document.getElementById('question-text').textContent = q.text;
+
+      // Gráfico SVG
+      const visualContainer = document.getElementById('question-visual');
+      const visualInner = document.getElementById('visual-inner');
+      if (q.visual && SIGNALS[q.visual]) {
+        visualInner.innerHTML = SIGNALS[q.visual];
+        visualContainer.classList.remove('hidden');
+      } else {
+        visualInner.innerHTML = '';
+        visualContainer.classList.add('hidden');
+      }
+
+      // Opciones
+      const letters = ['A', 'B', 'C', 'D'];
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+
+        let cardClass =
+          'option-card w-full text-left p-4 rounded-xl border-2 flex items-center gap-3.5 focus:outline-none ';
+        let letterClass =
+          'opt-letter w-9 h-9 rounded-lg font-extrabold text-sm flex items-center justify-center shrink-0 transition-colors ';
+        let statusIcon = '';
+        let statusColor = '';
+
+        if (!isAnswered) {
+          cardClass += 'border-slate-200 bg-white hover:border-blue-500 hover:bg-blue-50/40 cursor-pointer';
+          letterClass += 'bg-slate-100 text-slate-700';
+          btn.onclick = () => selectOption(idx);
+        } else {
+          btn.disabled = true;
+          if (idx === q.correct) {
+            cardClass += 'border-emerald-500 bg-emerald-50';
+            letterClass += 'bg-emerald-600 text-white';
+            statusIcon = '✓';
+            statusColor = 'text-emerald-700';
+          } else if (idx === selectedIdx) {
+            cardClass += 'border-rose-500 bg-rose-50';
+            letterClass += 'bg-rose-600 text-white';
+            statusIcon = '✕';
+            statusColor = 'text-rose-700';
+          } else {
+            cardClass += 'border-slate-200 bg-white opacity-60';
+            letterClass += 'bg-slate-100 text-slate-700';
+          }
+        }
+
+        btn.className = cardClass;
+        btn.innerHTML = `
+          <span class="${letterClass}">${letters[idx]}</span>
+          <span class="text-sm sm:text-base font-medium text-slate-800 leading-snug flex-1">${optText}</span>
+          <span class="opt-status text-lg font-bold shrink-0 ${statusColor}">${statusIcon}</span>
+        `;
+        optionsContainer.appendChild(btn);
+      });
+
+      // Retroalimentación
+      const feedbackBox = document.getElementById('feedback-box');
+      if (isAnswered) {
+        const isCorrect = selectedIdx === q.correct;
+        document.getElementById('feedback-icon').textContent = isCorrect ? '✅' : '❌';
+        document.getElementById('feedback-title').textContent = isCorrect
+          ? '¡Respuesta correcta!'
+          : 'Respuesta incorrecta';
+        document.getElementById('feedback-text').textContent = q.explanation;
+        feedbackBox.className = isCorrect
+          ? 'mt-5 p-4 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-950 text-sm leading-relaxed fade-in'
+          : 'mt-5 p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-950 text-sm leading-relaxed fade-in';
+        feedbackBox.classList.remove('hidden');
+      } else {
+        feedbackBox.classList.add('hidden');
+      }
+
+      // Botones navegación
+      document.getElementById('btn-prev').disabled = currentIndex === 0;
+      document.getElementById('btn-next-label').textContent =
+        currentIndex === total - 1 ? 'Finalizar y ver resultados' : 'Siguiente pregunta';
+    }
+
+    function selectOption(selectedIdx) {
+      const q = quizQuestions[currentIndex];
+      if (userAnswers[q.id] !== undefined) return;
+      userAnswers[q.id] = selectedIdx;
+      saveProgress();
+      renderQuestion();
+      renderQuestionGrid();
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        saveProgress();
+        renderQuestion();
+        renderQuestionGrid();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentIndex < quizQuestions.length - 1) {
+        currentIndex++;
+        saveProgress();
+        renderQuestion();
+        renderQuestionGrid();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      currentIndex = idx;
+      saveProgress();
+      renderQuestion();
+      renderQuestionGrid();
+    }
+
+    // =========================================================================
+    // MAPA / REJILLA DE PREGUNTAS Y FILTROS
+    // =========================================================================
+    function toggleQuestionGrid() {
+      const panel = document.getElementById('question-grid-panel');
+      panel.classList.toggle('hidden');
+      if (!panel.classList.contains('hidden')) {
+        renderQuestionGrid();
+      }
+    }
+
+    function filterGrid(filterType) {
+      activeGridFilter = filterType;
+      ['all', 'general', 'especifica', 'wrong'].forEach(f => {
+        const el = document.getElementById(`filter-${f}`);
+        if (!el) return;
+        if (f === filterType) {
+          el.className = 'px-2.5 py-1 rounded-lg font-semibold bg-slate-900 text-white';
+        } else {
+          el.className = 'px-2.5 py-1 rounded-lg font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200';
+        }
+      });
+      renderQuestionGrid();
+    }
+
+    function renderQuestionGrid() {
+      const container = document.getElementById('grid-numbers');
+      if (!container) return;
+
+      const items = quizQuestions
+        .map((q, idx) => ({ q, idx }))
+        .filter(({ q }) => {
+          if (activeGridFilter === 'general') return q.type === 'general';
+          if (activeGridFilter === 'especifica') return q.type === 'especifica';
+          if (activeGridFilter === 'wrong') {
+            return userAnswers[q.id] !== undefined && userAnswers[q.id] !== q.correct;
+          }
+          return true;
+        });
+
+      if (items.length === 0) {
+        container.innerHTML = `<p class="col-span-full text-xs text-slate-400 py-3 text-center">No hay preguntas en este filtro todavía.</p>`;
+        return;
+      }
+
+      container.innerHTML = items
+        .map(({ q, idx }) => {
+          const ans = userAnswers[q.id];
+          let cls = 'h-8 rounded-lg text-xs font-bold border transition flex items-center justify-center ';
+          if (idx === currentIndex) {
+            cls += 'bg-blue-600 text-white border-blue-700 ring-2 ring-blue-300';
+          } else if (ans === undefined) {
+            cls +=
+              q.type === 'especifica'
+                ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
+                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100';
+          } else if (ans === q.correct) {
+            cls += 'bg-emerald-500 text-white border-emerald-600';
+          } else {
+            cls += 'bg-rose-500 text-white border-rose-600';
+          }
+          const label = q.type === 'especifica' ? `A${q.num}` : `${q.num}`;
+          return `<button type="button" onclick="jumpToQuestion(${idx})" class="${cls}" title="${q.text}">${label}</button>`;
+        })
+        .join('');
+    }
+
+    // =========================================================================
+    // RESULTADOS FINALES Y REPASO DE ERRORES
+    // =========================================================================
+    function finishQuiz() {
+      clearInterval(timerInterval);
+      const total = quizQuestions.length;
+      const { correct, wrong } = getCounts();
+      const grade20 = ((correct / total) * 20).toFixed(1);
+      const passed = parseFloat(grade20) >= 16.0;
+
+      const elapsedSec = Math.floor((Date.now() - startTime) / 1000);
+      const mins = Math.floor(elapsedSec / 60);
+      const secs = elapsedSec % 60;
+      const timeStr = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('btn-grid-toggle').classList.add('hidden');
+      document.getElementById('screen-results').classList.remove('hidden');
+
+      const badge = document.getElementById('result-badge');
+      const heading = document.getElementById('result-heading');
+      const subtitle = document.getElementById('result-subtitle');
+
+      if (passed) {
+        badge.textContent = '✓ EXAMEN APROBADO';
+        badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-extrabold uppercase tracking-wider mb-4 bg-emerald-100 text-emerald-800';
+        heading.textContent = '¡Felicitaciones, aprobaste la evaluación!';
+        subtitle.textContent = 'Superaste el puntaje mínimo exigido por la ANT (16.0 / 20).';
+      } else {
+        badge.textContent = '✕ NECESITAS REPASAR';
+        badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-extrabold uppercase tracking-wider mb-4 bg-rose-100 text-rose-800';
+        heading.textContent = 'Sigue practicando para alcanzar 16/20';
+        subtitle.textContent = 'Revisa tus preguntas falladas abajo o practica únicamente tus errores.';
+      }
+
+      document.getElementById('res-grade').textContent = `${grade20}/20`;
+      document.getElementById('res-correct').textContent = `${correct}/${total}`;
+      document.getElementById('res-wrong').textContent = wrong;
+      document.getElementById('res-time').textContent = timeStr;
+
+      const failedQuestions = quizQuestions.filter(
+        q => userAnswers[q.id] !== undefined && userAnswers[q.id] !== q.correct
+      );
+
+      const mistakesSection = document.getElementById('mistakes-section');
+      const mistakesList = document.getElementById('mistakes-list');
+      const retryMistakesBtn = document.getElementById('btn-retry-mistakes');
+
+      if (failedQuestions.length > 0) {
+        mistakesSection.classList.remove('hidden');
+        retryMistakesBtn.classList.remove('hidden');
+        mistakesList.innerHTML = failedQuestions
+          .map(
+            (q, i) => `
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">${q.type === 'especifica' ? 'Específica Tipo A #' + q.num : 'General #' + q.num}</span>
+            <p class="font-bold text-slate-900 mt-1.5">${i + 1}. ${q.text}</p>
+            <p class="mt-2 text-rose-700"><strong>Tu respuesta:</strong> ${q.options[userAnswers[q.id]]}</p>
+            <p class="mt-1 text-emerald-700"><strong>Respuesta correcta:</strong> ${q.options[q.correct]}</p>
+            <p class="mt-1.5 text-xs text-slate-600 bg-white p-2.5 rounded-lg border border-slate-200">${q.explanation}</p>
+          </div>
+        `
+          )
+          .join('');
+      } else {
+        mistakesSection.classList.add('hidden');
+        retryMistakesBtn.classList.add('hidden');
+      }
+    }
+
+    function retryMistakesOnly() {
+      const failedQuestions = quizQuestions.filter(
+        q => userAnswers[q.id] !== undefined && userAnswers[q.id] !== q.correct
+      );
+      if (failedQuestions.length > 0) {
+        startQuiz('errores', failedQuestions);
+      }
+    }
+
+    function restartSameMode() {
+      startQuiz(currentMode);
+    }
+
+    function confirmExit() {
+      if (!document.getElementById('screen-quiz').classList.contains('hidden')) {
+        document.getElementById('exit-modal').classList.remove('hidden');
+      } else {
+        goHome();
+      }
+    }
+
+    function closeExitModal() {
+      document.getElementById('exit-modal').classList.add('hidden');
+    }
+
+    function goHome() {
+      clearInterval(timerInterval);
+      closeExitModal();
+      checkSavedProgress();
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-results').classList.add('hidden');
+      document.getElementById('btn-home').classList.add('hidden');
+      document.getElementById('btn-grid-toggle').classList.add('hidden');
+      document.getElementById('screen-start').classList.remove('hidden');
+    }
+
+    // =========================================================================
+    // EXPORTAR ARCHIVO index.html LISTO PARA GITHUB
+    // =========================================================================
+    function downloadIndexHtml() {
+      try {
+        // Clona el DOM actual para limpiar estados transitorios o paneles abiertos
+        const clone = document.documentElement.cloneNode(true);
+        const gridPanel = clone.querySelector('#question-grid-panel');
+        if (gridPanel) gridPanel.classList.add('hidden');
+        const exitModal = clone.querySelector('#exit-modal');
+        if (exitModal) exitModal.classList.add('hidden');
+
+        const htmlContent = '<!DOCTYPE html>\n' + clone.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'index.html';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (err) {
+        console.error('Error al generar index.html:', err);
+      }
+    }
+  </script>
+
+</body></html>
